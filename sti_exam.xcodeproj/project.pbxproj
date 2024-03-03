@@ -8,12 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		FE64B9F02B4C354700A70F62 /* sti_examApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE64B9EF2B4C354700A70F62 /* sti_examApp.swift */; };
-		FE64B9F22B4C354700A70F62 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE64B9F12B4C354700A70F62 /* ContentView.swift */; };
 		FE64B9F42B4C354900A70F62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE64B9F32B4C354900A70F62 /* Assets.xcassets */; };
 		FE64B9F72B4C354900A70F62 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE64B9F62B4C354900A70F62 /* Preview Assets.xcassets */; };
 		FE64BA012B4C354900A70F62 /* sti_examTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE64BA002B4C354900A70F62 /* sti_examTests.swift */; };
 		FE64BA0B2B4C354900A70F62 /* sti_examUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE64BA0A2B4C354900A70F62 /* sti_examUITests.swift */; };
 		FE64BA0D2B4C354900A70F62 /* sti_examUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE64BA0C2B4C354900A70F62 /* sti_examUITestsLaunchTests.swift */; };
+		FE688CD12B94E0370063B1D3 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = FE688CD02B94E0370063B1D3 /* .gitignore */; };
+		FE688CD32B94E11D0063B1D3 /* .env.local in Resources */ = {isa = PBXBuildFile; fileRef = FE688CD22B94E11D0063B1D3 /* .env.local */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +37,6 @@
 /* Begin PBXFileReference section */
 		FE64B9EC2B4C354700A70F62 /* sti_exam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sti_exam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE64B9EF2B4C354700A70F62 /* sti_examApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sti_examApp.swift; sourceTree = "<group>"; };
-		FE64B9F12B4C354700A70F62 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		FE64B9F32B4C354900A70F62 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FE64B9F62B4C354900A70F62 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		FE64B9FC2B4C354900A70F62 /* sti_examTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = sti_examTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -44,6 +44,8 @@
 		FE64BA062B4C354900A70F62 /* sti_examUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = sti_examUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE64BA0A2B4C354900A70F62 /* sti_examUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sti_examUITests.swift; sourceTree = "<group>"; };
 		FE64BA0C2B4C354900A70F62 /* sti_examUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sti_examUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		FE688CD02B94E0370063B1D3 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		FE688CD22B94E11D0063B1D3 /* .env.local */ = {isa = PBXFileReference; lastKnownFileType = text; path = .env.local; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,8 +96,12 @@
 		FE64B9EE2B4C354700A70F62 /* sti_exam */ = {
 			isa = PBXGroup;
 			children = (
+				FE64BA1B2B4C39CE00A70F62 /* views */,
+				FE64BA1A2B4C39C300A70F62 /* viewModel */,
+				FE64BA192B4C39BC00A70F62 /* model */,
 				FE64B9EF2B4C354700A70F62 /* sti_examApp.swift */,
-				FE64B9F12B4C354700A70F62 /* ContentView.swift */,
+				FE688CD02B94E0370063B1D3 /* .gitignore */,
+				FE688CD22B94E11D0063B1D3 /* .env.local */,
 				FE64B9F32B4C354900A70F62 /* Assets.xcassets */,
 				FE64B9F52B4C354900A70F62 /* Preview Content */,
 			);
@@ -125,6 +131,27 @@
 				FE64BA0C2B4C354900A70F62 /* sti_examUITestsLaunchTests.swift */,
 			);
 			path = sti_examUITests;
+			sourceTree = "<group>";
+		};
+		FE64BA192B4C39BC00A70F62 /* model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		FE64BA1A2B4C39C300A70F62 /* viewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = viewModel;
+			sourceTree = "<group>";
+		};
+		FE64BA1B2B4C39CE00A70F62 /* views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -232,6 +259,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				FE64B9F72B4C354900A70F62 /* Preview Assets.xcassets in Resources */,
+				FE688CD12B94E0370063B1D3 /* .gitignore in Resources */,
+				FE688CD32B94E11D0063B1D3 /* .env.local in Resources */,
 				FE64B9F42B4C354900A70F62 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -257,7 +286,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FE64B9F22B4C354700A70F62 /* ContentView.swift in Sources */,
 				FE64B9F02B4C354700A70F62 /* sti_examApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
