@@ -22,8 +22,9 @@ struct sti_examApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     var body: some Scene {
         WindowGroup {
-        
-            HomeView()
+            NavigationStack {
+                CoordinatorView()
+            }
         }
     }
 }
