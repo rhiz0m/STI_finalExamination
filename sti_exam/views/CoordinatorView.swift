@@ -8,11 +8,19 @@
 import SwiftUI
 
 struct CoordinatorView: View {
+    @ObservedObject var viewAdapter: HomeViewAdapter
+    
     var body: some View {
-        Text("Coordinator View!")
+        NavigationStack(path: $viewAdapter.coordinator.path, root: {
+            viewAdapter.coordinator.build(screen: .LoginView, viewAdapter: viewAdapter)
+                .navigationDestination(for: Screens.self) { screen in
+                    viewAdapter.coordinator.build(screen: screen, viewAdapter: viewAdapter)
+                }
+        })
+        .environmentObject(viewAdapter.coordinator)
     }
 }
 
 #Preview {
-    CoordinatorView()
+    CoordinatorView(viewAdapter: HomeViewAdapter(coordinator: Coordinator()))
 }

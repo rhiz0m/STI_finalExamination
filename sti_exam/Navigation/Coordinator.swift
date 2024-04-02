@@ -27,7 +27,7 @@ enum Screens: String, Identifiable {
 
 }
 
-class Coordinator {
+class Coordinator : ObservableObject {
     
     @Published var path = NavigationPath()
     
@@ -44,10 +44,10 @@ class Coordinator {
     }
     
     @MainActor @ViewBuilder
-    func build(screen: Screens) -> some View {
+    func build(screen: Screens, viewAdapter: HomeViewAdapter) -> some View {
         switch screen {
         case .LoginView:
-            LoginView()
+            LoginView(viewAdapter: viewAdapter)
         case .SignUpview:
             SignUpView()
         case .SplashScreen:

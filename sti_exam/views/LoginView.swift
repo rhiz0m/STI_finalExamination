@@ -8,11 +8,16 @@
 import SwiftUI
 
 struct LoginView: View {
+    let viewAdapter: HomeViewAdapter
+    
     var body: some View {
-        Text("LoginView!")
+        
+        NavigationLink(destination: viewAdapter.coordinator.build(screen: .HomeView, viewAdapter: viewAdapter), label: {
+             Text("Login")
+         })
     }
 }
 
 #Preview {
-    LoginView()
+    LoginView(viewAdapter: HomeViewAdapter(coordinator: Coordinator()))
 }

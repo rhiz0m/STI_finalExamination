@@ -20,11 +20,14 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct sti_examApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    
+    @StateObject private var coordinator = Coordinator()
     var body: some Scene {
         WindowGroup {
             NavigationStack {
-                CoordinatorView()
+                CoordinatorView(viewAdapter: HomeViewAdapter(coordinator: coordinator))
             }
+            .environmentObject(coordinator)
         }
     }
 }

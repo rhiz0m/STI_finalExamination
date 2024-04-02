@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FE2694672BBC5912007733B4 /* HomeViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2694662BBC5912007733B4 /* HomeViewAdapter.swift */; };
 		FE64B9F02B4C354700A70F62 /* sti_examApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE64B9EF2B4C354700A70F62 /* sti_examApp.swift */; };
 		FE64B9F42B4C354900A70F62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE64B9F32B4C354900A70F62 /* Assets.xcassets */; };
 		FE64B9F72B4C354900A70F62 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE64B9F62B4C354900A70F62 /* Preview Assets.xcassets */; };
@@ -52,6 +53,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FE2694662BBC5912007733B4 /* HomeViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewAdapter.swift; sourceTree = "<group>"; };
 		FE64B9EC2B4C354700A70F62 /* sti_exam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sti_exam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE64B9EF2B4C354700A70F62 /* sti_examApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sti_examApp.swift; sourceTree = "<group>"; };
 		FE64B9F32B4C354900A70F62 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 				FE64B9F32B4C354900A70F62 /* Assets.xcassets */,
 				FE8D9A182BA305E10065EEDD /* GoogleService-Info.plist */,
 				FE64B9F52B4C354900A70F62 /* Preview Content */,
+				FE2694662BBC5912007733B4 /* HomeViewAdapter.swift */,
 			);
 			path = sti_exam;
 			sourceTree = "<group>";
@@ -360,6 +363,7 @@
 				FE8D9A2E2BA314530065EEDD /* CreateExerciseView.swift in Sources */,
 				FE64B9F02B4C354700A70F62 /* sti_examApp.swift in Sources */,
 				FE8D9A282BA313990065EEDD /* SignUpView.swift in Sources */,
+				FE2694672BBC5912007733B4 /* HomeViewAdapter.swift in Sources */,
 				FE8D9A382BA316B70065EEDD /* CoordinatorView.swift in Sources */,
 				FE8D9A122BA2EF020065EEDD /* HomeView.swift in Sources */,
 				FE8D9A262BA313420065EEDD /* LoginView.swift in Sources */,
