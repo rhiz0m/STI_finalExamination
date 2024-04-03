@@ -8,11 +8,23 @@
 import SwiftUI
 
 struct CreateProgramView: View {
+    var viewAdapter: HomeViewAdapter
+    
     var body: some View {
-        Text("Create Program!")
+        VStack {
+            Text("Create program")
+            HStack {
+                Text("Save program")
+                    .padding()
+                Text("Add Exercises")
+                    .onTapGesture {
+                        viewAdapter.coordinator.push(.CreateExerciseView)
+                    }
+            }
+        }
     }
 }
 
 #Preview {
-    CreateProgramView()
+    CreateProgramView(viewAdapter: HomeViewAdapter(coordinator: Coordinator()))
 }

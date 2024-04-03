@@ -8,11 +8,23 @@
 import SwiftUI
 
 struct UpdateProgramView: View {
+    var viewAdapter: HomeViewAdapter
+    
     var body: some View {
-        Text("Update Program!")
+        VStack {
+            Text("Update Program!")
+            HStack {
+                Text("Save")
+                    .padding()
+                Text("Dismiss X")
+                    .onTapGesture {
+                        viewAdapter.coordinator.dismissSheet()
+                    }
+            }
+        }
     }
 }
 
 #Preview {
-    UpdateProgramView()
+    UpdateProgramView(viewAdapter: HomeViewAdapter(coordinator: Coordinator()))
 }

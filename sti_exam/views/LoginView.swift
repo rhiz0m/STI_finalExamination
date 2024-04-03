@@ -11,13 +11,19 @@ struct LoginView: View {
     let viewAdapter: HomeViewAdapter
     
     var body: some View {
-        
-        NavigationLink(destination: viewAdapter.coordinator.build(screen: .HomeView, viewAdapter: viewAdapter), label: {
-             Text("Login")
-         })
+        VStack {
+            Text("Login")
+                .onTapGesture {
+                    viewAdapter.coordinator.push(.HomeView)
+                }
+            Text("Sign up")
+                .onTapGesture {
+                    viewAdapter.coordinator.present(fullScreenCover: .SignUpView)
+                }
+            
+        }
     }
 }
-
 #Preview {
     LoginView(viewAdapter: HomeViewAdapter(coordinator: Coordinator()))
 }

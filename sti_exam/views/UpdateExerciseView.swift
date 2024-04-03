@@ -8,11 +8,19 @@
 import SwiftUI
 
 struct UpdateExerciseView: View {
+    var viewAdapter: HomeViewAdapter
+    
     var body: some View {
-        Text("Update Exercise!")
+        VStack(alignment: .leading) {
+            Text("Update Exercise!")
+            Text("Dismiss X")
+                .onTapGesture {
+                    viewAdapter.coordinator.dismissSheet()
+                }
+        }
     }
 }
 
 #Preview {
-    UpdateExerciseView()
+    UpdateExerciseView(viewAdapter: HomeViewAdapter(coordinator: Coordinator()))
 }

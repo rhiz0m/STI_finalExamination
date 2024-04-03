@@ -16,6 +16,9 @@ struct CoordinatorView: View {
                 .navigationDestination(for: Screens.self) { screen in
                     viewAdapter.coordinator.build(screen: screen, viewAdapter: viewAdapter)
                 }
+                .sheet(item: $viewAdapter.coordinator.sheet) { sheet in
+                    viewAdapter.coordinator.build(sheet: sheet, viewAdapter: viewAdapter)
+                }
         })
         .environmentObject(viewAdapter.coordinator)
     }

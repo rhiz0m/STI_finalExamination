@@ -9,15 +9,10 @@ import Foundation
 import SwiftUI
 
 enum Screens: String, Identifiable {
-
     case LoginView
-    case SignUpview
     case SplashScreen
     case HomeView
-    case CreateProgramView
     case CreateExerciseView
-    case UpdateProgramView
-    case UpdateExerciseView
     case SearchView
     case MapsView
     
@@ -27,12 +22,40 @@ enum Screens: String, Identifiable {
 
 }
 
+enum Sheet: String, Identifiable {
+    case CreateProgramView
+    case UpdateProgramView
+    case UpdateExerciseView
+    
+    var id: String {
+        self.rawValue
+    }
+}
+
+enum FullScreenCover: String, Identifiable {
+    case SignUpView
+    
+    var id: String {
+        self.rawValue
+    }
+}
+
 class Coordinator : ObservableObject {
     
     @Published var path = NavigationPath()
+    @Published var sheet: Sheet?
+    @Published var fullScreenCover: FullScreenCover?
     
     func push(_ screen: Screens) {
         path.append(screen)
+    }
+    
+    func present(sheet: Sheet) {
+        self.sheet = sheet
+    }
+    
+    func present(fullScreenCover: FullScreenCover) {
+        self.fullScreenCover = fullScreenCover
     }
     
     func pop() {
@@ -43,29 +66,45 @@ class Coordinator : ObservableObject {
         path.removeLast(path.count)
     }
     
+    func dismissSheet() {
+        self.sheet = nil
+    }
+    
     @MainActor @ViewBuilder
     func build(screen: Screens, viewAdapter: HomeViewAdapter) -> some View {
         switch screen {
         case .LoginView:
             LoginView(viewAdapter: viewAdapter)
-        case .SignUpview:
-            SignUpView()
         case .SplashScreen:
             SplashScreen()
         case .HomeView:
-            HomeView()
-        case .CreateProgramView:
-            CreateProgramView()
+            HomeView(viewAdapter: viewAdapter)
         case .CreateExerciseView:
-            CreateExerciseView()
-        case .UpdateProgramView:
-            UpdateProgramView()
-        case .UpdateExerciseView:
-            UpdateExerciseView()
+            CreateExerciseView(viewAdapter: viewAdapter)
         case .SearchView:
             SearchView()
         case .MapsView:
             MapsView()
+        }
+    }
+    
+    @MainActor @ViewBuilder
+    func build(sheet: Sheet, viewAdapter: HomeViewAdapter) -> some View {
+        switch sheet {
+        case .CreateProgramView:
+            CreateProgramView(viewAdapter: viewAdapter)
+        case .UpdateProgramView:
+            UpdateProgramView(viewAdapter: viewAdapter)
+        case .UpdateExerciseView:
+            UpdateExerciseView(viewAdapter: viewAdapter)
+        }
+    }
+    
+    @MainActor @ViewBuilder
+    func build(fullScreenCover: FullScreenCover, viewAdapter: HomeViewAdapter) -> some View {
+        switch fullScreenCover {
+        case .SignUpView:
+            SignUpView(viewAdapter: viewAdapter)
         }
     }
 }
