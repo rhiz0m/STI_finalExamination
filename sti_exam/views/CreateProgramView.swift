@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CreateProgramView: View {
-    var viewAdapter: HomeViewAdapter
+    var authViewAdapter: AuthViewAdapter
     
     var body: some View {
         VStack {
@@ -18,7 +18,7 @@ struct CreateProgramView: View {
                     .padding()
                 Text("Add Exercises")
                     .onTapGesture {
-                        viewAdapter.coordinator.push(.CreateExerciseView)
+                        authViewAdapter.coordinator.push(.CreateExerciseView)
                     }
             }
         }
@@ -26,5 +26,5 @@ struct CreateProgramView: View {
 }
 
 #Preview {
-    CreateProgramView(viewAdapter: HomeViewAdapter(coordinator: Coordinator()))
+    CreateProgramView(authViewAdapter: AuthViewAdapter(coordinator: Coordinator(), emailInput: "", passwordInput: ""))
 }

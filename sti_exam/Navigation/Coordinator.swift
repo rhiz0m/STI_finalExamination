@@ -12,6 +12,7 @@ enum Screens: String, Identifiable {
     case LoginView
     case SplashScreen
     case HomeView
+    case UpdateProgramView
     case CreateExerciseView
     case SearchView
     case MapsView
@@ -24,7 +25,6 @@ enum Screens: String, Identifiable {
 
 enum Sheet: String, Identifiable {
     case CreateProgramView
-    case UpdateProgramView
     case UpdateExerciseView
     
     var id: String {
@@ -33,7 +33,7 @@ enum Sheet: String, Identifiable {
 }
 
 enum FullScreenCover: String, Identifiable {
-    case SignUpView
+    case RegisterView
     
     var id: String {
         self.rawValue
@@ -70,17 +70,23 @@ class Coordinator : ObservableObject {
         self.sheet = nil
     }
     
+    func dismissFullScreenCover() {
+        self.fullScreenCover = nil
+    }
+    
     @MainActor @ViewBuilder
-    func build(screen: Screens, viewAdapter: HomeViewAdapter) -> some View {
+    func build(screen: Screens, authViewAdapter: AuthViewAdapter, homeViewAdapter: HomeViewAdapter) -> some View {
         switch screen {
         case .LoginView:
-            LoginView(viewAdapter: viewAdapter)
+            LoginView(authViewAdapter: authViewAdapter, homeViewAdapter: homeViewAdapter)
         case .SplashScreen:
             SplashScreen()
         case .HomeView:
-            HomeView(viewAdapter: viewAdapter)
+            HomeView(authViewAdapter: authViewAdapter, homeViewAdapter: homeViewAdapter)
+        case .UpdateProgramView:
+            UpdateProgramView(authViewAdapter: authViewAdapter)
         case .CreateExerciseView:
-            CreateExerciseView(viewAdapter: viewAdapter)
+            CreateExerciseView(authViewAdapter: authViewAdapter)
         case .SearchView:
             SearchView()
         case .MapsView:
@@ -89,22 +95,20 @@ class Coordinator : ObservableObject {
     }
     
     @MainActor @ViewBuilder
-    func build(sheet: Sheet, viewAdapter: HomeViewAdapter) -> some View {
+    func build(sheet: Sheet, authViewAdapter: AuthViewAdapter) -> some View {
         switch sheet {
         case .CreateProgramView:
-            CreateProgramView(viewAdapter: viewAdapter)
-        case .UpdateProgramView:
-            UpdateProgramView(viewAdapter: viewAdapter)
+            CreateProgramView(authViewAdapter: authViewAdapter)
         case .UpdateExerciseView:
-            UpdateExerciseView(viewAdapter: viewAdapter)
+            UpdateExerciseView(authViewAdapter: authViewAdapter)
         }
     }
     
     @MainActor @ViewBuilder
-    func build(fullScreenCover: FullScreenCover, viewAdapter: HomeViewAdapter) -> some View {
+    func build(fullScreenCover: FullScreenCover, authViewAdapter: AuthViewAdapter ,homeViewAdapter: HomeViewAdapter) -> some View {
         switch fullScreenCover {
-        case .SignUpView:
-            SignUpView(viewAdapter: viewAdapter)
+        case .RegisterView:
+            RegisterView(authViewAdapter: authViewAdapter, homeViewAdapter: homeViewAdapter)
         }
     }
 }

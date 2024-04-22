@@ -8,22 +8,27 @@
 import SwiftUI
 
 struct CreateExerciseView: View {
-    var viewAdapter: HomeViewAdapter
+    var authViewAdapter: AuthViewAdapter
     
     var body: some View {
-            List() {
-                VStack(alignment: .leading) {
+                VStack() {
                     Text("Create Exercise")
-                    Text("Update Exercise")
-                        .onTapGesture {
-                            viewAdapter.coordinator.present(sheet: .UpdateExerciseView)
-                        }
-                    Text("Save program")
+                        .padding()
+                    HStack {
+                        Text("Save program")
+                        Text("Update Exercise")
+                            .onTapGesture {
+                                authViewAdapter.coordinator.present(sheet: .UpdateExerciseView)
+                            }
+                    }
+                    .padding()
+                    Text("Cancel").onTapGesture {
+                        authViewAdapter.coordinator.pop()
+                    }
                 }
-        }
     }
 }
 
 #Preview {
-    CreateExerciseView(viewAdapter: HomeViewAdapter(coordinator: Coordinator()))
+    CreateExerciseView(authViewAdapter: AuthViewAdapter(coordinator: Coordinator(), emailInput: "", passwordInput: ""))
 }

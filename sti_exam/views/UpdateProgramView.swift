@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct UpdateProgramView: View {
-    var viewAdapter: HomeViewAdapter
+    @ObservedObject var authViewAdapter: AuthViewAdapter
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         VStack {
@@ -16,9 +17,20 @@ struct UpdateProgramView: View {
             HStack {
                 Text("Save")
                     .padding()
-                Text("Dismiss X")
+                Text("Dismiss")
+                    .bold()
+                    .padding(.vertical, GridPoints.x1)
+                    .padding(.horizontal, GridPoints.x3)
+                    .background(.yellow)
+                    .border(.white, width: 3)
+                    .cornerRadius(8)
+                    .padding(.bottom, GridPoints.x2)
                     .onTapGesture {
-                        viewAdapter.coordinator.dismissSheet()
+                        presentationMode.wrappedValue.dismiss()
+                    }
+                Text("Add Exercise")
+                    .onTapGesture {
+                        authViewAdapter.coordinator.push(.CreateExerciseView)
                     }
             }
         }
@@ -26,5 +38,5 @@ struct UpdateProgramView: View {
 }
 
 #Preview {
-    UpdateProgramView(viewAdapter: HomeViewAdapter(coordinator: Coordinator()))
+    UpdateProgramView(authViewAdapter: AuthViewAdapter(coordinator: Coordinator(), emailInput: "", passwordInput: ""))
 }

@@ -8,22 +8,17 @@
 import SwiftUI
 
 struct CoordinatorView: View {
-    @ObservedObject var viewAdapter: HomeViewAdapter
+    
+    @ObservedObject var authViewAdapter: AuthViewAdapter
+    @ObservedObject var homeViewAdapter: HomeViewAdapter
     
     var body: some View {
-        NavigationStack(path: $viewAdapter.coordinator.path, root: {
-            viewAdapter.coordinator.build(screen: .LoginView, viewAdapter: viewAdapter)
-                .navigationDestination(for: Screens.self) { screen in
-                    viewAdapter.coordinator.build(screen: screen, viewAdapter: viewAdapter)
-                }
-                .sheet(item: $viewAdapter.coordinator.sheet) { sheet in
-                    viewAdapter.coordinator.build(sheet: sheet, viewAdapter: viewAdapter)
-                }
-        })
-        .environmentObject(viewAdapter.coordinator)
+        VStack {
+            
+        }
     }
 }
 
 #Preview {
-    CoordinatorView(viewAdapter: HomeViewAdapter(coordinator: Coordinator()))
+    CoordinatorView(authViewAdapter: AuthViewAdapter(coordinator: Coordinator(), emailInput: "", passwordInput: ""), homeViewAdapter: HomeViewAdapter())
 }

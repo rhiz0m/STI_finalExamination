@@ -8,19 +8,19 @@
 import SwiftUI
 
 struct UpdateExerciseView: View {
-    var viewAdapter: HomeViewAdapter
+    var authViewAdapter: AuthViewAdapter
     
     var body: some View {
         VStack(alignment: .leading) {
             Text("Update Exercise!")
             Text("Dismiss X")
                 .onTapGesture {
-                    viewAdapter.coordinator.dismissSheet()
+                    authViewAdapter.coordinator.dismissSheet()
                 }
         }
     }
 }
 
 #Preview {
-    UpdateExerciseView(viewAdapter: HomeViewAdapter(coordinator: Coordinator()))
+    UpdateExerciseView(authViewAdapter: AuthViewAdapter(coordinator: Coordinator(), emailInput: "", passwordInput: ""))
 }

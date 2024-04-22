@@ -8,45 +8,22 @@
 import SwiftUI
 
 struct HomeView: View {
-    let viewAdapter: HomeViewAdapter
+    @ObservedObject var authViewAdapter: AuthViewAdapter
+    @ObservedObject var homeViewAdapter: HomeViewAdapter
     
     var body: some View {
-        VStack {
-            bottomBar(viewAdapter: viewAdapter)
-        }
-        .navigationBarBackButtonHidden(true)
-    }
-}
-
-struct bottomBar: View {
-    var viewAdapter: HomeViewAdapter
-    
-    @State private var tabSelection = 1
-    var body: some View {
-        ZStack(alignment: .bottom) {
-                TabView(selection: $tabSelection) {
-                    ProgramList(viewAdapter: viewAdapter)
-                        .tabItem {
-                    }.tag(1)
-                    
-                    CreateProgramView(viewAdapter: viewAdapter)
-                        .tabItem {
-                    }.tag(2)
-                    
-                    SearchView()
-                        .tabItem {
-                    }.tag(3)
-                    
-                    
-                    MapsView().tabItem {
-                    }.tag(4)
-                }
-                CustomBottomBar(tabSelection: $tabSelection)
+            VStack {
+                Button(action: {
+                    authViewAdapter.logout()
+                }, label: {
+                    Text("Logout")
+                })
+                BottomBar(authViewAdapter: AuthViewAdapter(coordinator: Coordinator(), emailInput: "", passwordInput: ""), homeViewAdapter: homeViewAdapter)
             }
+        .navigationBarBackButtonHidden(true)
+        }
     }
-}
-
 
 #Preview {
-    HomeView(viewAdapter: HomeViewAdapter(coordinator: Coordinator()))
+    HomeView(authViewAdapter: AuthViewAdapter(coordinator: Coordinator(), emailInput: "", passwordInput: ""), homeViewAdapter: HomeViewAdapter())
 }

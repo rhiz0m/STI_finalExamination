@@ -8,18 +8,17 @@
 import SwiftUI
 
 struct ProgramList: View {
-    var viewAdapter: HomeViewAdapter
+    @ObservedObject var authViewAdapter: AuthViewAdapter
     
     var body: some View {
-        List {
-            Text("Create program")
-                .onTapGesture {
-                    viewAdapter.coordinator.present(sheet: .UpdateProgramView)
-                }
-        }
+            List {
+                NavigationLink(destination: UpdateProgramView(authViewAdapter: authViewAdapter), label: {
+                    Text("Update Program")
+                })
+            }
     }
 }
 
 #Preview {
-    ProgramList(viewAdapter: HomeViewAdapter(coordinator: Coordinator()))
+    ProgramList(authViewAdapter: AuthViewAdapter(coordinator: Coordinator(), emailInput: "", passwordInput: ""))
 }

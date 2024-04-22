@@ -8,9 +8,9 @@
 import Foundation
 
 class HomeViewAdapter: ObservableObject {
-    @Published var coordinator: Coordinator
-    
-    init(coordinator: Coordinator) {
-        self.coordinator = coordinator
-    }
+//    @Published var coordinator: Coordinator
+//    
+//    init(coordinator: Coordinator) {
+//        self.coordinator = coordinator
+//    }
 }
