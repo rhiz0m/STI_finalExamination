@@ -8,6 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		FE2694672BBC5912007733B4 /* HomeViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2694662BBC5912007733B4 /* HomeViewAdapter.swift */; };
+		FE60341A2BD7F65E00D7FA47 /* ExerciseList.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6034192BD7F65E00D7FA47 /* ExerciseList.swift */; };
+		FE60341C2BD7F6E600D7FA47 /* ExerciseViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE60341B2BD7F6E600D7FA47 /* ExerciseViewAdapter.swift */; };
+		FE60341E2BD7F76C00D7FA47 /* RoundedBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE60341D2BD7F76C00D7FA47 /* RoundedBtn.swift */; };
+		FE6034202BD8018200D7FA47 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE60341F2BD8018200D7FA47 /* SearchViewModel.swift */; };
+		FE6034222BD801CE00D7FA47 /* ExerciseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6034212BD801CE00D7FA47 /* ExerciseAPI.swift */; };
+		FE6034272BD8040E00D7FA47 /* auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6034262BD8040E00D7FA47 /* auth.swift */; };
+		FE6034292BD804FD00D7FA47 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6034282BD804FD00D7FA47 /* CustomTextField.swift */; };
+		FE60342C2BD806C400D7FA47 /* Maps.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE60342B2BD806C400D7FA47 /* Maps.swift */; };
+		FE60342E2BD806FF00D7FA47 /* LocationDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE60342D2BD806FF00D7FA47 /* LocationDetailsView.swift */; };
 		FE64B9F02B4C354700A70F62 /* sti_examApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE64B9EF2B4C354700A70F62 /* sti_examApp.swift */; };
 		FE64B9F42B4C354900A70F62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE64B9F32B4C354900A70F62 /* Assets.xcassets */; };
 		FE64B9F72B4C354900A70F62 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE64B9F62B4C354900A70F62 /* Preview Assets.xcassets */; };
@@ -20,6 +29,13 @@
 		FE687F592BD6D2B000F8A307 /* TextFieldStyling.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE687F582BD6D2B000F8A307 /* TextFieldStyling.swift */; };
 		FE688CD12B94E0370063B1D3 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = FE688CD02B94E0370063B1D3 /* .gitignore */; };
 		FE688CD32B94E11D0063B1D3 /* .env.local in Resources */ = {isa = PBXBuildFile; fileRef = FE688CD22B94E11D0063B1D3 /* .env.local */; };
+		FE7101FF2BD79A6000B61516 /* LocalizedStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7101FE2BD79A6000B61516 /* LocalizedStrings.swift */; };
+		FE7102012BD7A2F000B61516 /* ExerciseFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7102002BD7A2F000B61516 /* ExerciseFormView.swift */; };
+		FE7102032BD7A35800B61516 /* DbViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7102022BD7A35800B61516 /* DbViewAdapter.swift */; };
+		FE7102052BD7A3C100B61516 /* UsersExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7102042BD7A3C100B61516 /* UsersExercise.swift */; };
+		FE7102072BD7A3E600B61516 /* UsersTrainingRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7102062BD7A3E600B61516 /* UsersTrainingRecord.swift */; };
+		FE7102092BD7A44900B61516 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7102082BD7A44900B61516 /* UserData.swift */; };
+		FE71020B2BD7A4BA00B61516 /* TrainingRecordFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE71020A2BD7A4BA00B61516 /* TrainingRecordFormView.swift */; };
 		FE8D9A122BA2EF020065EEDD /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE8D9A112BA2EF020065EEDD /* HomeView.swift */; };
 		FE8D9A192BA305E10065EEDD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FE8D9A182BA305E10065EEDD /* GoogleService-Info.plist */; };
 		FE8D9A1B2BA307CA0065EEDD /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = FE8D9A1A2BA307CA0065EEDD /* FirebaseAuth */; };
@@ -64,6 +80,15 @@
 
 /* Begin PBXFileReference section */
 		FE2694662BBC5912007733B4 /* HomeViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewAdapter.swift; sourceTree = "<group>"; };
+		FE6034192BD7F65E00D7FA47 /* ExerciseList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseList.swift; sourceTree = "<group>"; };
+		FE60341B2BD7F6E600D7FA47 /* ExerciseViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseViewAdapter.swift; sourceTree = "<group>"; };
+		FE60341D2BD7F76C00D7FA47 /* RoundedBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedBtn.swift; sourceTree = "<group>"; };
+		FE60341F2BD8018200D7FA47 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		FE6034212BD801CE00D7FA47 /* ExerciseAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseAPI.swift; sourceTree = "<group>"; };
+		FE6034262BD8040E00D7FA47 /* auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = auth.swift; sourceTree = "<group>"; };
+		FE6034282BD804FD00D7FA47 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		FE60342B2BD806C400D7FA47 /* Maps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Maps.swift; sourceTree = "<group>"; };
+		FE60342D2BD806FF00D7FA47 /* LocationDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailsView.swift; sourceTree = "<group>"; };
 		FE64B9EC2B4C354700A70F62 /* sti_exam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sti_exam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE64B9EF2B4C354700A70F62 /* sti_examApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sti_examApp.swift; sourceTree = "<group>"; };
 		FE64B9F32B4C354900A70F62 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -79,6 +104,13 @@
 		FE687F582BD6D2B000F8A307 /* TextFieldStyling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldStyling.swift; sourceTree = "<group>"; };
 		FE688CD02B94E0370063B1D3 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		FE688CD22B94E11D0063B1D3 /* .env.local */ = {isa = PBXFileReference; lastKnownFileType = text; path = .env.local; sourceTree = "<group>"; };
+		FE7101FE2BD79A6000B61516 /* LocalizedStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedStrings.swift; sourceTree = "<group>"; };
+		FE7102002BD7A2F000B61516 /* ExerciseFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseFormView.swift; sourceTree = "<group>"; };
+		FE7102022BD7A35800B61516 /* DbViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DbViewAdapter.swift; sourceTree = "<group>"; };
+		FE7102042BD7A3C100B61516 /* UsersExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersExercise.swift; sourceTree = "<group>"; };
+		FE7102062BD7A3E600B61516 /* UsersTrainingRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersTrainingRecord.swift; sourceTree = "<group>"; };
+		FE7102082BD7A44900B61516 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		FE71020A2BD7A4BA00B61516 /* TrainingRecordFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingRecordFormView.swift; sourceTree = "<group>"; };
 		FE8D9A112BA2EF020065EEDD /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		FE8D9A182BA305E10065EEDD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FE8D9A232BA30E8A0065EEDD /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
@@ -129,6 +161,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FE6034232BD802D800D7FA47 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				FE6034262BD8040E00D7FA47 /* auth.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		FE60342A2BD8069500D7FA47 /* Maps */ = {
+			isa = PBXGroup;
+			children = (
+				FE60342B2BD806C400D7FA47 /* Maps.swift */,
+				FE60342D2BD806FF00D7FA47 /* LocationDetailsView.swift */,
+			);
+			path = Maps;
+			sourceTree = "<group>";
+		};
 		FE64B9E32B4C354700A70F62 = {
 			isa = PBXGroup;
 			children = (
@@ -195,6 +244,12 @@
 		FE64BA192B4C39BC00A70F62 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				FE6034232BD802D800D7FA47 /* Auth */,
+				FE7101FE2BD79A6000B61516 /* LocalizedStrings.swift */,
+				FE7102042BD7A3C100B61516 /* UsersExercise.swift */,
+				FE7102062BD7A3E600B61516 /* UsersTrainingRecord.swift */,
+				FE7102082BD7A44900B61516 /* UserData.swift */,
+				FE6034212BD801CE00D7FA47 /* ExerciseAPI.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -203,6 +258,9 @@
 			isa = PBXGroup;
 			children = (
 				FE687F4F2BD6CFD000F8A307 /* AuthViewAdapter.swift */,
+				FE7102022BD7A35800B61516 /* DbViewAdapter.swift */,
+				FE60341B2BD7F6E600D7FA47 /* ExerciseViewAdapter.swift */,
+				FE60341F2BD8018200D7FA47 /* SearchViewModel.swift */,
 			);
 			path = viewModel;
 			sourceTree = "<group>";
@@ -210,6 +268,7 @@
 		FE64BA1B2B4C39CE00A70F62 /* views */ = {
 			isa = PBXGroup;
 			children = (
+				FE60342A2BD8069500D7FA47 /* Maps */,
 				FE93B89B2BBDBC0B00A68DBD /* Theme */,
 				FE93B8972BBDB86100A68DBD /* Subviews */,
 				FE8D9A292BA313D70065EEDD /* SplashScreen.swift */,
@@ -267,6 +326,7 @@
 				FE687F512BD6D1C100F8A307 /* Auth */,
 				FE93B8A22BBDBE2F00A68DBD /* Bottombar */,
 				FE93B8982BBDB86F00A68DBD /* Components */,
+				FE7102002BD7A2F000B61516 /* ExerciseFormView.swift */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -276,6 +336,10 @@
 			children = (
 				FE93B8992BBDB88B00A68DBD /* ProgramList.swift */,
 				FE93B8A02BBDBCD300A68DBD /* PrimaryBtnStyle.swift */,
+				FE71020A2BD7A4BA00B61516 /* TrainingRecordFormView.swift */,
+				FE6034192BD7F65E00D7FA47 /* ExerciseList.swift */,
+				FE60341D2BD7F76C00D7FA47 /* RoundedBtn.swift */,
+				FE6034282BD804FD00D7FA47 /* CustomTextField.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -440,30 +504,46 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE6034292BD804FD00D7FA47 /* CustomTextField.swift in Sources */,
 				FE687F562BD6D1F600F8A307 /* PasswordView.swift in Sources */,
+				FE60342C2BD806C400D7FA47 /* Maps.swift in Sources */,
+				FE6034202BD8018200D7FA47 /* SearchViewModel.swift in Sources */,
+				FE60341A2BD7F65E00D7FA47 /* ExerciseList.swift in Sources */,
 				FE93B8A42BBDC4D200A68DBD /* CustomBottomBar.swift in Sources */,
 				FE8D9A2A2BA313D70065EEDD /* SplashScreen.swift in Sources */,
 				FE8D9A302BA314760065EEDD /* UpdateProgramView.swift in Sources */,
+				FE6034272BD8040E00D7FA47 /* auth.swift in Sources */,
 				FE687F542BD6D1E900F8A307 /* EmailView.swift in Sources */,
+				FE60341E2BD7F76C00D7FA47 /* RoundedBtn.swift in Sources */,
 				FE8D9A2C2BA314310065EEDD /* CreateProgramView.swift in Sources */,
 				FE93B8A12BBDBCD300A68DBD /* PrimaryBtnStyle.swift in Sources */,
 				FE8D9A342BA314CD0065EEDD /* MapsView.swift in Sources */,
 				FE8D9A362BA314F60065EEDD /* SearchView.swift in Sources */,
 				FE8D9A322BA314980065EEDD /* UpdateExerciseView.swift in Sources */,
 				FE8D9A2E2BA314530065EEDD /* CreateExerciseView.swift in Sources */,
+				FE60341C2BD7F6E600D7FA47 /* ExerciseViewAdapter.swift in Sources */,
+				FE60342E2BD806FF00D7FA47 /* LocationDetailsView.swift in Sources */,
 				FE64B9F02B4C354700A70F62 /* sti_examApp.swift in Sources */,
+				FE7102032BD7A35800B61516 /* DbViewAdapter.swift in Sources */,
 				FE687F592BD6D2B000F8A307 /* TextFieldStyling.swift in Sources */,
 				FE8D9A282BA313990065EEDD /* RegisterView.swift in Sources */,
 				FE93B89F2BBDBC9600A68DBD /* CustomColors.swift in Sources */,
+				FE7102052BD7A3C100B61516 /* UsersExercise.swift in Sources */,
 				FE2694672BBC5912007733B4 /* HomeViewAdapter.swift in Sources */,
+				FE7102092BD7A44900B61516 /* UserData.swift in Sources */,
 				FE8D9A382BA316B70065EEDD /* CoordinatorView.swift in Sources */,
 				FE8D9A122BA2EF020065EEDD /* HomeView.swift in Sources */,
 				FE8D9A262BA313420065EEDD /* LoginView.swift in Sources */,
+				FE7101FF2BD79A6000B61516 /* LocalizedStrings.swift in Sources */,
 				FEF232892BC1AB3B00DCEE65 /* BottomBar.swift in Sources */,
 				FE687F502BD6CFD000F8A307 /* AuthViewAdapter.swift in Sources */,
+				FE7102012BD7A2F000B61516 /* ExerciseFormView.swift in Sources */,
+				FE6034222BD801CE00D7FA47 /* ExerciseAPI.swift in Sources */,
 				FE93B89A2BBDB88B00A68DBD /* ProgramList.swift in Sources */,
+				FE7102072BD7A3E600B61516 /* UsersTrainingRecord.swift in Sources */,
 				FE93B89D2BBDBC2200A68DBD /* GridPoints.swift in Sources */,
 				FE8D9A242BA30E8A0065EEDD /* Coordinator.swift in Sources */,
+				FE71020B2BD7A4BA00B61516 /* TrainingRecordFormView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

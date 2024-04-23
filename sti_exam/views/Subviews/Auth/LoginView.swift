@@ -9,7 +9,6 @@ import SwiftUI
 
 struct LoginView: View {
     @ObservedObject var authViewAdapter: AuthViewAdapter
-    @ObservedObject var homeViewAdapter: HomeViewAdapter
     @State var email = ""
     @State var password = ""
     
@@ -41,16 +40,16 @@ struct LoginView: View {
             }
             VStack(spacing: 18) {
                 VStack {
-                    EmailView(viewAdapter: authViewAdapter, userNameInput: $authViewAdapter.emailInput, customLabel: viewModel.emailLabel, textSize: 14)
+                    EmailView(viewAdapter: authViewAdapter, userNameInput: $authViewAdapter.emailInput, customLabel: viewModel.emailTitle, textSize: 14)
                         .padding(.vertical)
-                    PasswordView(viewAdapter: authViewAdapter, userNameInput: $authViewAdapter.passwordInput, customLabel: viewModel.passwordLabel, textSize: 12)
+                    PasswordView(viewAdapter: authViewAdapter, userNameInput: $authViewAdapter.passwordInput, customLabel: viewModel.passwordTitle, textSize: 12)
                         .padding(.bottom, GridPoints.x3)
                 }
                 .padding(.horizontal, GridPoints.x2)
                 Divider()
                     .rotationEffect(Angle(degrees: -GridPoints.x1))
                 
-                Text(viewModel.loginLabel)
+                Text(viewModel.loginTitle)
                     .font(.title2)
                     .bold()
                     .padding(.vertical, GridPoints.x1)
@@ -73,8 +72,8 @@ struct LoginView: View {
                         }
                     }
                 
-                NavigationLink(destination: RegisterView(authViewAdapter: authViewAdapter, homeViewAdapter: homeViewAdapter), label: {
-                    Text(viewModel.signUpLabel)
+                NavigationLink(destination: RegisterView(authViewAdapter: authViewAdapter), label: {
+                    Text(viewModel.registerTitle)
                 })
                 .bold()
                 .padding(.vertical, GridPoints.x1)
@@ -113,13 +112,13 @@ struct LoginView: View {
     
     struct ViewModel {
         let appTitle: String
-        let loginLabel: String
-        let signUpLabel: String
-        let passwordLabel: String
-        let emailLabel: String
+        let loginTitle: String
+        let registerTitle: String
+        let passwordTitle: String
+        let emailTitle: String
     }
 }
 
 #Preview {
-    LoginView(authViewAdapter: AuthViewAdapter(coordinator: Coordinator(), emailInput: "", passwordInput: ""), homeViewAdapter: HomeViewAdapter())
+    LoginView(authViewAdapter: AuthViewAdapter())
 }

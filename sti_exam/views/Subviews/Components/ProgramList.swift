@@ -10,15 +10,24 @@ import SwiftUI
 struct ProgramList: View {
     @ObservedObject var authViewAdapter: AuthViewAdapter
     
-    var body: some View {
-            List {
-                NavigationLink(destination: UpdateProgramView(authViewAdapter: authViewAdapter), label: {
-                    Text("Update Program")
-                })
+        var body: some View {
+            content
+        }
+
+    @ViewBuilder private var content: some View {
+        ZStack{
+            VStack() {
+                list
             }
+        }
     }
+
+    @ViewBuilder private var list: some View {
+        ExerciseList(db: authViewAdapter)
+    }
+    
 }
 
 #Preview {
-    ProgramList(authViewAdapter: AuthViewAdapter(coordinator: Coordinator(), emailInput: "", passwordInput: ""))
+    ProgramList(authViewAdapter: AuthViewAdapter())
 }

@@ -9,21 +9,17 @@ import SwiftUI
 
 struct HomeView: View {
     @ObservedObject var authViewAdapter: AuthViewAdapter
-    @ObservedObject var homeViewAdapter: HomeViewAdapter
     
     var body: some View {
             VStack {
-                Button(action: {
-                    authViewAdapter.logout()
-                }, label: {
-                    Text("Logout")
-                })
-                BottomBar(authViewAdapter: AuthViewAdapter(coordinator: Coordinator(), emailInput: "", passwordInput: ""), homeViewAdapter: homeViewAdapter)
+                BottomBar(authViewAdapter: authViewAdapter)
             }
         .navigationBarBackButtonHidden(true)
         }
     }
 
+
+
 #Preview {
-    HomeView(authViewAdapter: AuthViewAdapter(coordinator: Coordinator(), emailInput: "", passwordInput: ""), homeViewAdapter: HomeViewAdapter())
+    HomeView(authViewAdapter: AuthViewAdapter())
 }

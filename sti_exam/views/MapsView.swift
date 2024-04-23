@@ -9,9 +9,16 @@ import SwiftUI
 
 struct MapsView: View {
     var body: some View {
-        Text("Maps View!")
+        content
     }
 }
+
+@ViewBuilder private var content: some View {
+    VStack() {
+        Maps()
+    }
+}
+
 
 #Preview {
     MapsView()

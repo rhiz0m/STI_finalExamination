@@ -15,12 +15,12 @@ struct UpdateExerciseView: View {
             Text("Update Exercise!")
             Text("Dismiss X")
                 .onTapGesture {
-                    authViewAdapter.coordinator.dismissSheet()
+              
                 }
         }
     }
 }
 
 #Preview {
-    UpdateExerciseView(authViewAdapter: AuthViewAdapter(coordinator: Coordinator(), emailInput: "", passwordInput: ""))
+    UpdateExerciseView(authViewAdapter: AuthViewAdapter())
 }

@@ -9,7 +9,6 @@ import SwiftUI
 
 struct BottomBar: View {
     @ObservedObject var authViewAdapter: AuthViewAdapter
-    @ObservedObject var homeViewAdapter: HomeViewAdapter
     
     @State private var tabSelection = 1
     var body: some View {
@@ -36,5 +35,5 @@ struct BottomBar: View {
     }
 }
 #Preview {
-    BottomBar(authViewAdapter: AuthViewAdapter(coordinator: Coordinator(), emailInput: "", passwordInput: ""), homeViewAdapter: HomeViewAdapter())
+    BottomBar(authViewAdapter: AuthViewAdapter())
 }

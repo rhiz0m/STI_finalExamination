@@ -75,16 +75,16 @@ class Coordinator : ObservableObject {
     }
     
     @MainActor @ViewBuilder
-    func build(screen: Screens, authViewAdapter: AuthViewAdapter, homeViewAdapter: HomeViewAdapter) -> some View {
+    func build(screen: Screens, authViewAdapter: AuthViewAdapter, homeViewAdapter: HomeViewAdapter, exerciceViewAdapter: ExerciseViewAdapter) -> some View {
         switch screen {
         case .LoginView:
-            LoginView(authViewAdapter: authViewAdapter, homeViewAdapter: homeViewAdapter)
+            LoginView(authViewAdapter: authViewAdapter)
         case .SplashScreen:
             SplashScreen()
         case .HomeView:
-            HomeView(authViewAdapter: authViewAdapter, homeViewAdapter: homeViewAdapter)
+            HomeView(authViewAdapter: authViewAdapter)
         case .UpdateProgramView:
-            UpdateProgramView(authViewAdapter: authViewAdapter)
+            UpdateProgramView(authViewAdapter: authViewAdapter, viewModel: exerciceViewAdapter)
         case .CreateExerciseView:
             CreateExerciseView(authViewAdapter: authViewAdapter)
         case .SearchView:
@@ -105,10 +105,10 @@ class Coordinator : ObservableObject {
     }
     
     @MainActor @ViewBuilder
-    func build(fullScreenCover: FullScreenCover, authViewAdapter: AuthViewAdapter ,homeViewAdapter: HomeViewAdapter) -> some View {
+    func build(fullScreenCover: FullScreenCover, authViewAdapter: AuthViewAdapter) -> some View {
         switch fullScreenCover {
         case .RegisterView:
-            RegisterView(authViewAdapter: authViewAdapter, homeViewAdapter: homeViewAdapter)
+            RegisterView(authViewAdapter: authViewAdapter)
         }
     }
 }

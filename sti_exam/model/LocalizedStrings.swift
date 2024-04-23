@@ -6,3 +6,15 @@
 //
 
 import Foundation
+
+struct LocalizedStrings {
+    // Auth
+    static let apptitle = "Training app"
+    static let login = "Login"
+    static let register = "Register"
+    static let email = "Email"
+    static let confirmEmail = "Confirm Email"
+    static let password = "Password"
+    static let confirmPassword = "Confirm Password"
+    static let cancel = "Cancel"
+}

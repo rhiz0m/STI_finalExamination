@@ -20,5 +20,5 @@ struct CoordinatorView: View {
 }
 
 #Preview {
-    CoordinatorView(authViewAdapter: AuthViewAdapter(coordinator: Coordinator(), emailInput: "", passwordInput: ""), homeViewAdapter: HomeViewAdapter())
+    CoordinatorView(authViewAdapter: AuthViewAdapter(), homeViewAdapter: HomeViewAdapter())
 }

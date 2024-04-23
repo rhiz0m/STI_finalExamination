@@ -1,5 +1,9 @@
 # Xcode
 .DS_Store
+sti_exam/model/Auth/auth.swift
+sti_exam/ViewModel/SearchViewModel.swift
+sti_exam/Model/Auth/API.swift
+
 build/
 DerivedData/
 /*.hmap

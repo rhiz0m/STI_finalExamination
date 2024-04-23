@@ -21,19 +21,18 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct sti_examApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
-    @StateObject private var authViewAdapter = AuthViewAdapter(coordinator: Coordinator(), emailInput: "", passwordInput: "")
-    @StateObject private var homeViewAdapter = HomeViewAdapter()
+    @StateObject private var authViewAdapter = AuthViewAdapter()
     
     var body: some Scene {
         WindowGroup {
             if let user = authViewAdapter.currentUser {
                 NavigationStack {
-                    HomeView(authViewAdapter: authViewAdapter, homeViewAdapter: homeViewAdapter)
+                    HomeView(authViewAdapter: authViewAdapter)
                 }
                 
             } else {
                 NavigationStack {
-                    LoginView(authViewAdapter: authViewAdapter, homeViewAdapter: homeViewAdapter)
+                    LoginView(authViewAdapter: authViewAdapter)
                 }
                 
             }

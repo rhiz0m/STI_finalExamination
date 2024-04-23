@@ -9,7 +9,6 @@ import SwiftUI
 
 struct RegisterView: View {
     @ObservedObject var authViewAdapter: AuthViewAdapter
-    @ObservedObject var homeViewAdapter: HomeViewAdapter
     @State var email = ""
     @State var confirmEmail = ""
     @State var password = ""
@@ -17,13 +16,13 @@ struct RegisterView: View {
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
-        if let viewModel = authViewAdapter.signUpViewModel {
+        if let viewModel = authViewAdapter.registerViewModel{
             content(viewModel: viewModel)
             
         } else {
             ProgressView()
                 .onAppear(perform: {
-                    authViewAdapter.generateSignUpViewModel()
+                    authViewAdapter.generateRegisterViewModel()
                     
                 })
         }
@@ -33,20 +32,20 @@ struct RegisterView: View {
         VStack(spacing: 0) {
             VStack(spacing: 18) {
                 VStack {
-                    EmailView(viewAdapter: authViewAdapter, userNameInput: $email, customLabel: viewModel.emailLabel, textSize: 14)
+                    EmailView(viewAdapter: authViewAdapter, userNameInput: $email, customLabel: viewModel.emailTitle, textSize: 14)
                         .padding(.vertical)
-                    EmailView(viewAdapter: authViewAdapter, userNameInput: $confirmEmail, customLabel: viewModel.confirmEmail, textSize: 12)
+                    EmailView(viewAdapter: authViewAdapter, userNameInput: $confirmEmail, customLabel: viewModel.confirmEmailTitle, textSize: 12)
                         .padding(.vertical)
-                    PasswordView(viewAdapter: authViewAdapter, userNameInput: $password, customLabel: viewModel.passwordLabel, textSize: 14)
+                    PasswordView(viewAdapter: authViewAdapter, userNameInput: $password, customLabel: viewModel.passwordTitle, textSize: 14)
                         .padding(.bottom, GridPoints.x3)
-                    PasswordView(viewAdapter: authViewAdapter, userNameInput: $confirmPassword, customLabel: viewModel.confirmPassword, textSize: 12)
+                    PasswordView(viewAdapter: authViewAdapter, userNameInput: $confirmPassword, customLabel: viewModel.confirmPasswordTitle, textSize: 12)
                         .padding(.bottom, GridPoints.x3)
                 }
                 .padding(.horizontal, GridPoints.x2)
                 Divider()
                     .rotationEffect(Angle(degrees: -GridPoints.x1))
                 
-                Text(viewModel.signUpLabel)
+                Text(viewModel.registerTitle)
                     .font(.title2)
                     .bold()
                     .padding(.vertical, GridPoints.x1)
@@ -61,7 +60,7 @@ struct RegisterView: View {
                     }
                 
                 
-                Text(viewModel.cancelLabel)
+                Text(viewModel.cancelTitle)
                     .bold()
                     .padding(.vertical, GridPoints.x1)
                     .padding(.horizontal, GridPoints.x3)
@@ -74,7 +73,6 @@ struct RegisterView: View {
                     }
             }
             .background(.yellow)
-            .padding(.bottom, GridPoints.x8)
         }
         .padding(GridPoints.half)
         .navigationBarBackButtonHidden(true)
@@ -102,16 +100,16 @@ struct RegisterView: View {
     
     struct ViewModel {
         let appTitle: String
-        let cancelLabel: String
-        let signUpLabel: String
-        let passwordLabel: String
-        let confirmPassword: String
-        let emailLabel: String
-        let confirmEmail: String
+        let cancelTitle: String
+        let registerTitle: String
+        let passwordTitle: String
+        let confirmPasswordTitle: String
+        let emailTitle: String
+        let confirmEmailTitle: String
     }
 }
 
 #Preview {
-    RegisterView(authViewAdapter: AuthViewAdapter(coordinator: Coordinator(), emailInput: "", passwordInput: ""), homeViewAdapter: HomeViewAdapter(),
+    RegisterView(authViewAdapter: AuthViewAdapter(),
                  email: "", confirmEmail: "", password: "", confirmPassword: "")
 }
