@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ExerciseFormView: View {
     
-    @ObservedObject var db: AuthViewAdapter
+    @ObservedObject var db: AuthDatabaseViewAdapter
     
     @Binding var exerciseName: String
     @Binding var date: String
@@ -45,7 +45,7 @@ struct ExerciseFormView: View {
 
 struct ProgramFormView_Previews: PreviewProvider {
     static var previews: some View {
-        let db = AuthViewAdapter()
+        let db = AuthDatabaseViewAdapter()
         let selectedProgram = UsersExcercise(id: UUID(),
                                              exerciseName: "Test",
                                              date: Date(),

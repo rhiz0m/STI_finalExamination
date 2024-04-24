@@ -12,10 +12,10 @@ struct CustomBottomBar: View {
     @Namespace private var animationNamespace
     
     let tabBarItems: [(image: String, title: String)] = [
-        ("dumbbell.fill", "List"),
-        ("plus.circle.fill", "Add"),
-        ("magnifyingglass.circle.fill", "Search"),
-        ("map.fill", "Map")
+        ("dumbbell.fill", LocalizedStrings.list),
+        ("plus.circle.fill", LocalizedStrings.add),
+        ("magnifyingglass.circle.fill", LocalizedStrings.search),
+        ("map.fill", LocalizedStrings.map)
     ]
     
     var body: some View {
@@ -27,7 +27,7 @@ struct CustomBottomBar: View {
                     VStack() {
                         PrimaryBtnStyle(title: tabBarItems[index].title, icon: tabBarItems[index].image, fontSize: 12)
                         if index + 1 == tabSelection {
-                            Capsule().frame(height: 6).foregroundColor(CustomColors.cyan).matchedGeometryEffect(id: "selectedTabId", in: animationNamespace).offset(y: 3)
+                            Capsule().frame(height: 6).foregroundColor(CustomColors.cyan).matchedGeometryEffect(id: LocalizedStrings.selectedTabId, in: animationNamespace).offset(y: 3)
                             
                         } else {
                             Capsule()

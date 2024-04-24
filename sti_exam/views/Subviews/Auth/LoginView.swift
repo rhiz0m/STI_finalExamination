@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LoginView: View {
-    @ObservedObject var authViewAdapter: AuthViewAdapter
+    @ObservedObject var authViewAdapter: AuthDatabaseViewAdapter
     @State var email = ""
     @State var password = ""
     
@@ -120,5 +120,5 @@ struct LoginView: View {
 }
 
 #Preview {
-    LoginView(authViewAdapter: AuthViewAdapter())
+    LoginView(authViewAdapter: AuthDatabaseViewAdapter())
 }

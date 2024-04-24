@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CoordinatorView: View {
     
-    @ObservedObject var authViewAdapter: AuthViewAdapter
+    @ObservedObject var authViewAdapter: AuthDatabaseViewAdapter
     @ObservedObject var homeViewAdapter: HomeViewAdapter
     
     var body: some View {
@@ -20,5 +20,5 @@ struct CoordinatorView: View {
 }
 
 #Preview {
-    CoordinatorView(authViewAdapter: AuthViewAdapter(), homeViewAdapter: HomeViewAdapter())
+    CoordinatorView(authViewAdapter: AuthDatabaseViewAdapter(), homeViewAdapter: HomeViewAdapter())
 }

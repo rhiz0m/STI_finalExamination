@@ -10,9 +10,10 @@ import FirebaseAuth
 
 
 struct ExerciseList: View {
-    @ObservedObject var db: AuthViewAdapter
-    @StateObject private var exerciseViewAdapter = ExerciseViewAdapter()
-  
+    @ObservedObject var exerciseViewAdapter: ExerciseViewAdapter
+    @ObservedObject var authDatabaseViewAdapter: AuthDatabaseViewAdapter
+    @ObservedObject var homeViewAdapter: HomeViewAdapter
+    
     var body: some View {
         VStack() {
             HStack(alignment: .center) {
@@ -25,22 +26,22 @@ struct ExerciseList: View {
                         RoundedRectangle(cornerRadius: 50)
                             .stroke(Color.gray, lineWidth: 2)
                     )
-                  Spacer()
-                Text("Welcome!")
+                Spacer()
+                Text(LocalizedStrings.welcome)
                     .font(.title).bold()
                     .foregroundStyle(.black)
                 Spacer()
                 Button(action: {
-                    db.logout()
+                    authDatabaseViewAdapter.logout()
                 }, label: {
-                    RoundedBtn(title: "", icon: "power")
+                    RoundedBtn(icon: homeViewAdapter.systemImages.power)
                 }).background(.black).cornerRadius(50)
-             
+                
             }.padding(.top).padding(.horizontal, GridPoints.x4)
             
-            if let userData = db.currentUserData {
+            if let userData = authDatabaseViewAdapter.currentUserData {
                 if userData.usersExercises.isEmpty {
-                    Text("You have no programs yet!")
+                    Text(LocalizedStrings.noExercises)
                         .foregroundStyle(CustomColors.dark)
                         .italic()
                         .padding(.top)
@@ -50,7 +51,8 @@ struct ExerciseList: View {
                     List(userData.usersExercises) { exercise in
                         
                         NavigationLink(
-                            destination: UpdateProgramView(authViewAdapter: db, viewModel: exerciseViewAdapter),
+                            destination: UpdateProgramView(
+                                authViewAdapter: authDatabaseViewAdapter, viewModel: exerciseViewAdapter),
                             tag: exercise.id,
                             selection: $exerciseViewAdapter.selectedExerciseID
                             
@@ -61,10 +63,10 @@ struct ExerciseList: View {
                                     .bold()
                                     .foregroundStyle(.white)
                                     .padding(.vertical, GridPoints.x1)
-                                Text("Type: \(exercise.type)")
+                                Text("\(LocalizedStrings.type) \(exercise.type)")
                                     .foregroundStyle(.white)
                                     .font(.caption)
-                                Text("Muscle Groups: \(exercise.muscleGroups.joined(separator: " "))")
+                                Text("\(LocalizedStrings.muscleGroups) \(exercise.muscleGroups.joined(separator: " "))")
                                     .foregroundStyle(.white)
                                     .font(.caption)
                                 
@@ -72,22 +74,22 @@ struct ExerciseList: View {
                                     HStack() {
                                         VStack(alignment: .leading) {
                                             HStack {
-                                                Text("Weight: \(records.weight)").foregroundStyle(.white).font(.caption)
-                                                Text("Sets: \(records.sets)").foregroundStyle(.white).font(.caption)
-                                                Text("Reps: \(records.reps)").foregroundStyle(.white).font(.caption)
+                                                Text("\(LocalizedStrings.weight) \(records.weight)").foregroundStyle(.white).font(.caption)
+                                                Text("\(LocalizedStrings.sets) \(records.sets)").foregroundStyle(.white).font(.caption)
+                                                Text("\(LocalizedStrings.reps) \(records.reps)").foregroundStyle(.white).font(.caption)
                                                 
                                             }
                                             HStack {
-                                                Text("Total Reps: \(records.totalReps)")
+                                                Text("\(LocalizedStrings.totalReps) \(records.totalReps)")
                                                     .foregroundStyle(.white)
                                                     .font(.caption)
-                                                Text("Total Weight: \(records.totalWeight)")
+                                                Text("\(LocalizedStrings.totalWeight) \(records.totalWeight)")
                                                     .foregroundStyle(.white)
                                                     .font(.caption)
                                             }
                                         }
                                         Spacer()
-                                        Image(systemName: "arrow.right.circle")
+                                        Image(systemName: homeViewAdapter.systemImages.arrowRightCircle)
                                             .foregroundColor(CustomColors.cyan)
                                             .font(.system(size: 40))
                                     }
@@ -101,13 +103,13 @@ struct ExerciseList: View {
                         
                         VStack {
                             Button(action: {
-                                db.deleteProgram(exercise: exercise)
+                                authDatabaseViewAdapter.deleteProgram(exercise: exercise)
                             }, label: {
                                 HStack(alignment: .center) {
-                                    RoundedBtn(title: "", icon: "trash")
+                                    RoundedBtn(icon: homeViewAdapter.systemImages.trash)
                                     Spacer()
                                     VStack(alignment: .leading) {
-                                        Text("Created:").font(.caption)
+                                        Text(LocalizedStrings.created).font(.caption)
                                         Text("\(formatDate(exercise.date))")
                                     }
                                     
@@ -117,7 +119,7 @@ struct ExerciseList: View {
                                             .stroke(LinearGradient(gradient: Gradient(colors: [CustomColors.dark, Color.black]),
                                                                    startPoint: .bottom,
                                                                    endPoint: .top),
-                                                                    lineWidth: 2))
+                                                    lineWidth: 2))
                             })
                         }
                         .listRowBackground(Color.black).cornerRadius(GridPoints.x1)
@@ -137,5 +139,8 @@ private func formatDate(_ date: Date) -> String {
 }
 
 #Preview {
-    ExerciseList(db: AuthViewAdapter())
+    ExerciseList(
+        exerciseViewAdapter: ExerciseViewAdapter(),
+        authDatabaseViewAdapter: AuthDatabaseViewAdapter(),
+        homeViewAdapter: HomeViewAdapter())
 }

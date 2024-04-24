@@ -13,4 +13,6 @@ class HomeViewAdapter: ObservableObject {
 //    init(coordinator: Coordinator) {
 //        self.coordinator = coordinator
 //    }
+    var systemImages = SelectedSystemImages()
+    
 }

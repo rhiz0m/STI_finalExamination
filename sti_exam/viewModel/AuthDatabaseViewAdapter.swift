@@ -10,31 +10,20 @@ import Foundation
 import Firebase
 import FirebaseAuth
 
-class AuthViewAdapter: ObservableObject {
+class AuthDatabaseViewAdapter: ObservableObject {
     @Published var loginViewModel: LoginView.ViewModel?
     @Published var registerViewModel: RegisterView.ViewModel?
     @Published var emailInput = ""
     @Published var passwordInput = ""
-    @Published var id = ""
-    @Published var title = ""
-    @Published var date = Date()
-    @Published var dateString: String = ""
-    @Published var description = ""
-    @Published var name = ""
-    @Published var muscleGroups = ""
-    @Published var weight = ""
-    @Published var reps = 0
-    @Published var sets = 0
-    @Published var usersExercises: [UsersExcercise] = []
-    @Published var usersTrainingRecord: [UsersTrainingRecord] = []
     @Published var currentUser: User?
     @Published var currentUserData: UserData?
     
-    var db = Firestore.firestore()
-    var auth = Auth.auth()
-    let USER_DATA_COLLECTION = "user_data"
-    let USER_EXERCISES = "usersExercises"
-    var dbListener: ListenerRegistration?
+    private var exerciseViewAdapter = ExerciseViewAdapter()
+    private var db = Firestore.firestore()
+    private var auth = Auth.auth()
+    private let USER_DATA_COLLECTION = "user_data"
+    private let USER_EXERCISES = "usersExercises"
+    private var dbListener: ListenerRegistration?
     
     
     init() {
@@ -79,21 +68,6 @@ class AuthViewAdapter: ObservableObject {
         self.registerViewModel = registerViewModel
     }
     
-    func clearFeilds() {
-        id = ""
-        title = ""
-        date = Date()
-        dateString = ""
-        description = ""
-        name = ""
-        muscleGroups = ""
-        weight = ""
-        reps = 0
-        sets = 0
-        usersExercises = []
-    }
-    
-   
     func startListeningToDb() {
         guard let user = currentUser else { return }
         
@@ -118,7 +92,7 @@ class AuthViewAdapter: ObservableObject {
             case .success(let userData):
                 self.currentUserData = userData
 
-                self.usersExercises = userData.usersExercises
+                self.exerciseViewAdapter.usersExercises = userData.usersExercises
             case .failure(let error):
                 print("Error decoding data: \(error.localizedDescription)")
             }

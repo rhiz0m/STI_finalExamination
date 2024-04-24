@@ -8,32 +8,40 @@
 import SwiftUI
 
 struct BottomBar: View {
-    @ObservedObject var authViewAdapter: AuthViewAdapter
+    @ObservedObject var authViewAdapter: AuthDatabaseViewAdapter
+    @ObservedObject var exerciseViewAdapter: ExerciseViewAdapter
+    @ObservedObject var homeViewAdapter: HomeViewAdapter
     
     @State private var tabSelection = 1
     var body: some View {
         ZStack(alignment: .bottom) {
-                TabView(selection: $tabSelection) {
-                    ProgramList(authViewAdapter: authViewAdapter)
-                        .tabItem {
-                    }.tag(1)
-                    
-                    CreateProgramView(authViewAdapter: authViewAdapter)
-                        .tabItem {
+            TabView(selection: $tabSelection) {
+                ProgramList(
+                    authDatabaseViewAdapter: authViewAdapter,
+                    exerciseViewAdapter: exerciseViewAdapter,
+                    homeViewAdapter: homeViewAdapter)
+                .tabItem {
+                }.tag(1)
+                
+                CreateProgramView(authViewAdapter: authViewAdapter)
+                    .tabItem {
                     }.tag(2)
-                    
-                    SearchView()
-                        .tabItem {
+                
+                SearchView()
+                    .tabItem {
                     }.tag(3)
-                    
-                    
-                    MapsView().tabItem {
-                    }.tag(4)
-                }
-                CustomBottomBar(tabSelection: $tabSelection)
+                
+                
+                MapsView().tabItem {
+                }.tag(4)
             }
+            CustomBottomBar(tabSelection: $tabSelection)
+        }
     }
 }
 #Preview {
-    BottomBar(authViewAdapter: AuthViewAdapter())
+    BottomBar(
+        authViewAdapter: AuthDatabaseViewAdapter(),
+        exerciseViewAdapter: ExerciseViewAdapter(),
+        homeViewAdapter: HomeViewAdapter())
 }

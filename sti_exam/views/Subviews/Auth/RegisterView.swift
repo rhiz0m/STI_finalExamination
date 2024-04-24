@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RegisterView: View {
-    @ObservedObject var authViewAdapter: AuthViewAdapter
+    @ObservedObject var authViewAdapter: AuthDatabaseViewAdapter
     @State var email = ""
     @State var confirmEmail = ""
     @State var password = ""
@@ -110,6 +110,6 @@ struct RegisterView: View {
 }
 
 #Preview {
-    RegisterView(authViewAdapter: AuthViewAdapter(),
+    RegisterView(authViewAdapter: AuthDatabaseViewAdapter(),
                  email: "", confirmEmail: "", password: "", confirmPassword: "")
 }

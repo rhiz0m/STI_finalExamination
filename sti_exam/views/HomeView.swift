@@ -8,18 +8,21 @@
 import SwiftUI
 
 struct HomeView: View {
-    @ObservedObject var authViewAdapter: AuthViewAdapter
+    @StateObject private var homeViewAdapter = HomeViewAdapter()
+    @StateObject private var exerciseViewAdapter = ExerciseViewAdapter()
+    @ObservedObject var authViewAdapter: AuthDatabaseViewAdapter
     
     var body: some View {
             VStack {
-                BottomBar(authViewAdapter: authViewAdapter)
+                BottomBar(
+                    authViewAdapter: authViewAdapter,
+                    exerciseViewAdapter: exerciseViewAdapter, 
+                    homeViewAdapter: homeViewAdapter)
             }
         .navigationBarBackButtonHidden(true)
         }
     }
 
-
-
 #Preview {
-    HomeView(authViewAdapter: AuthViewAdapter())
+    HomeView(authViewAdapter: AuthDatabaseViewAdapter())
 }

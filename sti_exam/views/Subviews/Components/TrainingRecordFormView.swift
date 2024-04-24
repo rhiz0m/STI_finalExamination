@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TrainingRecordFormView: View {
     
-    @ObservedObject var db: AuthViewAdapter
+    @ObservedObject var db: AuthDatabaseViewAdapter
     
     @Binding var weight: String
     @Binding var reps: Int
@@ -35,7 +35,7 @@ struct TrainingRecordFormView: View {
 
 struct ExerciseFormView_Previews: PreviewProvider {
     static var previews: some View {
-        let db = AuthViewAdapter()
+        let db = AuthDatabaseViewAdapter()
         let selectedExercice = Binding<UsersTrainingRecord?>(
             get: { nil },
             set: { _ in }

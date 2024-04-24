@@ -8,7 +8,9 @@
 import Foundation
 
 struct LocalizedStrings {
-    // Auth
+    // General
+    static let save = "Save"
+    // Auth.Login/Register
     static let apptitle = "Training app"
     static let login = "Login"
     static let register = "Register"
@@ -17,4 +19,27 @@ struct LocalizedStrings {
     static let password = "Password"
     static let confirmPassword = "Confirm Password"
     static let cancel = "Cancel"
+    // Home/Bottombar
+    static let welcome = "Welcome"
+    static let list = "List"
+    static let add = "Add"
+    static let search = "Search"
+    static let map = "Map"
+    static let selectedTabId = "selectedTabId"
+    static let noExercises = "You have no exercises yet!"
+    // Exercises
+    static let exerciseName = "ExerciseName"
+    static let type = "Type:"
+    static let date = "Date:"
+    static let muscleGroups = "MuscleGroups:"
+    static let weight = "Weight:"
+    static let reps = "Reps:"
+    static let sets = "Sets:"
+    static let title = "Title:"
+    static let description = "Description:"
+    static let name = "Name:"
+    static let totalReps = "Total Reps:"
+    static let totalWeight = "Total Weight:"
+    static let created = "Created"
+
 }

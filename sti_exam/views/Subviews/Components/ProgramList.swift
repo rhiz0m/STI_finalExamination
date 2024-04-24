@@ -8,26 +8,28 @@
 import SwiftUI
 
 struct ProgramList: View {
-    @ObservedObject var authViewAdapter: AuthViewAdapter
+    @ObservedObject var authDatabaseViewAdapter: AuthDatabaseViewAdapter
+    @ObservedObject var exerciseViewAdapter: ExerciseViewAdapter
+    @ObservedObject var homeViewAdapter: HomeViewAdapter
     
-        var body: some View {
-            content
-        }
-
+    var body: some View {
+        content
+    }
+    
     @ViewBuilder private var content: some View {
         ZStack{
             VStack() {
-                list
+                ExerciseList(exerciseViewAdapter: exerciseViewAdapter,
+                             authDatabaseViewAdapter: authDatabaseViewAdapter,
+                             homeViewAdapter: homeViewAdapter)
             }
         }
     }
-
-    @ViewBuilder private var list: some View {
-        ExerciseList(db: authViewAdapter)
-    }
-    
 }
 
 #Preview {
-    ProgramList(authViewAdapter: AuthViewAdapter())
+    ProgramList(
+        authDatabaseViewAdapter: AuthDatabaseViewAdapter(),
+        exerciseViewAdapter: ExerciseViewAdapter(),
+        homeViewAdapter: HomeViewAdapter())
 }

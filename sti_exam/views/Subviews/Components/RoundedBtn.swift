@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RoundedBtn: View {
     
-    var title: String
+    var title: String?
     var height: CGFloat = 44
     var width: CGFloat = 44
     var icon: String

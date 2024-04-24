@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct EmailView: View {
-    @ObservedObject var viewAdapter: AuthViewAdapter
+    @ObservedObject var viewAdapter: AuthDatabaseViewAdapter
     @Binding var userNameInput: String
     var customLabel: String
     var textSize: CGFloat
@@ -41,7 +41,7 @@ struct UserNameView_Previews: PreviewProvider {
     @State static var passwordInput: String = ""
     
     static var previews: some View {
-        EmailView(viewAdapter: AuthViewAdapter(),
+        EmailView(viewAdapter: AuthDatabaseViewAdapter(),
                   userNameInput: $userNameInput, customLabel: "User Name", textSize: 14)
         .previewLayout(.sizeThatFits)
     }

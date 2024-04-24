@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PasswordView: View {
-    @ObservedObject var viewAdapter: AuthViewAdapter
+    @ObservedObject var viewAdapter: AuthDatabaseViewAdapter
     @Binding var userNameInput: String
     var customLabel: String
     var textSize: CGFloat
@@ -41,7 +41,7 @@ struct PasswordView_Previews: PreviewProvider {
     @State static var passwordInput: String = ""
     
     static var previews: some View {
-        PasswordView(viewAdapter: AuthViewAdapter(),
+        PasswordView(viewAdapter: AuthDatabaseViewAdapter(),
                      userNameInput: $userNameInput, customLabel: "Password", textSize: 14)
         .previewLayout(.sizeThatFits)
     }

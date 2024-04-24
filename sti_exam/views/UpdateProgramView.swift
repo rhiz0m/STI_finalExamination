@@ -8,13 +8,12 @@
 import SwiftUI
 
 struct UpdateProgramView: View {
-    @ObservedObject var authViewAdapter: AuthViewAdapter
+    @ObservedObject var authViewAdapter: AuthDatabaseViewAdapter
     @ObservedObject var viewModel: ExerciseViewAdapter
     @Environment(\.dismiss) private var dismiss
     var selectedExerciseID: UUID?
     
     var body: some View {
-        
         
         VStack {
             
@@ -50,8 +49,6 @@ struct UpdateProgramView: View {
                                     print("Update failed with error: \(error.localizedDescription)")
                                 } else {
                                     print("Update successful!")
-                                    
-                                    // After the update
                                     print("After Update - Exercise Name: \(viewModel.exerciseName)")
                                 }
                             }
@@ -95,6 +92,7 @@ struct UpdateProgramView: View {
     }
 }
 
-#Preview {
-    UpdateProgramView(authViewAdapter: AuthViewAdapter(), viewModel: ExerciseViewAdapter())
-}
+//#Preview {
+//    UpdateProgramView(authViewAdapter: AuthDatabaseViewAdapter(), 
+//                      viewModel: ExerciseViewAdapter())
+//}
