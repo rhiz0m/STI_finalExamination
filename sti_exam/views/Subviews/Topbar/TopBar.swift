@@ -37,6 +37,10 @@ struct TopBar: View {
         .padding(.horizontal, GridPoints.x2)
         Spacer()
     }
+    struct ViewModel {
+        let logoutAction: () -> Void
+    }
+
 }
 
 #Preview {

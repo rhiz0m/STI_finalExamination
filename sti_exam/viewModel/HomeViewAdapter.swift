@@ -13,4 +13,20 @@ class HomeViewAdapter: ObservableObject {
 //    init(coordinator: Coordinator) {
 //        self.coordinator = coordinator
 //    }
+    
+    @Published var topBarView: TopBar.ViewModel?
+    
+    var authDbViewAdapter: AuthDbViewAdapter
+    
+    init(authDbViewAdapter: AuthDbViewAdapter) {
+        self.authDbViewAdapter = authDbViewAdapter
+    }
+    
+    func generateTopBarViewModel() {
+        let topBarViewModel = TopBar.ViewModel(
+            logoutAction: {
+                self.authDbViewAdapter.logout()
+            }
+        )
+    }
 }

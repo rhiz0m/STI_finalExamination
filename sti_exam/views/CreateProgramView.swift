@@ -91,7 +91,6 @@ struct CreateProgramView: View {
                     }
                     navigateToListView = true
                 })
-                .background(NavigationLink("", destination: HomeView(authDbViewAdapter: authDbViewAdapter), isActive: $navigateToListView))
             }
             .padding(.vertical, GridPoints.x1)
             .padding(.horizontal, GridPoints.x4)

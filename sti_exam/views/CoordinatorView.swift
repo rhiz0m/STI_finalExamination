@@ -13,12 +13,14 @@ struct CoordinatorView: View {
     
     init(authDbViewAdapter: AuthDbViewAdapter) {
         self._authDbViewAdapter = StateObject(wrappedValue: authDbViewAdapter)
+
     }
     
     var body: some View {
         if let _ = authDbViewAdapter.currentUser {
             NavigationStack {
-                HomeView(authDbViewAdapter: authDbViewAdapter)
+                HomeView(
+                    userAuthAdapter: UserAuthAdapter(authDbViewAdapter: authDbViewAdapter))
             }
             
         } else {

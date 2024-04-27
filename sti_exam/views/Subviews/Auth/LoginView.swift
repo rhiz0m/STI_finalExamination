@@ -66,16 +66,13 @@ struct LoginView: View {
                     .shadow(color: Color.brown.opacity(0.6), radius: 8, x: 0, y: 2)
                     .onTapGesture {
                         if !userAuthAdapter.authDbViewAdapter.emailInput.isEmpty && !userAuthAdapter.authDbViewAdapter.passwordInput.isEmpty {
-                            
-                            userAuthAdapter.authDbViewAdapter.loginUser(email: userAuthAdapter.authDbViewAdapter.emailInput, password: userAuthAdapter.authDbViewAdapter.passwordInput) { success in
+                            viewModel.loginAction { success in
                                 if success {
                                     
                                 } else {
                                     
                                 }
                             }
-                        } else {
-                            
                         }
                     }
                 
@@ -125,6 +122,7 @@ struct LoginView: View {
         let registerTitle: String
         let passwordTitle: String
         let emailTitle: String
+        let loginAction: (@escaping (Bool) -> Void) -> Void
     }
 }
 
