@@ -11,13 +11,19 @@ struct MapsView: View {
     var body: some View {
         content
     }
-}
-
-@ViewBuilder private var content: some View {
-    VStack() {
-        Maps()
+    
+    @ViewBuilder private var content: some View {
+        VStack() {
+            Maps()
+        }
+    }
+    
+    struct ViewModel {
+        let title: String
     }
 }
+
+
 
 
 #Preview {

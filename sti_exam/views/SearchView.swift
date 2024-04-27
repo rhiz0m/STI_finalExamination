@@ -31,7 +31,7 @@ struct SearchView: View {
     @ViewBuilder private func backgroundImageView(imageName: String) -> some View {
         Image(imageName)
             .resizable()
-//            .scaledToFill()
+        //            .scaledToFill()
             .edgesIgnoringSafeArea(.bottom)
             .overlay(
                 LinearGradient(
@@ -49,75 +49,75 @@ struct SearchView: View {
     
     
     @ViewBuilder private func resultListView() -> some View {
-    
-                List(viewModel.apiResponse) { exerciseInfo in
-                    VStack(alignment: .leading, spacing: 8) {
-                        HStack(alignment: .top) {
-                            Text("Name:")
-                                .bold()
-                                .foregroundColor(CustomColors.cyan)
-
-                            Text(exerciseInfo.name)
-                                .foregroundColor(.white)
-                        }
-                        HStack {
-                            Text("Type:")
-                                .bold()
-                                .foregroundColor(CustomColors.cyan)
-                            
-                            Text("\(exerciseInfo.type)")
-                                .foregroundColor(.white)
-                        }
-                        HStack {
-                            Text("Muscle:")
-                                .bold()
-                                .foregroundColor(CustomColors.cyan)
-                            
-                            Text("\(exerciseInfo.muscle)")
-                                .foregroundColor(.white)
-                            
-                        }
-                        HStack {
-                            Text("Equipment:")
-                                .bold()
-                                .foregroundColor(CustomColors.cyan)
-                            
-                            Text("\(exerciseInfo.equipment)")
-                                .foregroundColor(.white)
-                        }
-                        HStack {
-                            Text("Difficulty:")
-                                .bold()
-                                .foregroundColor(CustomColors.cyan)
-                            
-                            Text("\(exerciseInfo.difficulty)")
-                                .foregroundColor(.white)
-                        }
-                        VStack(alignment: .leading) {
-                            Text("Instructions:")
-                                .bold()
-                                .foregroundColor(CustomColors.cyan)
-                            
-                            Text("\(exerciseInfo.instructions)")
-                                .foregroundColor(.white)
-                        }
-                    }
-                    .padding()
-                    .background(Color.black)
-                    .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+        
+        List(viewModel.apiResponse) { exerciseInfo in
+            VStack(alignment: .leading, spacing: 8) {
+                HStack(alignment: .top) {
+                    Text("Name:")
+                        .bold()
+                        .foregroundColor(CustomColors.cyan)
                     
-                }.cornerRadius(GridPoints.x2)
-                    .listStyle(PlainListStyle())
-                
-                    .padding(.horizontal, GridPoints.x8)
-                    .shadow(color: CustomColors.cyan.opacity(0.2), radius: 15, x: 0, y: 5)
+                    Text(exerciseInfo.name)
+                        .foregroundColor(.white)
+                }
+                HStack {
+                    Text("Type:")
+                        .bold()
+                        .foregroundColor(CustomColors.cyan)
+                    
+                    Text("\(exerciseInfo.type)")
+                        .foregroundColor(.white)
+                }
+                HStack {
+                    Text("Muscle:")
+                        .bold()
+                        .foregroundColor(CustomColors.cyan)
+                    
+                    Text("\(exerciseInfo.muscle)")
+                        .foregroundColor(.white)
+                    
+                }
+                HStack {
+                    Text("Equipment:")
+                        .bold()
+                        .foregroundColor(CustomColors.cyan)
+                    
+                    Text("\(exerciseInfo.equipment)")
+                        .foregroundColor(.white)
+                }
+                HStack {
+                    Text("Difficulty:")
+                        .bold()
+                        .foregroundColor(CustomColors.cyan)
+                    
+                    Text("\(exerciseInfo.difficulty)")
+                        .foregroundColor(.white)
+                }
+                VStack(alignment: .leading) {
+                    Text("Instructions:")
+                        .bold()
+                        .foregroundColor(CustomColors.cyan)
+                    
+                    Text("\(exerciseInfo.instructions)")
+                        .foregroundColor(.white)
+                }
+            }
+            .padding()
+            .background(Color.black)
+            .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
             
+        }.cornerRadius(GridPoints.x2)
+            .listStyle(PlainListStyle())
+        
+            .padding(.horizontal, GridPoints.x8)
+            .shadow(color: CustomColors.cyan.opacity(0.2), radius: 15, x: 0, y: 5)
+        
     }
-
-
+    
+    
     @ViewBuilder private var searchFeildView: some View {
         
-       
+        
         
         HStack {
             CustomTextField(textInput: $title, title: "musclegroups...")
@@ -129,13 +129,17 @@ struct SearchView: View {
                 }
             }, label: {
                 RoundedBtn(title: "", icon: "magnifyingglass.circle.fill")
-                        .scaleEffect(selected ? 1.1 : 1.0)
+                    .scaleEffect(selected ? 1.1 : 1.0)
             })
         }.padding(.horizontal, GridPoints.x8)
             .padding(.top, GridPoints.x4)
-           
-        }
+        
     }
+    
+    struct ViewModel {
+        let title: String
+    }
+}
 
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {

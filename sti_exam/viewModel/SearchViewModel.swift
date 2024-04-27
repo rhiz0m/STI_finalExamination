@@ -8,7 +8,13 @@
 import Foundation
 
 class SearchViewModel: ObservableObject {
+    @Published var searchViewModel: SearchView.ViewModel?
     @Published var apiResponse: [ExerciseAPI] = []
+    
+    func generateSearchViewModel() {
+        let searchViewModel = SearchView.ViewModel(
+            title: "")
+    }
     
     func API(muscle: String) {
         guard let muscleEncoded = muscle.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),

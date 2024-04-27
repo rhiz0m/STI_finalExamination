@@ -9,16 +9,26 @@ import SwiftUI
 
 struct CoordinatorView: View {
     
-    @ObservedObject var authViewAdapter: AuthDatabaseViewAdapter
-    @ObservedObject var homeViewAdapter: HomeViewAdapter
+    @StateObject var authDbViewAdapter: AuthDbViewAdapter
+    
+    init(authDbViewAdapter: AuthDbViewAdapter) {
+        self._authDbViewAdapter = StateObject(wrappedValue: authDbViewAdapter)
+    }
     
     var body: some View {
-        VStack {
+        if let _ = authDbViewAdapter.currentUser {
+            NavigationStack {
+                HomeView(authDbViewAdapter: authDbViewAdapter)
+            }
             
+        } else {
+            NavigationStack {
+                LoginView(loginViewAdapter: UserAuthAdapter(authDbViewAdapter: authDbViewAdapter))
+            }
         }
     }
 }
 
 #Preview {
-    CoordinatorView(authViewAdapter: AuthDatabaseViewAdapter(), homeViewAdapter: HomeViewAdapter())
+    CoordinatorView(authDbViewAdapter: AuthDbViewAdapter())
 }

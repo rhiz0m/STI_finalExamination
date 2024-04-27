@@ -21,21 +21,11 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct sti_examApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
-    @StateObject private var authDatabaseViewAdapter = AuthDatabaseViewAdapter()
+    @StateObject var authDbViewAdapter = AuthDbViewAdapter()
     
     var body: some Scene {
         WindowGroup {
-            if let _ = authDatabaseViewAdapter.currentUser {
-                NavigationStack {
-                    HomeView(authViewAdapter: authDatabaseViewAdapter)
-                }
-                
-            } else {
-                NavigationStack {
-                    LoginView(authViewAdapter: authDatabaseViewAdapter)
-                }
-                
-            }
+            CoordinatorView(authDbViewAdapter: authDbViewAdapter)
         }
     }
 }

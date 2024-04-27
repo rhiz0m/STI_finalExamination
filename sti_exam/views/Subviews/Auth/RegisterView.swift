@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RegisterView: View {
-    @ObservedObject var authViewAdapter: AuthDatabaseViewAdapter
+    @ObservedObject var userAuthAdapter: UserAuthAdapter
     @State var email = ""
     @State var confirmEmail = ""
     @State var password = ""
@@ -16,13 +16,13 @@ struct RegisterView: View {
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
-        if let viewModel = authViewAdapter.registerViewModel{
+        if let viewModel = userAuthAdapter.registerViewModel{
             content(viewModel: viewModel)
             
         } else {
             ProgressView()
                 .onAppear(perform: {
-                    authViewAdapter.generateRegisterViewModel()
+                    userAuthAdapter.generateRegisterViewModel()
                     
                 })
         }
@@ -32,13 +32,25 @@ struct RegisterView: View {
         VStack(spacing: 0) {
             VStack(spacing: 18) {
                 VStack {
-                    EmailView(viewAdapter: authViewAdapter, userNameInput: $email, customLabel: viewModel.emailTitle, textSize: 14)
+                    EmailView(
+                        authDbViewAdapter: userAuthAdapter.authDbViewAdapter,
+                        userNameInput: $email,
+                        customLabel: viewModel.emailTitle, textSize: 14)
                         .padding(.vertical)
-                    EmailView(viewAdapter: authViewAdapter, userNameInput: $confirmEmail, customLabel: viewModel.confirmEmailTitle, textSize: 12)
+                    EmailView(
+                        authDbViewAdapter: userAuthAdapter.authDbViewAdapter,
+                        userNameInput: $confirmEmail,
+                        customLabel: viewModel.confirmEmailTitle, textSize: 12)
                         .padding(.vertical)
-                    PasswordView(viewAdapter: authViewAdapter, userNameInput: $password, customLabel: viewModel.passwordTitle, textSize: 14)
+                    PasswordView(
+                        authDbViewAdapter: userAuthAdapter.authDbViewAdapter,
+                        userNameInput: $password,
+                        customLabel: viewModel.passwordTitle, textSize: 14)
                         .padding(.bottom, GridPoints.x3)
-                    PasswordView(viewAdapter: authViewAdapter, userNameInput: $confirmPassword, customLabel: viewModel.confirmPasswordTitle, textSize: 12)
+                    PasswordView(
+                        authDbViewAdapter: userAuthAdapter.authDbViewAdapter,
+                        userNameInput: $confirmPassword,
+                        customLabel: viewModel.confirmPasswordTitle, textSize: 12)
                         .padding(.bottom, GridPoints.x3)
                 }
                 .padding(.horizontal, GridPoints.x2)
@@ -55,7 +67,7 @@ struct RegisterView: View {
                     .shadow(color: Color.brown.opacity(0.6), radius: 8, x: 0, y: 2)
                     .onTapGesture {
                         if !email.isEmpty && email == confirmEmail && !password.isEmpty && password == confirmPassword {
-                            _ = authViewAdapter.registerUser(email: email, password: password)
+                            _ = userAuthAdapter.authDbViewAdapter.registerUser(email: email, password: password)
                         }
                     }
                 
@@ -110,6 +122,6 @@ struct RegisterView: View {
 }
 
 #Preview {
-    RegisterView(authViewAdapter: AuthDatabaseViewAdapter(),
+    RegisterView(userAuthAdapter: UserAuthAdapter(authDbViewAdapter: AuthDbViewAdapter()),
                  email: "", confirmEmail: "", password: "", confirmPassword: "")
 }

@@ -8,18 +8,22 @@
 import SwiftUI
 
 struct LoginView: View {
-    @ObservedObject var authViewAdapter: AuthDatabaseViewAdapter
+    @StateObject var userAuthAdapter: UserAuthAdapter
     @State var email = ""
     @State var password = ""
     
+    init(loginViewAdapter: UserAuthAdapter) {
+        self._userAuthAdapter = StateObject(wrappedValue: loginViewAdapter)
+    }
+    
     var body: some View {
-        if let viewModel = authViewAdapter.loginViewModel{
+        if let viewModel = userAuthAdapter.loginViewModel{
             content(viewModel: viewModel)
             
         } else {
             ProgressView()
                 .onAppear(perform: {
-                    authViewAdapter.generateLoginViewModel()
+                    userAuthAdapter.generateLoginViewModel()
                 })
         }
     }
@@ -40,10 +44,13 @@ struct LoginView: View {
             }
             VStack(spacing: 18) {
                 VStack {
-                    EmailView(viewAdapter: authViewAdapter, userNameInput: $authViewAdapter.emailInput, customLabel: viewModel.emailTitle, textSize: 14)
-                        .padding(.vertical)
-                    PasswordView(viewAdapter: authViewAdapter, userNameInput: $authViewAdapter.passwordInput, customLabel: viewModel.passwordTitle, textSize: 12)
-                        .padding(.bottom, GridPoints.x3)
+                    EmailView(
+                        authDbViewAdapter: userAuthAdapter.authDbViewAdapter,
+                        userNameInput: $userAuthAdapter.authDbViewAdapter.emailInput, customLabel: viewModel.emailTitle, textSize: 14)
+                    .padding(.vertical)
+                    
+                    PasswordView(authDbViewAdapter: userAuthAdapter.authDbViewAdapter, userNameInput: $userAuthAdapter.authDbViewAdapter.passwordInput, customLabel: viewModel.passwordTitle, textSize: 12)
+                        .padding()
                 }
                 .padding(.horizontal, GridPoints.x2)
                 Divider()
@@ -58,9 +65,9 @@ struct LoginView: View {
                     .cornerRadius(8)
                     .shadow(color: Color.brown.opacity(0.6), radius: 8, x: 0, y: 2)
                     .onTapGesture {
-                        if !authViewAdapter.emailInput.isEmpty && !authViewAdapter.passwordInput.isEmpty {
+                        if !userAuthAdapter.authDbViewAdapter.emailInput.isEmpty && !userAuthAdapter.authDbViewAdapter.passwordInput.isEmpty {
                             
-                            authViewAdapter.loginUser(email: authViewAdapter.emailInput, password: authViewAdapter.passwordInput) { success in
+                            userAuthAdapter.authDbViewAdapter.loginUser(email: userAuthAdapter.authDbViewAdapter.emailInput, password: userAuthAdapter.authDbViewAdapter.passwordInput) { success in
                                 if success {
                                     
                                 } else {
@@ -72,7 +79,9 @@ struct LoginView: View {
                         }
                     }
                 
-                NavigationLink(destination: RegisterView(authViewAdapter: authViewAdapter), label: {
+                NavigationLink(destination: RegisterView(
+                    userAuthAdapter: userAuthAdapter),
+                               label: {
                     Text(viewModel.registerTitle)
                 })
                 .bold()
@@ -120,5 +129,5 @@ struct LoginView: View {
 }
 
 #Preview {
-    LoginView(authViewAdapter: AuthDatabaseViewAdapter())
+    LoginView(loginViewAdapter: UserAuthAdapter(authDbViewAdapter: AuthDbViewAdapter()))
 }

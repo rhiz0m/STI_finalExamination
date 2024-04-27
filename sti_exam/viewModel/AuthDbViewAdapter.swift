@@ -1,30 +1,41 @@
 //
-//  AuthViewAdapter.swift
+//  TestAuth.swift
 //  sti_exam
 //
-//  Created by Andreas Antonsson on 2024-04-22.
-//
-
-
+//  Created by Andreas Antonsson on 2024-04-26.
 import Foundation
-import Firebase
+import FirebaseFirestore
 import FirebaseAuth
+import Firebase
 
-class AuthDatabaseViewAdapter: ObservableObject {
-    @Published var loginViewModel: LoginView.ViewModel?
-    @Published var registerViewModel: RegisterView.ViewModel?
+class AuthDbViewAdapter: ObservableObject {
+    @Published var currentUserData: UserData?
     @Published var emailInput = ""
     @Published var passwordInput = ""
     @Published var currentUser: User?
-    @Published var currentUserData: UserData?
-    
-    private var exerciseViewAdapter = ExerciseViewAdapter()
+    @Published var selectedExerciseID: UUID?
+    @Published var selectedExercise: UsersExcercise?
+    @Published var usersExercises: [UsersExcercise] = []
+//    @Published var usersTrainingRecord: [UsersTrainingRecord] = []
+    @Published var usersTrainingRecord: UsersTrainingRecord?
+    @Published var exerciseName = ""
+    @Published var date = ""
+    @Published var type = ""
+    @Published var muscleGroups = ""
+    @Published var weight = ""
+    @Published var reps = 0
+    @Published var sets = 0
+    @Published var title = ""
+    @Published var dateString: String = ""
+    @Published var description = ""
+    @Published var name = ""
+        
     private var db = Firestore.firestore()
     private var auth = Auth.auth()
     private let USER_DATA_COLLECTION = "user_data"
     private let USER_EXERCISES = "usersExercises"
     private var dbListener: ListenerRegistration?
-    
+    var systemImages = SelectedSystemImages()
     
     init() {
         auth.addStateDidChangeListener { auth, user in
@@ -43,30 +54,7 @@ class AuthDatabaseViewAdapter: ObservableObject {
         }
     }
     
-    func generateLoginViewModel() {
-        let loginViewModel = LoginView.ViewModel(
-            appTitle: LocalizedStrings.apptitle,
-            loginTitle: LocalizedStrings.login,
-            registerTitle: LocalizedStrings.register,
-            passwordTitle: LocalizedStrings.apptitle,
-            emailTitle: LocalizedStrings.email)
-
-        self.loginViewModel = loginViewModel
-    }
-
-    func generateRegisterViewModel() {
-        let registerViewModel = RegisterView.ViewModel(
-            appTitle: LocalizedStrings.apptitle,
-            cancelTitle: LocalizedStrings.cancel,
-            registerTitle: LocalizedStrings.register,
-            passwordTitle: LocalizedStrings.password,
-            confirmPasswordTitle: LocalizedStrings.confirmPassword,
-            emailTitle: LocalizedStrings.email,
-            confirmEmailTitle: LocalizedStrings.confirmEmail
-        )
-
-        self.registerViewModel = registerViewModel
-    }
+    // DB
     
     func startListeningToDb() {
         guard let user = currentUser else { return }
@@ -92,11 +80,54 @@ class AuthDatabaseViewAdapter: ObservableObject {
             case .success(let userData):
                 self.currentUserData = userData
 
-                self.exerciseViewAdapter.usersExercises = userData.usersExercises
+                self.usersExercises = userData.usersExercises
             case .failure(let error):
                 print("Error decoding data: \(error.localizedDescription)")
             }
         }
+    }
+    
+    func saveExercise(completion: @escaping (Bool) -> Void) {
+        
+        if !exerciseName.isEmpty {
+            
+            let weightValue = Double(weight) ?? 0.0
+            
+            let usersTrainingRecord = UsersTrainingRecord(weight: weight, reps: reps, sets: sets, totalReps: reps * sets, totalWeight: reps * sets * Int(weightValue))
+            
+            let trainingRecordsId = usersTrainingRecord.id
+            
+            let newExercise = UsersExcercise(
+                id: UUID(),
+                category: "users_exercise",
+                exerciseName: exerciseName,
+                date: Date(),
+                type: type,
+                muscleGroups: [muscleGroups],
+                trainingRecordIds: [trainingRecordsId],
+                usersTrainingRecords: [usersTrainingRecord]
+            )
+            print("new exercise \(newExercise)")
+            //authDatabaseViewAdapter.addProgramToDb(userExercise: newExercise)
+            completion(true)
+            
+        } else {
+            completion(false)
+        }
+    }
+    
+    func clearFeilds() {
+        exerciseName = ""
+        date = ""
+        muscleGroups = ""
+        weight = ""
+        reps = 0
+        sets = 0
+        title = ""
+        dateString = ""
+        description = ""
+        name = ""
+        usersExercises = []
     }
     
     func addProgramToDb(userExercise: UsersExcercise) {
@@ -153,36 +184,8 @@ class AuthDatabaseViewAdapter: ObservableObject {
             }
         }
     }
-    
-    func updateProgram(usersExercise: [UsersExcercise], completion: @escaping (Error?) -> Void) {
-        guard let currentUser = currentUser else { return }
 
-        do {
-            let removedData = try usersExercise.map { try Firestore.Encoder().encode($0) }
-            try db.collection(USER_DATA_COLLECTION)
-                .document(currentUser.uid)
-                .updateData([
-                    USER_EXERCISES: FieldValue.arrayRemove(removedData)
-                ]) { (error: Error?) in
-                    if let error = error {
-                        completion(error)
-                    } else {
-                        let addedData = try! usersExercise.map { try! Firestore.Encoder().encode($0) }
-                        self.db.collection(self.USER_DATA_COLLECTION)
-                            .document(currentUser.uid)
-                            .updateData([
-                                self.USER_EXERCISES: FieldValue.arrayUnion(addedData)
-                            ]) { (error: Error?) in
-                                completion(error)
-                            }
-                    }
-                }
-        } catch {
-            print("Error updating Firestore: \(error.localizedDescription)")
-            completion(error)
-        }
-    }
-
+    // Auth
         func registerUser(email: String, password: String) -> Bool {
     
             var success = false

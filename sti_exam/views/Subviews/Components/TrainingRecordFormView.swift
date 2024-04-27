@@ -9,12 +9,12 @@ import SwiftUI
 
 struct TrainingRecordFormView: View {
     
-    @ObservedObject var db: AuthDatabaseViewAdapter
+    @ObservedObject var authDbViewAdapter: AuthDbViewAdapter
     
     @Binding var weight: String
     @Binding var reps: Int
     @Binding var sets: Int
-    //@Binding var selectedExercice: UsersTrainingRecord?
+//    @Binding var usersTrainingRecord: UsersTrainingRecord?
     
     var body: some View {
         
@@ -35,18 +35,18 @@ struct TrainingRecordFormView: View {
 
 struct ExerciseFormView_Previews: PreviewProvider {
     static var previews: some View {
-        let db = AuthDatabaseViewAdapter()
+        let authDbViewAdapter = AuthDbViewAdapter()
         let selectedExercice = Binding<UsersTrainingRecord?>(
             get: { nil },
             set: { _ in }
         )
         
         return TrainingRecordFormView(
-            db: db,
+            authDbViewAdapter: authDbViewAdapter,
             weight: Binding.constant("100"),
             reps: Binding.constant(5),
             sets: Binding.constant(6)
-            //selectedExercice: selectedExercice
+//            usersTrainingRecord: selectedExercice
         )
     }
 }

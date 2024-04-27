@@ -8,22 +8,17 @@
 import SwiftUI
 
 struct BottomBar: View {
-    @ObservedObject var authViewAdapter: AuthDatabaseViewAdapter
-    @ObservedObject var exerciseViewAdapter: ExerciseViewAdapter
-    @ObservedObject var homeViewAdapter: HomeViewAdapter
-    
+    @ObservedObject var authDbViewAdapter: AuthDbViewAdapter
     @State private var tabSelection = 1
+    
     var body: some View {
         ZStack(alignment: .bottom) {
             TabView(selection: $tabSelection) {
-                ProgramList(
-                    authDatabaseViewAdapter: authViewAdapter,
-                    exerciseViewAdapter: exerciseViewAdapter,
-                    homeViewAdapter: homeViewAdapter)
+                ExerciseListView( authDbViewAdapter: authDbViewAdapter)
                 .tabItem {
                 }.tag(1)
                 
-                CreateProgramView(authViewAdapter: authViewAdapter)
+                CreateProgramView(authDbViewAdapter: authDbViewAdapter)
                     .tabItem {
                     }.tag(2)
                 
@@ -41,7 +36,5 @@ struct BottomBar: View {
 }
 #Preview {
     BottomBar(
-        authViewAdapter: AuthDatabaseViewAdapter(),
-        exerciseViewAdapter: ExerciseViewAdapter(),
-        homeViewAdapter: HomeViewAdapter())
+        authDbViewAdapter: AuthDbViewAdapter())
 }
