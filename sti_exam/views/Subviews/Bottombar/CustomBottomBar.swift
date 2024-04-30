@@ -8,33 +8,34 @@
 import SwiftUI
 
 struct CustomBottomBar: View {
+    @EnvironmentObject var homeViewAdapter: HomeViewAdapter
     @Binding var tabSelection: Int
     @Namespace private var animationNamespace
+    let viewModel: ViewModel
     
-    let tabBarItems: [(image: String, title: String)] = [
-        ("dumbbell.fill", LocalizedStrings.list),
-        ("plus.circle.fill", LocalizedStrings.add),
-        ("magnifyingglass.circle.fill", LocalizedStrings.search),
-        ("map.fill", LocalizedStrings.map)
-    ]
+    init(tabSelection: Binding<Int>, viewModel: ViewModel) {
+        self._tabSelection = tabSelection
+        self.viewModel = viewModel
+    }
     
     var body: some View {
         HStack() {
-            ForEach(0..<tabBarItems.count) { index in
+            ForEach(0..<viewModel.tabBarItems.count) { index in
                 Button(action: {
                     tabSelection = index + 1
                 }, label: {
                     VStack() {
-                        PrimaryBtnStyle(title: tabBarItems[index].title, icon: tabBarItems[index].image, fontSize: 12)
+                        PrimaryBtnStyle(title: viewModel.tabBarItems[index].title, icon: viewModel.tabBarItems[index].image, fontSize: 12)
                         if index + 1 == tabSelection {
-                            Capsule().frame(height: 6).foregroundColor(CustomColors.cyan).matchedGeometryEffect(id: LocalizedStrings.selectedTabId, in: animationNamespace).offset(y: 3)
-                            
+                            Capsule().frame(height: 6)
+                                .foregroundColor(CustomColors.cyan)
+                                .matchedGeometryEffect(id: LocalizedStrings.selectedTabId, in: animationNamespace)
+                                .offset(y: 3)
                         } else {
                             Capsule()
                                 .frame(height: 8)
                                 .foregroundColor(.clear)
                                 .offset(y: 3)
-                            
                         }
                     }
                     .padding(.vertical, GridPoints.x2)
@@ -44,5 +45,40 @@ struct CustomBottomBar: View {
         }
         .background(.black)
     }
-}
+    
+    struct ViewModel {
+            let listTitle: String
+            let addTitle: String
+            let searchTitle: String
+            let mapTitle: String
+            let listIcon: String
+            let addIcon: String
+            let searchIcon: String
+            let mapIcon: String
+            let tabBarItems: [(image: String, title: String)]
 
+            init(listTitle: String,
+                 addTitle: String,
+                 searchTitle: String,
+                 mapTitle: String,
+                 listIcon: String,
+                 addIcon: String,
+                 searchIcon: String,
+                 mapIcon: String) {
+                self.listTitle = listTitle
+                self.addTitle = addTitle
+                self.searchTitle = searchTitle
+                self.mapTitle = mapTitle
+                self.listIcon = listIcon
+                self.addIcon = addIcon
+                self.searchIcon = searchIcon
+                self.mapIcon = mapIcon
+                self.tabBarItems = [
+                    (listIcon, listTitle),
+                    (addIcon, addTitle),
+                    (searchIcon, searchTitle),
+                    (mapIcon, mapTitle)
+                ]
+            }
+        }
+}

@@ -7,18 +7,29 @@
 
 import SwiftUI
 
-struct BottomBar: View {
-    @ObservedObject var authDbViewAdapter: AuthDbViewAdapter
+struct BottomBarView: View {
+    @EnvironmentObject var homeViewAdapter: HomeViewAdapter
     @State private var tabSelection = 1
     
     var body: some View {
+        if let viewModel = homeViewAdapter.customBottomBarViewModel {
+            content(viewModel: viewModel)
+        } else {
+            ProgressView()
+                .onAppear(perform: {
+                    homeViewAdapter.generateBottomBarViewModel()
+                })
+        }
+    }
+    
+    @ViewBuilder func content(viewModel: CustomBottomBar.ViewModel) -> some View {
         ZStack(alignment: .bottom) {
             TabView(selection: $tabSelection) {
-                ExerciseListView( authDbViewAdapter: authDbViewAdapter)
+                ExerciseListView()
                 .tabItem {
                 }.tag(1)
                 
-                CreateProgramView(authDbViewAdapter: authDbViewAdapter)
+                CreateProgramView()
                     .tabItem {
                     }.tag(2)
                 
@@ -30,11 +41,15 @@ struct BottomBar: View {
                 MapsView().tabItem {
                 }.tag(4)
             }
-            CustomBottomBar(tabSelection: $tabSelection)
+            CustomBottomBar(tabSelection: $tabSelection, viewModel: viewModel)
         }
     }
+    struct ViewModel {
+        
+    }
 }
+
 #Preview {
-    BottomBar(
-        authDbViewAdapter: AuthDbViewAdapter())
+    BottomBarView()
+        .environmentObject(HomeViewAdapter(authDbViewAdapter: AuthDbViewAdapter()))
 }

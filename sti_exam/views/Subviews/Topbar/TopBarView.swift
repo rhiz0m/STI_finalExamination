@@ -7,12 +7,24 @@
 
 import SwiftUI
 
-struct TopBar: View {
-    @ObservedObject var authDbViewAdapter: AuthDbViewAdapter
+struct TopBarView: View {
+    @EnvironmentObject var homeViewAdapter: HomeViewAdapter
     
     var body: some View {
+        if let viewModel = homeViewAdapter.topBarViewModel {
+            content(viewModel: viewModel)
+            
+        } else {
+            ProgressView()
+                .onAppear(perform: {
+                    homeViewAdapter.generateTopBarViewModel()
+                })
+        }
+    }
+    
+    @ViewBuilder func content(viewModel: ViewModel) -> some View {
         HStack(alignment: .center) {
-            Image("logo")
+            Image(viewModel.image)
                 .resizable()
                 .frame(width: 80, height: 80)
                 .scaledToFit()
@@ -22,14 +34,14 @@ struct TopBar: View {
                         .stroke(Color.gray, lineWidth: 2)
                 )
             Spacer()
-            Text(LocalizedStrings.welcome)
+            Text(viewModel.welcomeTitle)
                 .font(.title).bold()
                 .foregroundStyle(.black)
             Spacer()
             Button(action: {
-                authDbViewAdapter.logout()
+                viewModel.logoutAction()
             }, label: {
-                RoundedBtn(icon: authDbViewAdapter.systemImages.power)
+                RoundedBtn(icon: viewModel.icon)
             }).background(.black).cornerRadius(50)
             
         }
@@ -38,11 +50,15 @@ struct TopBar: View {
         Spacer()
     }
     struct ViewModel {
+        let image: String
+        let welcomeTitle: String
+        let icon: String
         let logoutAction: () -> Void
     }
 
 }
 
 #Preview {
-    TopBar(authDbViewAdapter: AuthDbViewAdapter())
+    TopBarView()
+        .environmentObject(HomeViewAdapter(authDbViewAdapter: AuthDbViewAdapter()))
 }

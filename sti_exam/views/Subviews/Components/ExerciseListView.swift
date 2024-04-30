@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct ExerciseListView: View {
-    @ObservedObject var authDbViewAdapter: AuthDbViewAdapter
+    @EnvironmentObject var homeViewAdapter: HomeViewAdapter
     
     var body: some View {
         VStack() {
-            if let userData = authDbViewAdapter.currentUserData {
+            if let userData = homeViewAdapter.authDbViewAdapter.currentUserData {
                 if userData.usersExercises.isEmpty {
                     Text(LocalizedStrings.noExercises)
                         .foregroundStyle(CustomColors.dark)
@@ -22,10 +22,9 @@ struct ExerciseListView: View {
                 } else {
                     List(userData.usersExercises) { exercise in
                         NavigationLink(
-                            destination: UpdateProgramView(
-                                authDbViewAdapter: authDbViewAdapter),
+                            destination: UpdateProgramView(),
                             tag: exercise.id,
-                            selection: $authDbViewAdapter.selectedExerciseID
+                            selection: $homeViewAdapter.authDbViewAdapter.selectedExerciseID
                             
                         ) {
                             VStack(alignment: .leading) {
@@ -36,7 +35,7 @@ struct ExerciseListView: View {
                                         .foregroundStyle(.white)
                                         .padding(.vertical, GridPoints.x1)
                                     Spacer()
-                                    Image(systemName: authDbViewAdapter.systemImages.arrowRightCircle)
+                                    Image(systemName: homeViewAdapter.authDbViewAdapter.systemImages.arrowRightCircle)
                                         .foregroundColor(CustomColors.cyan)
                                         .font(.system(size: 30))
                                     
@@ -77,10 +76,10 @@ struct ExerciseListView: View {
                         
                         VStack {
                             Button(action: {
-                                authDbViewAdapter.deleteProgram(exercise: exercise)
+                                homeViewAdapter.authDbViewAdapter.deleteProgram(exercise: exercise)
                             }, label: {
                                 HStack(alignment: .center) {
-                                    RoundedBtn(icon: authDbViewAdapter.systemImages.trash)
+                                    RoundedBtn(icon: homeViewAdapter.authDbViewAdapter.systemImages.trash)
                                     Spacer()
                                     VStack(alignment: .leading) {
                                         Text(LocalizedStrings.created).font(.caption)
@@ -114,6 +113,6 @@ private func formatDate(_ date: Date) -> String {
 }
 
 #Preview {
-    ExerciseListView(
-        authDbViewAdapter: AuthDbViewAdapter())
+    ExerciseListView()
+        .environmentObject(HomeViewAdapter(authDbViewAdapter: AuthDbViewAdapter()))
 }

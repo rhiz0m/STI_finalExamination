@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CreateProgramView: View {
     
-    @ObservedObject var authDbViewAdapter: AuthDbViewAdapter
+    @EnvironmentObject var homeViewAdapter: HomeViewAdapter
     @StateObject private var exerciseViewAdapter = ExerciseViewAdapter()
     @State var usersExercise: UsersExcercise?
     @State var usersTrainingRecord: UsersTrainingRecord?
@@ -37,14 +37,14 @@ struct CreateProgramView: View {
     @ViewBuilder func content(viewModel: ViewModel) -> some View {
         VStack {
             ExerciseFormView(
-                authDbViewAdapter: authDbViewAdapter,
+                authDbViewAdapter: homeViewAdapter.authDbViewAdapter,
                 exerciseName: $exerciseName,
                 date: $date,
                 type: $type,
                 muscleGroups: $muscleGroups)
             
             TrainingRecordFormView(
-                authDbViewAdapter: authDbViewAdapter,
+                authDbViewAdapter: homeViewAdapter.authDbViewAdapter,
                 weight: $weight,
                 reps: $reps,
                 sets: $sets
@@ -61,7 +61,7 @@ struct CreateProgramView: View {
                 
                 Button(viewModel.saveTitle, action: {
                     
-                    authDbViewAdapter.saveExercise { success in
+                    homeViewAdapter.authDbViewAdapter.saveExercise { success in
                         if success {
                         } else {
                         }
@@ -85,7 +85,7 @@ struct CreateProgramView: View {
                             usersTrainingRecords: [usersTrainingRecord]
                         )
                         print("new exercise \(newExercise)")
-                        authDbViewAdapter.addProgramToDb(userExercise: newExercise)
+                        homeViewAdapter.authDbViewAdapter.addProgramToDb(userExercise: newExercise)
                         
                         navigateToListView = true
                     }
@@ -97,7 +97,7 @@ struct CreateProgramView: View {
             
         }
         .onAppear {
-            authDbViewAdapter.clearFeilds()
+            homeViewAdapter.authDbViewAdapter.clearFeilds()
         }
     }
     
@@ -107,8 +107,7 @@ struct CreateProgramView: View {
         //        let saveExercise: (@escaping (Bool) -> Void) -> Void
     }
 }
-struct CreateProgramView_Previews: PreviewProvider {
-    static var previews: some View {
-        CreateProgramView(authDbViewAdapter: AuthDbViewAdapter())
-    }
+#Preview {
+    CreateProgramView()
+        .environmentObject(HomeViewAdapter(authDbViewAdapter: AuthDbViewAdapter()))
 }

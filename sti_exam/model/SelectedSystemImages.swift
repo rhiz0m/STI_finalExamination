@@ -11,4 +11,8 @@ struct SelectedSystemImages {
     let power = "power"
     let arrowRightCircle = "arrow.right.circle"
     let trash = "trash"
+    let list = "dumbbell.fill"
+    let add = "plus.circle.fill"
+    let search = "magnifyingglass.circle.fill"
+    let map = "map.fill"
 }

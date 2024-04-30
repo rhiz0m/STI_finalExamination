@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct UpdateProgramView: View {
-    @ObservedObject var authDbViewAdapter: AuthDbViewAdapter
+    @EnvironmentObject var homeViewAdapter: HomeViewAdapter
     @Environment(\.dismiss) private var dismiss
     var selectedExerciseID: UUID?
     
@@ -18,16 +18,16 @@ struct UpdateProgramView: View {
             
             Text("Update Exercises").font(.title).bold()
             
-            ExerciseFormView(authDbViewAdapter: authDbViewAdapter,
-                             exerciseName: $authDbViewAdapter.exerciseName,
-                             date: $authDbViewAdapter.date,
-                             type: $authDbViewAdapter.type,
-                             muscleGroups: $authDbViewAdapter.muscleGroups)
+            ExerciseFormView(authDbViewAdapter: homeViewAdapter.authDbViewAdapter,
+                             exerciseName: $homeViewAdapter.authDbViewAdapter.exerciseName,
+                             date: $homeViewAdapter.authDbViewAdapter.date,
+                             type: $homeViewAdapter.authDbViewAdapter.type,
+                             muscleGroups: $homeViewAdapter.authDbViewAdapter.muscleGroups)
             
-            TrainingRecordFormView(authDbViewAdapter: authDbViewAdapter,
-                                   weight: $authDbViewAdapter.weight,
-                                   reps: $authDbViewAdapter.reps,
-                                   sets: $authDbViewAdapter.sets
+            TrainingRecordFormView(authDbViewAdapter: homeViewAdapter.authDbViewAdapter,
+                                   weight: $homeViewAdapter.authDbViewAdapter.weight,
+                                   reps: $homeViewAdapter.authDbViewAdapter.reps,
+                                   sets: $homeViewAdapter.authDbViewAdapter.sets
                               /*     usersTrainingRecord: authDbViewAdapter.usersTrainingRecord*/)
             
 //            HStack {
@@ -63,26 +63,26 @@ struct UpdateProgramView: View {
 //            }
             .onAppear {
                 print("UpdateProgramView appeared")
-                print("Selected Exercise ID: \(String(describing: authDbViewAdapter.selectedExerciseID))")
+                print("Selected Exercise ID: \(String(describing: homeViewAdapter.authDbViewAdapter.selectedExerciseID))")
                 
-                if let currentUserData = authDbViewAdapter.currentUserData,
-                   let selectedExerciseID = authDbViewAdapter.selectedExerciseID,
+                if let currentUserData = homeViewAdapter.authDbViewAdapter.currentUserData,
+                   let selectedExerciseID = homeViewAdapter.authDbViewAdapter.selectedExerciseID,
                    let selectedExercise = currentUserData.usersExercises.first(where: { $0.id == selectedExerciseID }) {
                     
-                    authDbViewAdapter.selectedExercise = selectedExercise
+                    homeViewAdapter.authDbViewAdapter.selectedExercise = selectedExercise
                     
-                    if let selectedExercise = authDbViewAdapter.selectedExercise {
+                    if let selectedExercise = homeViewAdapter.authDbViewAdapter.selectedExercise {
                         print("Selected Exercise: \(selectedExercise)")
                         
-                        authDbViewAdapter.exerciseName = selectedExercise.exerciseName
-                        authDbViewAdapter.date = selectedExercise.date.formatted()
-                        authDbViewAdapter.type = selectedExercise.type
-                        authDbViewAdapter.muscleGroups = selectedExercise.muscleGroups.joined(separator: ", ")
+                        homeViewAdapter.authDbViewAdapter.exerciseName = selectedExercise.exerciseName
+                        homeViewAdapter.authDbViewAdapter.date = selectedExercise.date.formatted()
+                        homeViewAdapter.authDbViewAdapter.type = selectedExercise.type
+                        homeViewAdapter.authDbViewAdapter.muscleGroups = selectedExercise.muscleGroups.joined(separator: ", ")
                         
                         if let firstTrainingRecord = selectedExercise.usersTrainingRecords.first {
-                            authDbViewAdapter.weight = firstTrainingRecord.weight
-                            authDbViewAdapter.sets = firstTrainingRecord.sets
-                            authDbViewAdapter.reps = firstTrainingRecord.reps
+                            homeViewAdapter.authDbViewAdapter.weight = firstTrainingRecord.weight
+                            homeViewAdapter.authDbViewAdapter.sets = firstTrainingRecord.sets
+                            homeViewAdapter.authDbViewAdapter.reps = firstTrainingRecord.reps
                         }
                     } else {
                         print("Selected Exercise is nil!")

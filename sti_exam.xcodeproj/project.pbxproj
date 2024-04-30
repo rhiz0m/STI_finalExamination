@@ -19,7 +19,7 @@
 		FE6034292BD804FD00D7FA47 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6034282BD804FD00D7FA47 /* CustomTextField.swift */; };
 		FE60342C2BD806C400D7FA47 /* Maps.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE60342B2BD806C400D7FA47 /* Maps.swift */; };
 		FE60342E2BD806FF00D7FA47 /* LocationDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE60342D2BD806FF00D7FA47 /* LocationDetailsView.swift */; };
-		FE612CDD2BDBF0A00072F72F /* TopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE612CDC2BDBF0A00072F72F /* TopBar.swift */; };
+		FE612CDD2BDBF0A00072F72F /* TopBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE612CDC2BDBF0A00072F72F /* TopBarView.swift */; };
 		FE64B9F02B4C354700A70F62 /* sti_examApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE64B9EF2B4C354700A70F62 /* sti_examApp.swift */; };
 		FE64B9F42B4C354900A70F62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE64B9F32B4C354900A70F62 /* Assets.xcassets */; };
 		FE64B9F72B4C354900A70F62 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE64B9F62B4C354900A70F62 /* Preview Assets.xcassets */; };
@@ -57,7 +57,6 @@
 		FE93B8A12BBDBCD300A68DBD /* PrimaryBtnStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE93B8A02BBDBCD300A68DBD /* PrimaryBtnStyle.swift */; };
 		FE93B8A42BBDC4D200A68DBD /* CustomBottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE93B8A32BBDC4D200A68DBD /* CustomBottomBar.swift */; };
 		FEA4F5C42BDC20AB005F21AE /* AuthDbViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA4F5C32BDC20AB005F21AE /* AuthDbViewAdapter.swift */; };
-		FEA4F5C82BDC2D9B005F21AE /* AuthDbCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA4F5C72BDC2D9B005F21AE /* AuthDbCoordinator.swift */; };
 		FEF232892BC1AB3B00DCEE65 /* BottomBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF232882BC1AB3B00DCEE65 /* BottomBarView.swift */; };
 		FEFD94862BD925BA00DB8D56 /* SelectedSystemImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEFD94852BD925BA00DB8D56 /* SelectedSystemImages.swift */; };
 /* End PBXBuildFile section */
@@ -92,7 +91,7 @@
 		FE6034282BD804FD00D7FA47 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		FE60342B2BD806C400D7FA47 /* Maps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Maps.swift; sourceTree = "<group>"; };
 		FE60342D2BD806FF00D7FA47 /* LocationDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailsView.swift; sourceTree = "<group>"; };
-		FE612CDC2BDBF0A00072F72F /* TopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBar.swift; sourceTree = "<group>"; };
+		FE612CDC2BDBF0A00072F72F /* TopBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBarView.swift; sourceTree = "<group>"; };
 		FE64B9EC2B4C354700A70F62 /* sti_exam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sti_exam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE64B9EF2B4C354700A70F62 /* sti_examApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sti_examApp.swift; sourceTree = "<group>"; };
 		FE64B9F32B4C354900A70F62 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -129,7 +128,6 @@
 		FE93B8A02BBDBCD300A68DBD /* PrimaryBtnStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryBtnStyle.swift; sourceTree = "<group>"; };
 		FE93B8A32BBDC4D200A68DBD /* CustomBottomBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBottomBar.swift; sourceTree = "<group>"; };
 		FEA4F5C32BDC20AB005F21AE /* AuthDbViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthDbViewAdapter.swift; sourceTree = "<group>"; };
-		FEA4F5C72BDC2D9B005F21AE /* AuthDbCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthDbCoordinator.swift; sourceTree = "<group>"; };
 		FEF232882BC1AB3B00DCEE65 /* BottomBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBarView.swift; sourceTree = "<group>"; };
 		FEFD94852BD925BA00DB8D56 /* SelectedSystemImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedSystemImages.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -183,7 +181,7 @@
 		FE612CDB2BDBF0890072F72F /* Topbar */ = {
 			isa = PBXGroup;
 			children = (
-				FE612CDC2BDBF0A00072F72F /* TopBar.swift */,
+				FE612CDC2BDBF0A00072F72F /* TopBarView.swift */,
 			);
 			path = Topbar;
 			sourceTree = "<group>";
@@ -271,7 +269,6 @@
 				FE60341B2BD7F6E600D7FA47 /* ExerciseViewAdapter.swift */,
 				FE60341F2BD8018200D7FA47 /* SearchViewModel.swift */,
 				FEA4F5C32BDC20AB005F21AE /* AuthDbViewAdapter.swift */,
-				FEA4F5C72BDC2D9B005F21AE /* AuthDbCoordinator.swift */,
 				FE186FCF2BDD3E21009C1ADE /* MapsViewModel.swift */,
 				FE186FD12BDD527F009C1ADE /* UserAuthAdapter.swift */,
 			);
@@ -520,7 +517,6 @@
 				FE60342C2BD806C400D7FA47 /* Maps.swift in Sources */,
 				FE6034202BD8018200D7FA47 /* SearchViewModel.swift in Sources */,
 				FE60341A2BD7F65E00D7FA47 /* ExerciseListView.swift in Sources */,
-				FEA4F5C82BDC2D9B005F21AE /* AuthDbCoordinator.swift in Sources */,
 				FE93B8A42BBDC4D200A68DBD /* CustomBottomBar.swift in Sources */,
 				FE8D9A2A2BA313D70065EEDD /* SplashScreen.swift in Sources */,
 				FE8D9A302BA314760065EEDD /* UpdateProgramView.swift in Sources */,
@@ -533,7 +529,7 @@
 				FE93B8A12BBDBCD300A68DBD /* PrimaryBtnStyle.swift in Sources */,
 				FE8D9A342BA314CD0065EEDD /* MapsView.swift in Sources */,
 				FE8D9A362BA314F60065EEDD /* SearchView.swift in Sources */,
-				FE612CDD2BDBF0A00072F72F /* TopBar.swift in Sources */,
+				FE612CDD2BDBF0A00072F72F /* TopBarView.swift in Sources */,
 				FE60341C2BD7F6E600D7FA47 /* ExerciseViewAdapter.swift in Sources */,
 				FE60342E2BD806FF00D7FA47 /* LocationDetailsView.swift in Sources */,
 				FE64B9F02B4C354700A70F62 /* sti_examApp.swift in Sources */,

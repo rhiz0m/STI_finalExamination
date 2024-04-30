@@ -14,19 +14,40 @@ class HomeViewAdapter: ObservableObject {
 //        self.coordinator = coordinator
 //    }
     
-    @Published var topBarView: TopBar.ViewModel?
+    @Published var topBarViewModel: TopBarView.ViewModel?
+    @Published var customBottomBarViewModel: CustomBottomBar.ViewModel?
     
     var authDbViewAdapter: AuthDbViewAdapter
+    var selectedSystemImages = SelectedSystemImages()
     
     init(authDbViewAdapter: AuthDbViewAdapter) {
         self.authDbViewAdapter = authDbViewAdapter
     }
     
     func generateTopBarViewModel() {
-        let topBarViewModel = TopBar.ViewModel(
+        let topBarViewModel = TopBarView.ViewModel(
+            image: "logo",
+            welcomeTitle: LocalizedStrings.welcome,
+            icon: selectedSystemImages.power,
             logoutAction: {
                 self.authDbViewAdapter.logout()
             }
+         
         )
+        self.topBarViewModel = topBarViewModel
+    }
+    
+    func generateBottomBarViewModel() {
+        let customBottomBarViewModel = CustomBottomBar.ViewModel(
+            listTitle: LocalizedStrings.list,
+            addTitle: LocalizedStrings.add,
+            searchTitle: LocalizedStrings.search,
+            mapTitle: LocalizedStrings.map,
+            listIcon: selectedSystemImages.list,
+            addIcon: selectedSystemImages.add,
+            searchIcon: selectedSystemImages.search,
+            mapIcon: selectedSystemImages.map
+        )
+        self.customBottomBarViewModel = customBottomBarViewModel
     }
 }
