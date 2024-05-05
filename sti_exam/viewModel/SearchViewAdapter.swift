@@ -7,13 +7,26 @@
 
 import Foundation
 
-class SearchViewModel: ObservableObject {
+class SearchViewAdapter: ObservableObject {
     @Published var searchViewModel: SearchView.ViewModel?
     @Published var apiResponse: [ExerciseAPI] = []
     
     func generateSearchViewModel() {
         let searchViewModel = SearchView.ViewModel(
-            title: "")
+            nameTitle: LocalizedStrings.name,
+            typeTitle: LocalizedStrings.type,
+            muscleTitle: LocalizedStrings.muscle,
+            equipmentTitle: LocalizedStrings.equipment,
+            difficultyTitle: LocalizedStrings.difficulty,
+            instructionsTitle: LocalizedStrings.instructions,
+            title: "\(LocalizedStrings.muscleGroups)...",
+            imageName: "gym_womanBg", 
+            icon: SelectedSystemImages.shared.magnifyingGlass, 
+            apiAction: { [weak self] muscle in
+                self?.API(muscle: muscle)
+            }
+        )
+        self.searchViewModel = searchViewModel
     }
     
     func API(muscle: String) {

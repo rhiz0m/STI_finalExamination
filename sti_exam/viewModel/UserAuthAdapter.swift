@@ -44,9 +44,16 @@ class UserAuthAdapter: ObservableObject {
             passwordTitle: LocalizedStrings.password,
             confirmPasswordTitle: LocalizedStrings.confirmPassword,
             emailTitle: LocalizedStrings.email,
-            confirmEmailTitle: LocalizedStrings.confirmEmail
+            confirmEmailTitle: LocalizedStrings.confirmEmail, 
+            registerAction: { [weak self] completion in
+                guard let self = self else { return }
+                self.authDbViewAdapter.registerUser(
+                    email: self.authDbViewAdapter.emailInput,
+                    password: self.authDbViewAdapter.passwordInput) { success in
+                        completion(success)
+                    }
+            }
         )
-        
         self.registerViewModel = registerViewModel
     }
 }

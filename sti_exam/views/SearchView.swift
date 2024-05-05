@@ -9,20 +9,27 @@ import SwiftUI
 
 
 struct SearchView: View {
-    @StateObject private var viewModel = SearchViewModel()
+    @StateObject private var searchViewAdapter = SearchViewAdapter()
     @State var selected: Bool = false
     @State private var title = ""
     
     var body: some View {
-        content
+        if let viewModel = searchViewAdapter.searchViewModel {
+            content(viewModel: viewModel)
+        } else {
+            ProgressView()
+                .onAppear(perform: {
+                    searchViewAdapter.generateSearchViewModel()
+                })
+        }
     }
     
-    @ViewBuilder private var content: some View {
+    @ViewBuilder func content(viewModel: ViewModel) -> some View {
         ZStack {
-            backgroundImageView(imageName: "gym_womanBg")
+            backgroundImageView(imageName: viewModel.imageName)
             VStack(spacing: CGFloat(GridPoints.x3)) {
-                searchFeildView
-                resultListView()
+                searchFeildView(viewModel: viewModel)
+                resultListView(viewModel: viewModel)
             }
         }
     }
@@ -47,13 +54,12 @@ struct SearchView: View {
             )
     }
     
-    
-    @ViewBuilder private func resultListView() -> some View {
+    @ViewBuilder private func resultListView(viewModel: ViewModel) -> some View {
         
-        List(viewModel.apiResponse) { exerciseInfo in
+        List(searchViewAdapter.apiResponse) { exerciseInfo in
             VStack(alignment: .leading, spacing: 8) {
                 HStack(alignment: .top) {
-                    Text("Name:")
+                    Text(viewModel.nameTitle)
                         .bold()
                         .foregroundColor(CustomColors.cyan)
                     
@@ -61,7 +67,7 @@ struct SearchView: View {
                         .foregroundColor(.white)
                 }
                 HStack {
-                    Text("Type:")
+                    Text(viewModel.typeTitle)
                         .bold()
                         .foregroundColor(CustomColors.cyan)
                     
@@ -69,7 +75,7 @@ struct SearchView: View {
                         .foregroundColor(.white)
                 }
                 HStack {
-                    Text("Muscle:")
+                    Text(viewModel.muscleTitle)
                         .bold()
                         .foregroundColor(CustomColors.cyan)
                     
@@ -78,7 +84,7 @@ struct SearchView: View {
                     
                 }
                 HStack {
-                    Text("Equipment:")
+                    Text(viewModel.equipmentTitle)
                         .bold()
                         .foregroundColor(CustomColors.cyan)
                     
@@ -86,7 +92,7 @@ struct SearchView: View {
                         .foregroundColor(.white)
                 }
                 HStack {
-                    Text("Difficulty:")
+                    Text(viewModel.difficultyTitle)
                         .bold()
                         .foregroundColor(CustomColors.cyan)
                     
@@ -94,7 +100,7 @@ struct SearchView: View {
                         .foregroundColor(.white)
                 }
                 VStack(alignment: .leading) {
-                    Text("Instructions:")
+                    Text(viewModel.instructionsTitle)
                         .bold()
                         .foregroundColor(CustomColors.cyan)
                     
@@ -115,20 +121,20 @@ struct SearchView: View {
     }
     
     
-    @ViewBuilder private var searchFeildView: some View {
+    @ViewBuilder func searchFeildView(viewModel: ViewModel) -> some View {
         
         
         
         HStack {
-            CustomTextField(textInput: $title, title: "musclegroups...")
+            CustomTextField(textInput: $title, title: viewModel.title)
             
             Button(action: {
                 withAnimation(.bouncy(duration: 0.5)) {
                     selected.toggle()
-                    viewModel.API(muscle: title)
+                    searchViewAdapter.API(muscle: title)
                 }
             }, label: {
-                RoundedBtn(title: "", icon: "magnifyingglass.circle.fill")
+                RoundedBtn(title: "", icon: viewModel.icon)
                     .scaleEffect(selected ? 1.1 : 1.0)
             })
         }.padding(.horizontal, GridPoints.x8)
@@ -137,7 +143,16 @@ struct SearchView: View {
     }
     
     struct ViewModel {
+        let nameTitle: String
+        let typeTitle: String
+        let muscleTitle: String
+        let equipmentTitle: String
+        let difficultyTitle: String
+        let instructionsTitle: String
         let title: String
+        let imageName: String
+        let icon: String
+        let apiAction: (String) -> Void
     }
 }
 

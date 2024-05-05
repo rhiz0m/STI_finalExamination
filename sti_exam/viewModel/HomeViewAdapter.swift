@@ -16,9 +16,10 @@ class HomeViewAdapter: ObservableObject {
     
     @Published var topBarViewModel: TopBarView.ViewModel?
     @Published var customBottomBarViewModel: CustomBottomBar.ViewModel?
+    @Published var createProgramViewModel: CreateProgramView.ViewModel?
     
     var authDbViewAdapter: AuthDbViewAdapter
-    var selectedSystemImages = SelectedSystemImages()
+
     
     init(authDbViewAdapter: AuthDbViewAdapter) {
         self.authDbViewAdapter = authDbViewAdapter
@@ -28,7 +29,7 @@ class HomeViewAdapter: ObservableObject {
         let topBarViewModel = TopBarView.ViewModel(
             image: "logo",
             welcomeTitle: LocalizedStrings.welcome,
-            icon: selectedSystemImages.power,
+            icon: SelectedSystemImages.shared.power,
             logoutAction: {
                 self.authDbViewAdapter.logout()
             }
@@ -43,11 +44,25 @@ class HomeViewAdapter: ObservableObject {
             addTitle: LocalizedStrings.add,
             searchTitle: LocalizedStrings.search,
             mapTitle: LocalizedStrings.map,
-            listIcon: selectedSystemImages.list,
-            addIcon: selectedSystemImages.add,
-            searchIcon: selectedSystemImages.search,
-            mapIcon: selectedSystemImages.map
+            listIcon: SelectedSystemImages.shared.list,
+            addIcon: SelectedSystemImages.shared.add,
+            searchIcon: SelectedSystemImages.shared.search,
+            mapIcon: SelectedSystemImages.shared.map
         )
         self.customBottomBarViewModel = customBottomBarViewModel
+    }
+    
+    func generateCreateProgramViewModel() {
+        let createProgramViewModel = CreateProgramView.ViewModel(
+            saveTitle: LocalizedStrings.save, 
+            categoryTitle: LocalizedStrings.usersExercise,
+            saveExercise: { [weak self] completion in
+                guard let self = self else { return }
+                self.authDbViewAdapter.saveExercise { success in
+                    completion(success)
+                }
+            }
+        )
+        self.createProgramViewModel = createProgramViewModel
     }
 }

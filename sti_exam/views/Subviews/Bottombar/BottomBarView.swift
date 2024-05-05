@@ -25,7 +25,7 @@ struct BottomBarView: View {
     @ViewBuilder func content(viewModel: CustomBottomBar.ViewModel) -> some View {
         ZStack(alignment: .bottom) {
             TabView(selection: $tabSelection) {
-                ExerciseListView()
+                ExerciseListView(authDBViewAdapter: AuthDbViewAdapter())
                 .tabItem {
                 }.tag(1)
                 

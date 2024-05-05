@@ -10,7 +10,6 @@ import SwiftUI
 struct CreateProgramView: View {
     
     @EnvironmentObject var homeViewAdapter: HomeViewAdapter
-    @StateObject private var exerciseViewAdapter = ExerciseViewAdapter()
     @State var usersExercise: UsersExcercise?
     @State var usersTrainingRecord: UsersTrainingRecord?
     @State var exerciseName = ""
@@ -23,13 +22,13 @@ struct CreateProgramView: View {
     @State private var navigateToListView = false
     
     var body: some View {
-        if let viewModel = exerciseViewAdapter.createProgramViewModel {
+        if let viewModel = homeViewAdapter.createProgramViewModel {
             content(viewModel: viewModel)
             
         } else {
             ProgressView()
                 .onAppear(perform: {
-                    exerciseViewAdapter.generateCreateProgramViewModel()
+                    homeViewAdapter.generateCreateProgramViewModel()
                 })
         }
     }
@@ -44,28 +43,14 @@ struct CreateProgramView: View {
                 muscleGroups: $muscleGroups)
             
             TrainingRecordFormView(
-                authDbViewAdapter: homeViewAdapter.authDbViewAdapter,
+                homeViewAdapter: homeViewAdapter,
                 weight: $weight,
                 reps: $reps,
-                sets: $sets
-                /* usersTrainingRecord: $usersTrainingRecord*/)
+                sets: $sets)
             
             HStack {
-                //                NavigationLink(
-                //                    destination: CreateExerciseView(authViewAdapter: authViewAdapter, exerciseViewAdapter: exerciseViewAdapter, exerciseName: exerciseName, date: date, type: type, muscleGroups: muscleGroups, weight: weight, reps: reps, sets: sets, selectedExercise: usersExercise),
-                //                    label: {
-                //                        PrimaryBtnStyle(title: "Add Exercise",
-                //                                        icon: "plus.circle.fill")
-                //                    }
-                //                )
-                
                 Button(viewModel.saveTitle, action: {
                     
-                    homeViewAdapter.authDbViewAdapter.saveExercise { success in
-                        if success {
-                        } else {
-                        }
-                    }
                     if !exerciseName.isEmpty {
                         
                         let weightValue = Double(weight) ?? 0.0
@@ -76,7 +61,7 @@ struct CreateProgramView: View {
                         
                         let newExercise = UsersExcercise(
                             id: UUID(),
-                            category: "users_exercise",
+                            category: viewModel.categoryTitle,
                             exerciseName: exerciseName,
                             date: Date(),
                             type: type,
@@ -84,10 +69,9 @@ struct CreateProgramView: View {
                             trainingRecordIds: [trainingRecordsId],
                             usersTrainingRecords: [usersTrainingRecord]
                         )
-                        print("new exercise \(newExercise)")
+//                        print("new exercise \(newExercise)")
                         homeViewAdapter.authDbViewAdapter.addProgramToDb(userExercise: newExercise)
-                        
-                        navigateToListView = true
+           
                     }
                     navigateToListView = true
                 })
@@ -104,10 +88,28 @@ struct CreateProgramView: View {
     
     struct ViewModel {
         let saveTitle: String
-        //        let saveExercise: (@escaping (Bool) -> Void) -> Void
+        let categoryTitle: String
+        let saveExercise: (@escaping (Bool) -> Void) -> Void
     }
 }
 #Preview {
     CreateProgramView()
         .environmentObject(HomeViewAdapter(authDbViewAdapter: AuthDbViewAdapter()))
 }
+
+//                        homeViewAdapter.authDbViewAdapter.saveExercise { success in
+//                            if success {
+//                            } else {
+//                            }
+//                        }
+
+//                NavigationLink(
+//                    destination: CreateExerciseView(authViewAdapter: authViewAdapter, exerciseViewAdapter: exerciseViewAdapter, exerciseName: exerciseName, date: date, type: type, muscleGroups: muscleGroups, weight: weight, reps: reps, sets: sets, selectedExercise: usersExercise),
+//                    label: {
+//                        PrimaryBtnStyle(title: "Add Exercise",
+//                                        icon: "plus.circle.fill")
+//                    }
+//                )
+
+
+//                        homeViewAdapter.authDbViewAdapter.addProgramToDb(userExercise: newExercise)

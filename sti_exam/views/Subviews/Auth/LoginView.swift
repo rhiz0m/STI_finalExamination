@@ -9,8 +9,6 @@ import SwiftUI
 
 struct LoginView: View {
     @StateObject var userAuthAdapter: UserAuthAdapter
-    @State var email = ""
-    @State var password = ""
     
     init(loginViewAdapter: UserAuthAdapter) {
         self._userAuthAdapter = StateObject(wrappedValue: loginViewAdapter)

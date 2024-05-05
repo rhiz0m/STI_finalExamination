@@ -27,10 +27,11 @@ struct LocalizedStrings {
     static let map = "Map"
     static let selectedTabId = "selectedTabId"
     static let noExercises = "You have no exercises yet!"
-    // Exercises
+    // Exercises data
     static let exerciseName = "ExerciseName"
     static let type = "Type:"
     static let date = "Date:"
+    static let muscle = "Muscle"
     static let muscleGroups = "MuscleGroups:"
     static let weight = "Weight:"
     static let reps = "Reps:"
@@ -41,5 +42,12 @@ struct LocalizedStrings {
     static let totalReps = "Total Reps:"
     static let totalWeight = "Total Weight:"
     static let created = "Created"
+    static let equipment = "Equipment:"
+    static let difficulty = "Difficulty:"
+    static let instructions = "Instructions"
+    // CreateProgram
+    static let usersExercise = "users_exercise"
+    // SearchViewModel
+//    static let 
 
 }

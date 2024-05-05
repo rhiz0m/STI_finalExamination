@@ -13,7 +13,7 @@
 		FE60341A2BD7F65E00D7FA47 /* ExerciseListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6034192BD7F65E00D7FA47 /* ExerciseListView.swift */; };
 		FE60341C2BD7F6E600D7FA47 /* ExerciseViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE60341B2BD7F6E600D7FA47 /* ExerciseViewAdapter.swift */; };
 		FE60341E2BD7F76C00D7FA47 /* RoundedBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE60341D2BD7F76C00D7FA47 /* RoundedBtn.swift */; };
-		FE6034202BD8018200D7FA47 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE60341F2BD8018200D7FA47 /* SearchViewModel.swift */; };
+		FE6034202BD8018200D7FA47 /* SearchViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE60341F2BD8018200D7FA47 /* SearchViewAdapter.swift */; };
 		FE6034222BD801CE00D7FA47 /* ExerciseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6034212BD801CE00D7FA47 /* ExerciseAPI.swift */; };
 		FE6034272BD8040E00D7FA47 /* auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6034262BD8040E00D7FA47 /* auth.swift */; };
 		FE6034292BD804FD00D7FA47 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6034282BD804FD00D7FA47 /* CustomTextField.swift */; };
@@ -85,7 +85,7 @@
 		FE6034192BD7F65E00D7FA47 /* ExerciseListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseListView.swift; sourceTree = "<group>"; };
 		FE60341B2BD7F6E600D7FA47 /* ExerciseViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseViewAdapter.swift; sourceTree = "<group>"; };
 		FE60341D2BD7F76C00D7FA47 /* RoundedBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedBtn.swift; sourceTree = "<group>"; };
-		FE60341F2BD8018200D7FA47 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		FE60341F2BD8018200D7FA47 /* SearchViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewAdapter.swift; sourceTree = "<group>"; };
 		FE6034212BD801CE00D7FA47 /* ExerciseAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseAPI.swift; sourceTree = "<group>"; };
 		FE6034262BD8040E00D7FA47 /* auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = auth.swift; sourceTree = "<group>"; };
 		FE6034282BD804FD00D7FA47 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
@@ -267,7 +267,7 @@
 			children = (
 				FE2694662BBC5912007733B4 /* HomeViewAdapter.swift */,
 				FE60341B2BD7F6E600D7FA47 /* ExerciseViewAdapter.swift */,
-				FE60341F2BD8018200D7FA47 /* SearchViewModel.swift */,
+				FE60341F2BD8018200D7FA47 /* SearchViewAdapter.swift */,
 				FEA4F5C32BDC20AB005F21AE /* AuthDbViewAdapter.swift */,
 				FE186FCF2BDD3E21009C1ADE /* MapsViewModel.swift */,
 				FE186FD12BDD527F009C1ADE /* UserAuthAdapter.swift */,
@@ -515,7 +515,7 @@
 				FE6034292BD804FD00D7FA47 /* CustomTextField.swift in Sources */,
 				FE687F562BD6D1F600F8A307 /* PasswordView.swift in Sources */,
 				FE60342C2BD806C400D7FA47 /* Maps.swift in Sources */,
-				FE6034202BD8018200D7FA47 /* SearchViewModel.swift in Sources */,
+				FE6034202BD8018200D7FA47 /* SearchViewAdapter.swift in Sources */,
 				FE60341A2BD7F65E00D7FA47 /* ExerciseListView.swift in Sources */,
 				FE93B8A42BBDC4D200A68DBD /* CustomBottomBar.swift in Sources */,
 				FE8D9A2A2BA313D70065EEDD /* SplashScreen.swift in Sources */,

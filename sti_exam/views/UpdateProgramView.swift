@@ -24,7 +24,7 @@ struct UpdateProgramView: View {
                              type: $homeViewAdapter.authDbViewAdapter.type,
                              muscleGroups: $homeViewAdapter.authDbViewAdapter.muscleGroups)
             
-            TrainingRecordFormView(authDbViewAdapter: homeViewAdapter.authDbViewAdapter,
+            TrainingRecordFormView(homeViewAdapter: homeViewAdapter,
                                    weight: $homeViewAdapter.authDbViewAdapter.weight,
                                    reps: $homeViewAdapter.authDbViewAdapter.reps,
                                    sets: $homeViewAdapter.authDbViewAdapter.sets

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ExerciseListView: View {
     @EnvironmentObject var homeViewAdapter: HomeViewAdapter
+    @ObservedObject var authDBViewAdapter: AuthDbViewAdapter
     
     var body: some View {
         VStack() {
@@ -35,7 +36,7 @@ struct ExerciseListView: View {
                                         .foregroundStyle(.white)
                                         .padding(.vertical, GridPoints.x1)
                                     Spacer()
-                                    Image(systemName: homeViewAdapter.authDbViewAdapter.systemImages.arrowRightCircle)
+                                    Image(systemName: "" /*homeViewAdapter.authDbViewAdapter.systemImages.arrowRightCircle*/)
                                         .foregroundColor(CustomColors.cyan)
                                         .font(.system(size: 30))
                                     
@@ -76,10 +77,11 @@ struct ExerciseListView: View {
                         
                         VStack {
                             Button(action: {
-                                homeViewAdapter.authDbViewAdapter.deleteProgram(exercise: exercise)
+                                //homeViewAdapter.authDbViewAdapter.deleteProgram(exercise: exercise)
+                                authDBViewAdapter.deleteProgram(exercise: exercise)
                             }, label: {
                                 HStack(alignment: .center) {
-                                    RoundedBtn(icon: homeViewAdapter.authDbViewAdapter.systemImages.trash)
+                                    RoundedBtn(icon: "" /*homeViewAdapter.authDbViewAdapter.systemImages.trash*/)
                                     Spacer()
                                     VStack(alignment: .leading) {
                                         Text(LocalizedStrings.created).font(.caption)
@@ -113,6 +115,6 @@ private func formatDate(_ date: Date) -> String {
 }
 
 #Preview {
-    ExerciseListView()
+    ExerciseListView(authDBViewAdapter: AuthDbViewAdapter())
         .environmentObject(HomeViewAdapter(authDbViewAdapter: AuthDbViewAdapter()))
 }

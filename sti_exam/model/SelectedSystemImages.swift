@@ -7,7 +7,9 @@
 
 import Foundation
 
-struct SelectedSystemImages {
+class SelectedSystemImages {
+    static let shared = SelectedSystemImages()
+    
     let power = "power"
     let arrowRightCircle = "arrow.right.circle"
     let trash = "trash"
@@ -15,4 +17,7 @@ struct SelectedSystemImages {
     let add = "plus.circle.fill"
     let search = "magnifyingglass.circle.fill"
     let map = "map.fill"
+    let magnifyingGlass = "magnifyingglass.circle.fill"
+    
+    private init() {}
 }

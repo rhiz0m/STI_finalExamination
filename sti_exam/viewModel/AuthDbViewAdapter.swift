@@ -11,7 +11,9 @@ import Firebase
 class AuthDbViewAdapter: ObservableObject {
     @Published var currentUserData: UserData?
     @Published var emailInput = ""
+    @Published var confirmEmail = ""
     @Published var passwordInput = ""
+    @Published var confirmPassword = ""
     @Published var currentUser: User?
     @Published var selectedExerciseID: UUID?
     @Published var selectedExercise: UsersExcercise?
@@ -35,7 +37,6 @@ class AuthDbViewAdapter: ObservableObject {
     private let USER_DATA_COLLECTION = "user_data"
     private let USER_EXERCISES = "usersExercises"
     private var dbListener: ListenerRegistration?
-    var systemImages = SelectedSystemImages()
     
     init() {
         auth.addStateDidChangeListener { auth, user in
@@ -108,7 +109,6 @@ class AuthDbViewAdapter: ObservableObject {
                 usersTrainingRecords: [usersTrainingRecord]
             )
             print("new exercise \(newExercise)")
-            //authDatabaseViewAdapter.addProgramToDb(userExercise: newExercise)
             completion(true)
             
         } else {
@@ -186,22 +186,19 @@ class AuthDbViewAdapter: ObservableObject {
     }
 
     // Auth
-        func registerUser(email: String, password: String) -> Bool {
-    
-            var success = false
-    
+    func registerUser(email: String, password: String, completion: @escaping (Bool) -> Void) {
+        
             auth.createUser(withEmail: email, password: password) { authResult, error in
     
                 if let error = error {
                     print(error.localizedDescription)
-                    success = false
+                    completion(false)
                 }
     
                 if authResult != nil {
-                    success = true
+                   completion(true)
                 }
             }
-            return success
         }
     
         func loginUser(email: String, password: String, completion: @escaping (Bool) -> Void) {

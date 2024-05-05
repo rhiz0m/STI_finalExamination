@@ -67,7 +67,14 @@ struct RegisterView: View {
                     .shadow(color: Color.brown.opacity(0.6), radius: 8, x: 0, y: 2)
                     .onTapGesture {
                         if !email.isEmpty && email == confirmEmail && !password.isEmpty && password == confirmPassword {
-                            _ = userAuthAdapter.authDbViewAdapter.registerUser(email: email, password: password)
+                            
+                            _ = userAuthAdapter.authDbViewAdapter.registerUser(email: email, password: password) { success in
+                                if success {
+                                    
+                                } else {
+                                    
+                                }
+                            }
                         }
                     }
                 
@@ -118,6 +125,7 @@ struct RegisterView: View {
         let confirmPasswordTitle: String
         let emailTitle: String
         let confirmEmailTitle: String
+        let registerAction: (@escaping (Bool) -> Void) -> Void
     }
 }
 
@@ -125,3 +133,12 @@ struct RegisterView: View {
     RegisterView(userAuthAdapter: UserAuthAdapter(authDbViewAdapter: AuthDbViewAdapter()),
                  email: "", confirmEmail: "", password: "", confirmPassword: "")
 }
+
+
+//                            viewModel.registerAction { success in
+//                                if success {
+//                                    print("success")
+//                                } else {
+//                                    print("non sucess")
+//                                }
+//                            }
