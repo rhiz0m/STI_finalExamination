@@ -47,7 +47,6 @@ struct LocalizedStrings {
     static let instructions = "Instructions"
     // CreateProgram
     static let usersExercise = "users_exercise"
-    // SearchViewModel
-//    static let 
+
 
 }

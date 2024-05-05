@@ -17,10 +17,10 @@ class HomeViewAdapter: ObservableObject {
     @Published var topBarViewModel: TopBarView.ViewModel?
     @Published var customBottomBarViewModel: CustomBottomBar.ViewModel?
     @Published var createProgramViewModel: CreateProgramView.ViewModel?
+    @Published var updateProgramViewModel: UpdateProgramView.ViewModel?
     
     var authDbViewAdapter: AuthDbViewAdapter
 
-    
     init(authDbViewAdapter: AuthDbViewAdapter) {
         self.authDbViewAdapter = authDbViewAdapter
     }
@@ -53,7 +53,7 @@ class HomeViewAdapter: ObservableObject {
     }
     
     func generateCreateProgramViewModel() {
-        let createProgramViewModel = CreateProgramView.ViewModel(
+        let ProgramViewModel = CreateProgramView.ViewModel(
             saveTitle: LocalizedStrings.save, 
             categoryTitle: LocalizedStrings.usersExercise,
             saveExercise: { [weak self] completion in
@@ -63,6 +63,13 @@ class HomeViewAdapter: ObservableObject {
                 }
             }
         )
-        self.createProgramViewModel = createProgramViewModel
+        self.createProgramViewModel = ProgramViewModel
+    }
+    
+    func generateUpdateProgramViewModel() {
+        let updateViewModel = UpdateProgramView.ViewModel(
+            updateExercisesTitle: "Update Exercises"
+        )
+        self.updateProgramViewModel = updateViewModel
     }
 }
