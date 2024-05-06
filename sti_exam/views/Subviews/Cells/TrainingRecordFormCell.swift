@@ -7,9 +7,8 @@
 
 import SwiftUI
 
-struct TrainingRecordFormView: View {
-    
-    @ObservedObject var homeViewAdapter: HomeViewAdapter
+struct TrainingRecordFormCell: View {
+    let viewModel: ViewModel
     
     @Binding var weight: String
     @Binding var reps: Int
@@ -17,35 +16,36 @@ struct TrainingRecordFormView: View {
     
     var body: some View {
         
-        TextField("Weight: \(weight)",
+        TextField("\(viewModel.weight) \(weight)",
                   text: $weight)
         .textFieldStyle(RoundedBorderTextFieldStyle())
         .padding(.vertical, GridPoints.x1)
         .padding(.horizontal, GridPoints.x4)
         
         HStack() {
-            Stepper("Reps: \(reps)", value: $reps)
-            Stepper("Sets: \(sets)", value: $sets)
+            Stepper("\(viewModel.reps) \(reps)", value: $reps)
+            Stepper("\(viewModel.sets) \(sets)", value: $sets)
         }.padding(.vertical, GridPoints.x1)
             .padding(.horizontal, GridPoints.x4)
         
     }
-    
     struct ViewModel {
-        
+        let weight: String
+        let reps: Int
+        let sets: Int
     }
 }
 
-struct ExerciseFormView_Previews: PreviewProvider {
+struct TrainingRecordFormView_Previews: PreviewProvider {
     static var previews: some View {
-        let homeViewAdapter = HomeViewAdapter(authDbViewAdapter: AuthDbViewAdapter())
-        let selectedExercice = Binding<UsersTrainingRecord?>(
-            get: { nil },
-            set: { _ in }
+        let viewModel = TrainingRecordFormCell.ViewModel(
+            weight: "Weight",
+            reps: 10,
+            sets: 5
         )
         
-        return TrainingRecordFormView(
-            homeViewAdapter: homeViewAdapter,
+        return TrainingRecordFormCell(
+            viewModel: viewModel,
             weight: Binding.constant("100"),
             reps: Binding.constant(5),
             sets: Binding.constant(6)

@@ -10,6 +10,13 @@ import SwiftUI
 struct UpdateProgramView: View {
     @EnvironmentObject var homeViewAdapter: HomeViewAdapter
     @Environment(\.dismiss) private var dismiss
+    @State private var exerciseName: String = ""
+    @State private var date: String = ""
+    @State private var type: String = ""
+    @State private var weight: String = ""
+    @State private var reps: Int = 0
+    @State private var sets: Int = 0
+    @State private var muscleGroups: String = ""
     var selectedExerciseID: UUID?
     
     var body: some View {
@@ -30,17 +37,17 @@ struct UpdateProgramView: View {
                     .font(.title)
                     .bold()
                 
-                ExerciseFormView(authDbViewAdapter: homeViewAdapter.authDbViewAdapter,
-                                 exerciseName: $homeViewAdapter.authDbViewAdapter.exerciseName,
-                                 date: $homeViewAdapter.authDbViewAdapter.date,
-                                 type: $homeViewAdapter.authDbViewAdapter.type,
-                                 muscleGroups: $homeViewAdapter.authDbViewAdapter.muscleGroups)
+                ExerciseFormCell(viewModel: viewModel.exerciceFormCell,
+                                 exerciseName: $exerciseName,
+                                 date: $date,
+                                 type: $type,
+                                 muscleGroups: $muscleGroups)
                 
-                TrainingRecordFormView(homeViewAdapter: homeViewAdapter,
-                                       weight: $homeViewAdapter.authDbViewAdapter.weight,
-                                       reps: $homeViewAdapter.authDbViewAdapter.reps,
-                                       sets: $homeViewAdapter.authDbViewAdapter.sets
-                                       /*     usersTrainingRecord: authDbViewAdapter.usersTrainingRecord*/)
+                TrainingRecordFormCell(viewModel: viewModel.trainingRecordFormCell,
+                                       weight: $weight,
+                                       reps: $reps,
+                                       sets: $sets)
+                                       /*     usersTrainingRecord: authDbViewAdapter.usersTrainingRecord*/
                 
                 //            HStack {
                 //                Button("update") {
@@ -105,10 +112,7 @@ struct UpdateProgramView: View {
         }
     struct ViewModel {
         let updateExercisesTitle: String
+        let exerciceFormCell: ExerciseFormCell.ViewModel
+        let trainingRecordFormCell: TrainingRecordFormCell.ViewModel
     }
 }
-
-//#Preview {
-//    UpdateProgramView(authViewAdapter: AuthDatabaseViewAdapter(), 
-//                      viewModel: ExerciseViewAdapter())
-//}

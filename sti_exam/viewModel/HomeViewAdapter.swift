@@ -20,9 +20,21 @@ class HomeViewAdapter: ObservableObject {
     @Published var updateProgramViewModel: UpdateProgramView.ViewModel?
     
     var authDbViewAdapter: AuthDbViewAdapter
+    var exerciseViewModel: ExerciseFormCell.ViewModel
+    var trainingRecordViewModel: TrainingRecordFormCell.ViewModel
 
     init(authDbViewAdapter: AuthDbViewAdapter) {
         self.authDbViewAdapter = authDbViewAdapter
+        
+        self.exerciseViewModel = ExerciseFormCell.ViewModel(
+            name: LocalizedStrings.name,
+            type: LocalizedStrings.type,
+            muscleGroups: LocalizedStrings.muscleGroups)
+        
+        self.trainingRecordViewModel = TrainingRecordFormCell.ViewModel(
+            weight: LocalizedStrings.weight,
+            reps: 0,
+            sets: 0)
     }
     
     func generateTopBarViewModel() {
@@ -56,6 +68,9 @@ class HomeViewAdapter: ObservableObject {
         let ProgramViewModel = CreateProgramView.ViewModel(
             saveTitle: LocalizedStrings.save, 
             categoryTitle: LocalizedStrings.usersExercise,
+            exerciceFormCell: self.exerciseViewModel, 
+            trainingRecordFormCell: self.trainingRecordViewModel,
+            
             saveExercise: { [weak self] completion in
                 guard let self = self else { return }
                 self.authDbViewAdapter.saveExercise { success in
@@ -67,9 +82,13 @@ class HomeViewAdapter: ObservableObject {
     }
     
     func generateUpdateProgramViewModel() {
+        
         let updateViewModel = UpdateProgramView.ViewModel(
-            updateExercisesTitle: "Update Exercises"
+            updateExercisesTitle: "Update Exercises", 
+            exerciceFormCell: self.exerciseViewModel,
+            trainingRecordFormCell: self.trainingRecordViewModel
         )
         self.updateProgramViewModel = updateViewModel
     }
+
 }

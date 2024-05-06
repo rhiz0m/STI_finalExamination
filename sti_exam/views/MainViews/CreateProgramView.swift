@@ -35,15 +35,15 @@ struct CreateProgramView: View {
     
     @ViewBuilder func content(viewModel: ViewModel) -> some View {
         VStack {
-            ExerciseFormView(
-                authDbViewAdapter: homeViewAdapter.authDbViewAdapter,
+            ExerciseFormCell(
+                viewModel: viewModel.exerciceFormCell,
                 exerciseName: $exerciseName,
                 date: $date,
                 type: $type,
                 muscleGroups: $muscleGroups)
             
-            TrainingRecordFormView(
-                homeViewAdapter: homeViewAdapter,
+            TrainingRecordFormCell(
+                viewModel: viewModel.trainingRecordFormCell,
                 weight: $weight,
                 reps: $reps,
                 sets: $sets)
@@ -89,6 +89,8 @@ struct CreateProgramView: View {
     struct ViewModel {
         let saveTitle: String
         let categoryTitle: String
+        let exerciceFormCell: ExerciseFormCell.ViewModel
+        let trainingRecordFormCell: TrainingRecordFormCell.ViewModel
         let saveExercise: (@escaping (Bool) -> Void) -> Void
     }
 }
