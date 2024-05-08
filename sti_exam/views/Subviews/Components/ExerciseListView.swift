@@ -9,9 +9,17 @@ import SwiftUI
 
 struct ExerciseListView: View {
     @EnvironmentObject var homeViewAdapter: HomeViewAdapter
-    @ObservedObject var authDBViewAdapter: AuthDbViewAdapter
+    private let viewModel: ViewModel
+    
+    init(viewModel: ViewModel) {
+        self.viewModel = viewModel
+    }
     
     var body: some View {
+        content(viewModel: viewModel)
+    }
+    
+    @ViewBuilder func content(viewModel: ViewModel) -> some View {
         VStack() {
             if let userData = homeViewAdapter.authDbViewAdapter.currentUserData {
                 if userData.usersExercises.isEmpty {
@@ -26,7 +34,6 @@ struct ExerciseListView: View {
                             destination: UpdateProgramView(),
                             tag: exercise.id,
                             selection: $homeViewAdapter.authDbViewAdapter.selectedExerciseID
-                            
                         ) {
                             VStack(alignment: .leading) {
                                 HStack {
@@ -39,7 +46,6 @@ struct ExerciseListView: View {
                                     Image(systemName: "" /*homeViewAdapter.authDbViewAdapter.systemImages.arrowRightCircle*/)
                                         .foregroundColor(CustomColors.cyan)
                                         .font(.system(size: 30))
-                                    
                                 }
                                 Text("\(LocalizedStrings.type) \(exercise.type)")
                                     .foregroundStyle(.white)
@@ -77,15 +83,17 @@ struct ExerciseListView: View {
                         
                         VStack {
                             Button(action: {
-                                //homeViewAdapter.authDbViewAdapter.deleteProgram(exercise: exercise)
-                                authDBViewAdapter.deleteProgram(exercise: exercise)
+                                homeViewAdapter.authDbViewAdapter.deleteProgram(exercise: exercise)
+                                
+                                
+                                //                                authDBViewAdapter.deleteProgram(exercise: exercise)
                             }, label: {
                                 HStack(alignment: .center) {
                                     RoundedBtn(icon: "" /*homeViewAdapter.authDbViewAdapter.systemImages.trash*/)
                                     Spacer()
                                     VStack(alignment: .leading) {
                                         Text(LocalizedStrings.created).font(.caption)
-                                        Text("\(formatDate(exercise.date))")
+                                        Text("\(homeViewAdapter.customDateFormatter.formatDate(exercise.date))")
                                     }
                                     
                                 }
@@ -105,16 +113,13 @@ struct ExerciseListView: View {
             }
         }
     }
+    
+    struct ViewModel {
+        let icon: String
+    }
 }
 
-private func formatDate(_ date: Date) -> String {
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateStyle = .short
-    dateFormatter.timeStyle = .short
-    return dateFormatter.string(from: date)
-}
-
-#Preview {
-    ExerciseListView(authDBViewAdapter: AuthDbViewAdapter())
-        .environmentObject(HomeViewAdapter(authDbViewAdapter: AuthDbViewAdapter()))
-}
+//#Preview {
+//    ExerciseListView(exerciceListViewModel: ExerciseListView.ViewModel(icon: ""))
+//        .environmentObject(HomeViewAdapter(authDbViewAdapter: AuthDbViewAdapter()))
+//}

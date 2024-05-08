@@ -38,7 +38,7 @@ struct UpdateProgramView: View {
                     .bold()
                 
                 ExerciseFormCell(viewModel: viewModel.exerciceFormCell,
-                                 exerciseName: $exerciseName,
+                                 name: $exerciseName,
                                  date: $date,
                                  type: $type,
                                  muscleGroups: $muscleGroups)
@@ -46,40 +46,35 @@ struct UpdateProgramView: View {
                 TrainingRecordFormCell(viewModel: viewModel.trainingRecordFormCell,
                                        weight: $weight,
                                        reps: $reps,
-                                       sets: $sets)
-                                       /*     usersTrainingRecord: authDbViewAdapter.usersTrainingRecord*/
-                
-                //            HStack {
-                //                Button("update") {
-                //                    print("Button Pressed!")
-                //
-                //                    print("Before Update - Exercise Name: \(authDbViewAdapter.exerciseName)")
-                //
-                //                    if let currentUserData = authDbViewAdapter.currentUserData,
-                //                       let selectedExerciseID = authDbViewAdapter.selectedExerciseID,
-                //                       let selectedExercise = currentUserData.usersExercises.first(where: { $0.id == selectedExerciseID }) {
-                //
-                //                        authDbViewAdapter.selectedExercise = selectedExercise
-                //
-                //                        if let selectedExercise = authDbViewAdapter.selectedExercise {
-                //                            print("Selected Exercise: \(selectedExercise)")
-                //
-                //                            authDbViewAdapter.updateProgram(usersExercise: [selectedExercise]) { error in
-                //                                if let error = error {
-                //                                    print("Update failed with error: \(error.localizedDescription)")
-                //                                } else {
-                //                                    print("Update successful!")
-                //                                    print("After Update - Exercise Name: \(authDbViewAdapter.exerciseName)")
-                //                                }
-                //                            }
-                //                        } else {
-                //                            print("Selected Exercise is nil!")
-                //                        }
-                //                    }
-                //                }
-                //                .padding(.vertical, GridPoints.x1)
-                //                .padding(.horizontal, GridPoints.x4)
-                //            }
+                                       sets: $sets
+                )
+                            HStack {
+                                Button(viewModel.saveTitle, action: {
+                                    
+                                    if !exerciseName.isEmpty {
+                                        
+                                        let weightValue = Double(weight) ?? 0.0
+                                        
+                                        let usersTrainingRecord = UsersTrainingRecord(weight: weight, reps: reps, sets: sets, totalReps: reps * sets, totalWeight: reps * sets * Int(weightValue))
+                                        
+                                        let trainingRecordsId = usersTrainingRecord.id
+                                        
+                                        let newExercise = UsersExcercise(
+                                            id: UUID(),
+                                            category: viewModel.categoryTitle,
+                                            exerciseName: exerciseName,
+                                            date: Date(),
+                                            type: type,
+                                            muscleGroups: [muscleGroups],
+                                            trainingRecordIds: [trainingRecordsId],
+                                            usersTrainingRecords: [usersTrainingRecord]
+                                        )
+                //                        print("new exercise \(newExercise)")
+                                        homeViewAdapter.authDbViewAdapter.addProgramToDb(userExercise: newExercise)
+                                    }
+                                    //navigateToListView = true
+                                })
+                            }
                 .onAppear {
                     print("UpdateProgramView appeared")
                     print("Selected Exercise ID: \(String(describing: homeViewAdapter.authDbViewAdapter.selectedExerciseID))")
@@ -112,7 +107,10 @@ struct UpdateProgramView: View {
         }
     struct ViewModel {
         let updateExercisesTitle: String
+        let saveTitle: String
+        let categoryTitle: String
         let exerciceFormCell: ExerciseFormCell.ViewModel
         let trainingRecordFormCell: TrainingRecordFormCell.ViewModel
+        let saveExercise: (@escaping (Bool) -> Void) -> Void
     }
 }

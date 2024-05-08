@@ -18,6 +18,7 @@ class SelectedSystemImages {
     let search = "magnifyingglass.circle.fill"
     let map = "map.fill"
     let magnifyingGlass = "magnifyingglass.circle.fill"
+    let paperPlane = "paperplane"
     
     private init() {}
 }

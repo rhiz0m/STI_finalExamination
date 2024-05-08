@@ -18,7 +18,6 @@ class AuthDbViewAdapter: ObservableObject {
     @Published var selectedExerciseID: UUID?
     @Published var selectedExercise: UsersExcercise?
     @Published var usersExercises: [UsersExcercise] = []
-//    @Published var usersTrainingRecord: [UsersTrainingRecord] = []
     @Published var usersTrainingRecord: UsersTrainingRecord?
     @Published var exerciseName = ""
     @Published var date = ""

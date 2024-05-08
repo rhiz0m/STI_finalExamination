@@ -23,14 +23,16 @@ struct TrainingRecordFormCell: View {
         .padding(.horizontal, GridPoints.x4)
         
         HStack() {
-            Stepper("\(viewModel.reps) \(reps)", value: $reps)
-            Stepper("\(viewModel.sets) \(sets)", value: $sets)
+            Stepper("\(viewModel.repsTitle) \(reps)", value: $reps)
+            Stepper("\(viewModel.setsTitle) \(sets)", value: $sets)
         }.padding(.vertical, GridPoints.x1)
             .padding(.horizontal, GridPoints.x4)
         
     }
     struct ViewModel {
         let weight: String
+        let setsTitle: String
+        let repsTitle: String
         let reps: Int
         let sets: Int
     }
@@ -39,7 +41,9 @@ struct TrainingRecordFormCell: View {
 struct TrainingRecordFormView_Previews: PreviewProvider {
     static var previews: some View {
         let viewModel = TrainingRecordFormCell.ViewModel(
-            weight: "Weight",
+            weight: "Weight", 
+            setsTitle: "Sets:", 
+            repsTitle: "Reps:",
             reps: 10,
             sets: 5
         )

@@ -12,7 +12,8 @@ struct BottomBarView: View {
     @State private var tabSelection = 1
     
     var body: some View {
-        if let viewModel = homeViewAdapter.customBottomBarViewModel {
+        if let viewModel = homeViewAdapter.bottomBarViewModel {
+            
             content(viewModel: viewModel)
         } else {
             ProgressView()
@@ -22,30 +23,32 @@ struct BottomBarView: View {
         }
     }
     
-    @ViewBuilder func content(viewModel: CustomBottomBar.ViewModel) -> some View {
+    @ViewBuilder func content(viewModel: ViewModel) -> some View {
         ZStack(alignment: .bottom) {
             TabView(selection: $tabSelection) {
-                ExerciseListView(authDBViewAdapter: AuthDbViewAdapter())
-                .tabItem {
-                }.tag(1)
-                
-                CreateProgramView()
+                ExerciseListView(viewModel: viewModel.exerciseListViewModel)
+                    .tabItem {
+                    }.tag(1)
+                CreateProgramView(viewModel: viewModel.createProgramViewModel)
                     .tabItem {
                     }.tag(2)
                 
-                SearchView()
+                SearchView(viewModel: viewModel.searchViewModel)
                     .tabItem {
                     }.tag(3)
-                
-                
-                MapsView().tabItem {
-                }.tag(4)
+                MapView(viewModel: viewModel.mapViewModel)
+                    .tabItem {
+                    }.tag(4)
             }
-            CustomBottomBar(tabSelection: $tabSelection, viewModel: viewModel)
+            CustomBottomBar(tabSelection: $tabSelection, viewModel: viewModel.customBottomBarViewModel)
         }
     }
     struct ViewModel {
-        
+        let customBottomBarViewModel: CustomBottomBar.ViewModel
+        let createProgramViewModel: CreateProgramView.ViewModel
+        let searchViewModel: SearchView.ViewModel
+        let exerciseListViewModel: ExerciseListView.ViewModel
+        let mapViewModel: MapView.ViewModel
     }
 }
 

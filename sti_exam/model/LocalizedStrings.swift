@@ -47,6 +47,8 @@ struct LocalizedStrings {
     static let instructions = "Instructions"
     // CreateProgram
     static let usersExercise = "users_exercise"
-
+    // Map
+    static let markerTitle = "My Location"
+    static let searchGym = "Search Gym"
 
 }

@@ -17,7 +17,6 @@ struct LoginView: View {
     var body: some View {
         if let viewModel = userAuthAdapter.loginViewModel{
             content(viewModel: viewModel)
-            
         } else {
             ProgressView()
                 .onAppear(perform: {

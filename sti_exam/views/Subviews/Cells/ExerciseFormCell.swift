@@ -10,7 +10,7 @@ import SwiftUI
 struct ExerciseFormCell: View {
     let viewModel: ViewModel
     
-    @Binding var exerciseName: String
+    @Binding var name: String
     @Binding var date: String
     @Binding var type: String
     @Binding var muscleGroups: String
@@ -19,12 +19,12 @@ struct ExerciseFormCell: View {
     
     var body: some View {
         
-        TextField(viewModel.name, text: $exerciseName)
+        TextField(viewModel.name, text: $name)
             .textFieldStyle(RoundedBorderTextFieldStyle())
             .padding(.vertical, GridPoints.x1)
             .padding(.horizontal, GridPoints.x4)
             .onAppear {
-                print("ExerciseFormView - exerciseName: \(exerciseName)")
+                print("ExerciseFormView - exerciseName: \(name)")
             }
         
         TextField(viewModel.type, text: $type)
@@ -46,24 +46,18 @@ struct ExerciseFormCell: View {
     }
 }
 
-//struct ProgramFormView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        let db = AuthDbViewAdapter()
-//        let selectedProgram = UsersExcercise(id: UUID(),
-//                                             exerciseName: "Test",
-//                                             date: Date(),
-//                                             type: "strength",
-//                                             trainingRecordIds: [],
-//                                             usersTrainingRecords: [])
-//        
-//        let date = Binding.constant("2023-11-02")
-//        
-//        return ExerciseFormView(authDbViewAdapter: db, viewModel: <#ExerciseFormView.ViewModel#>,
-//                                exerciseName: .constant("my exercise"),
-//                                date: date,
-//                                type: Binding.constant("strength"),
-//                                muscleGroups:
-//                                    Binding.constant("core,back,legs"),
-//                                selectedProgram: selectedProgram)
-//    }
-//}
+struct ProgramFormView_Previews: PreviewProvider {
+    static var previews: some View {
+        let viewModel = ExerciseFormCell.ViewModel(
+            name: "",
+            type: "",
+            muscleGroups: "")
+        
+        return ExerciseFormCell(
+            viewModel: viewModel,
+            name: Binding.constant("Name:"),
+            date: Binding.constant("Date:"),
+            type: Binding.constant("Type:"),
+            muscleGroups: Binding.constant("MuscleGroups:"))
+    }
+}

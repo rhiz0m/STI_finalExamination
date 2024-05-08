@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CreateProgramView: View {
-    
+
     @EnvironmentObject var homeViewAdapter: HomeViewAdapter
     @State var usersExercise: UsersExcercise?
     @State var usersTrainingRecord: UsersTrainingRecord?
@@ -20,24 +20,21 @@ struct CreateProgramView: View {
     @State var reps = 0
     @State var sets = 0
     @State private var navigateToListView = false
+    private let viewModel: ViewModel
+    
+    init(viewModel: ViewModel) {
+        self.viewModel = viewModel
+    }
     
     var body: some View {
-        if let viewModel = homeViewAdapter.createProgramViewModel {
-            content(viewModel: viewModel)
-            
-        } else {
-            ProgressView()
-                .onAppear(perform: {
-                    homeViewAdapter.generateCreateProgramViewModel()
-                })
-        }
+        content(viewModel: viewModel)
     }
     
     @ViewBuilder func content(viewModel: ViewModel) -> some View {
         VStack {
             ExerciseFormCell(
                 viewModel: viewModel.exerciceFormCell,
-                exerciseName: $exerciseName,
+                name: $exerciseName,
                 date: $date,
                 type: $type,
                 muscleGroups: $muscleGroups)
@@ -69,22 +66,18 @@ struct CreateProgramView: View {
                             trainingRecordIds: [trainingRecordsId],
                             usersTrainingRecords: [usersTrainingRecord]
                         )
-//                        print("new exercise \(newExercise)")
                         homeViewAdapter.authDbViewAdapter.addProgramToDb(userExercise: newExercise)
-           
                     }
                     navigateToListView = true
                 })
             }
             .padding(.vertical, GridPoints.x1)
             .padding(.horizontal, GridPoints.x4)
-            
         }
         .onAppear {
             homeViewAdapter.authDbViewAdapter.clearFeilds()
         }
     }
-    
     
     struct ViewModel {
         let saveTitle: String
@@ -94,10 +87,30 @@ struct CreateProgramView: View {
         let saveExercise: (@escaping (Bool) -> Void) -> Void
     }
 }
+
 #Preview {
-    CreateProgramView()
-        .environmentObject(HomeViewAdapter(authDbViewAdapter: AuthDbViewAdapter()))
+    CreateProgramView(viewModel: CreateProgramView.ViewModel(
+        saveTitle: "Save",
+        categoryTitle: "Category",
+        exerciceFormCell: ExerciseFormCell.ViewModel(
+            name: "Exercise Name",
+            type: "Exercise Type",
+            muscleGroups: "Muscle Groups"
+        ),
+        trainingRecordFormCell: TrainingRecordFormCell.ViewModel(
+            weight: "Weight",
+            setsTitle: "Sets",
+            repsTitle: "Reps",
+            reps: 0,
+            sets: 0
+        ),
+        saveExercise: { completion in
+            completion(true)
+        }))
+
+     
 }
+
 
 //                        homeViewAdapter.authDbViewAdapter.saveExercise { success in
 //                            if success {

@@ -9,19 +9,17 @@ import SwiftUI
 
 
 struct SearchView: View {
-    @StateObject private var searchViewAdapter = SearchViewAdapter()
+    @EnvironmentObject var homeViewAdapter: HomeViewAdapter
     @State var selected: Bool = false
     @State private var title = ""
+    private let viewModel: ViewModel
+    
+    init(viewModel: ViewModel) {
+        self.viewModel = viewModel
+    }
     
     var body: some View {
-        if let viewModel = searchViewAdapter.searchViewModel {
-            content(viewModel: viewModel)
-        } else {
-            ProgressView()
-                .onAppear(perform: {
-                    searchViewAdapter.generateSearchViewModel()
-                })
-        }
+        content(viewModel: viewModel)
     }
     
     @ViewBuilder func content(viewModel: ViewModel) -> some View {
@@ -56,7 +54,7 @@ struct SearchView: View {
     
     @ViewBuilder private func resultListView(viewModel: ViewModel) -> some View {
         
-        List(searchViewAdapter.apiResponse) { exerciseInfo in
+        List(homeViewAdapter.apiResponse) { exerciseInfo in
             VStack(alignment: .leading, spacing: 8) {
                 HStack(alignment: .top) {
                     Text(viewModel.nameTitle)
@@ -131,7 +129,7 @@ struct SearchView: View {
             Button(action: {
                 withAnimation(.bouncy(duration: 0.5)) {
                     selected.toggle()
-                    searchViewAdapter.API(muscle: title)
+                    homeViewAdapter.API(muscle: title)
                 }
             }, label: {
                 RoundedBtn(title: "", icon: viewModel.icon)
@@ -156,8 +154,18 @@ struct SearchView: View {
     }
 }
 
-struct SearchView_Previews: PreviewProvider {
-    static var previews: some View {
-        SearchView()
-    }
-}
+//struct SearchView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SearchView(viewModel: SearchView.ViewModel(
+//            nameTitle: <#T##String#>,
+//            typeTitle: <#T##String#>,
+//            muscleTitle: <#T##String#>,
+//            equipmentTitle: <#T##String#>,
+//            difficultyTitle: <#T##String#>,
+//            instructionsTitle: <#T##String#>,
+//            title: <#T##String#>,
+//            imageName: <#T##String#>,
+//            icon: <#T##String#>,
+//            apiAction: <#T##(String) -> Void#>))
+//    }
+//}

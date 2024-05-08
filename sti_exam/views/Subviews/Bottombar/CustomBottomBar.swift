@@ -25,7 +25,10 @@ struct CustomBottomBar: View {
                     tabSelection = index + 1
                 }, label: {
                     VStack() {
-                        PrimaryBtnStyle(title: viewModel.tabBarItems[index].title, icon: viewModel.tabBarItems[index].image, fontSize: 12)
+                        PrimaryBtnStyle(
+                            title: viewModel.tabBarItems[index].title,
+                            icon: viewModel.tabBarItems[index].image,
+                            fontSize: 12)
                         if index + 1 == tabSelection {
                             Capsule().frame(height: 6)
                                 .foregroundColor(CustomColors.cyan)
