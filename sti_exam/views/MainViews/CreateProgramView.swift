@@ -66,7 +66,7 @@ struct CreateProgramView: View {
                             trainingRecordIds: [trainingRecordsId],
                             usersTrainingRecords: [usersTrainingRecord]
                         )
-                        homeViewAdapter.authDbViewAdapter.addProgramToDb(userExercise: newExercise)
+                        viewModel.saveExerciseAction(newExercise)
                     }
                     navigateToListView = true
                 })
@@ -84,47 +84,7 @@ struct CreateProgramView: View {
         let categoryTitle: String
         let exerciceFormCell: ExerciseFormCell.ViewModel
         let trainingRecordFormCell: TrainingRecordFormCell.ViewModel
-        let saveExercise: (@escaping (Bool) -> Void) -> Void
+        let saveExerciseAction: (UsersExcercise) -> Void
     }
 }
 
-#Preview {
-    CreateProgramView(viewModel: CreateProgramView.ViewModel(
-        saveTitle: "Save",
-        categoryTitle: "Category",
-        exerciceFormCell: ExerciseFormCell.ViewModel(
-            name: "Exercise Name",
-            type: "Exercise Type",
-            muscleGroups: "Muscle Groups"
-        ),
-        trainingRecordFormCell: TrainingRecordFormCell.ViewModel(
-            weight: "Weight",
-            setsTitle: "Sets",
-            repsTitle: "Reps",
-            reps: 0,
-            sets: 0
-        ),
-        saveExercise: { completion in
-            completion(true)
-        }))
-
-     
-}
-
-
-//                        homeViewAdapter.authDbViewAdapter.saveExercise { success in
-//                            if success {
-//                            } else {
-//                            }
-//                        }
-
-//                NavigationLink(
-//                    destination: CreateExerciseView(authViewAdapter: authViewAdapter, exerciseViewAdapter: exerciseViewAdapter, exerciseName: exerciseName, date: date, type: type, muscleGroups: muscleGroups, weight: weight, reps: reps, sets: sets, selectedExercise: usersExercise),
-//                    label: {
-//                        PrimaryBtnStyle(title: "Add Exercise",
-//                                        icon: "plus.circle.fill")
-//                    }
-//                )
-
-
-//                        homeViewAdapter.authDbViewAdapter.addProgramToDb(userExercise: newExercise)

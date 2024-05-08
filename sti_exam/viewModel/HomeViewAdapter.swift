@@ -17,14 +17,14 @@ class HomeViewAdapter: ObservableObject {
     @Published var bottomBarViewModel: BottomBarView.ViewModel?
     
     @Published var exerciseListViewModel: ExerciseListView.ViewModel?
+    @Published var createProgramViewModel: CreateProgramView.ViewModel?
     @Published var mapViewModel: MapView.ViewModel?
-    
     @Published var searchViewModel: SearchView.ViewModel?
-    @Published var apiResponse: [ExerciseAPI] = []
     
+    @Published var apiResponse: [ExerciseAPI] = []
     @Published var topBarViewModel: TopBarView.ViewModel?
     @Published var customBottomBarViewModel: CustomBottomBar.ViewModel?
-    @Published var createProgramViewModel: CreateProgramView.ViewModel?
+
     @Published var updateProgramViewModel: UpdateProgramView.ViewModel?
     @Published var setTitle = ""
     @Published var repsTitle = ""
@@ -65,19 +65,28 @@ class HomeViewAdapter: ObservableObject {
     
     func generateBottomBarViewModel() {
         let exerciseListViewModel = ExerciseListView.ViewModel(
-            icon: "")
+            noExercisesTitle: LocalizedStrings.noExercises,
+            typeTitle: LocalizedStrings.type,
+            muscleGroupsTitle: LocalizedStrings.muscleGroups,
+            weightTitle: LocalizedStrings.weight,
+            setsTitle: LocalizedStrings.sets,
+            repsTitle: LocalizedStrings.reps,
+            totalRepsTitle: LocalizedStrings.totalReps,
+            totalWeightTitle: LocalizedStrings.totalWeight,
+            arrowIcon: SelectedSystemImages.shared.arrowRightCircle,
+            trashIcon: SelectedSystemImages.shared.trash,
+            deleteAction: { exercise in
+                self.authDbViewAdapter.deleteProgram(exercise: exercise)
+            }
+        )
         
         let createProgramViewModel = CreateProgramView.ViewModel(
             saveTitle: LocalizedStrings.save,
             categoryTitle: LocalizedStrings.usersExercise,
             exerciceFormCell: self.exerciseViewModel,
             trainingRecordFormCell: self.trainingRecordViewModel,
-            
-            saveExercise: { [weak self] completion in
-                guard let self = self else { return }
-                self.authDbViewAdapter.saveExercise { success in
-                    completion(success)
-                }
+            saveExerciseAction: { exercise in
+                self.authDbViewAdapter.saveProgramToDb(userExercise: exercise)
             }
         )
         
@@ -121,17 +130,14 @@ class HomeViewAdapter: ObservableObject {
     func generateUpdateProgramViewModel() {
         
         let updateViewModel = UpdateProgramView.ViewModel(
-            updateExercisesTitle: "Update Exercises",
-            saveTitle: LocalizedStrings.save,
+            updateExercisesTitle: LocalizedStrings.updateExercises,
+            updateTitle: LocalizedStrings.update,
             categoryTitle: LocalizedStrings.usersExercise,
             exerciceFormCell: self.exerciseViewModel,
             trainingRecordFormCell: self.trainingRecordViewModel,
             
-            saveExercise: { [weak self] completion in
-                guard let self = self else { return }
-                self.authDbViewAdapter.saveExercise { success in
-                    completion(success)
-                }
+            updateExerciseAction: { exercise in
+                self.authDbViewAdapter.saveProgramToDb(userExercise: exercise)
             }
         )
         self.updateProgramViewModel = updateViewModel

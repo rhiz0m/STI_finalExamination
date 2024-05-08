@@ -10,6 +10,8 @@ import Foundation
 struct LocalizedStrings {
     // General
     static let save = "Save"
+    static let update = "Update"
+    static let updateExercises = "Update Exercises"
     // Auth.Login/Register
     static let apptitle = "Training app"
     static let login = "Login"

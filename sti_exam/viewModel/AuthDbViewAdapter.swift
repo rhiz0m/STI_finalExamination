@@ -129,7 +129,7 @@ class AuthDbViewAdapter: ObservableObject {
         usersExercises = []
     }
     
-    func addProgramToDb(userExercise: UsersExcercise) {
+    func saveProgramToDb(userExercise: UsersExcercise) {
         if let currentUser = currentUser {
             do {
                 let documentRef = db.collection(USER_DATA_COLLECTION).document(currentUser.uid)
@@ -170,7 +170,6 @@ class AuthDbViewAdapter: ObservableObject {
     func deleteProgram(exercise: UsersExcercise) {
         if let currentUser = currentUser {
             do {
-         
                 var currentPrograms = currentUserData?.usersExercises ?? []
                 currentPrograms.removeAll { $0.id == exercise.id }
                 try db.collection(USER_DATA_COLLECTION)
@@ -178,6 +177,7 @@ class AuthDbViewAdapter: ObservableObject {
                     .updateData([
                         USER_EXERCISES: try currentPrograms.map { try Firestore.Encoder().encode($0) }
                     ])
+                print("Exercise deleted")
             } catch {
                 print("Error updating Firestore: \(error.localizedDescription)")
             }

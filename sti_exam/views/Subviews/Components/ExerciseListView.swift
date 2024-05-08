@@ -23,7 +23,7 @@ struct ExerciseListView: View {
         VStack() {
             if let userData = homeViewAdapter.authDbViewAdapter.currentUserData {
                 if userData.usersExercises.isEmpty {
-                    Text(LocalizedStrings.noExercises)
+                    Text(viewModel.noExercisesTitle)
                         .foregroundStyle(CustomColors.dark)
                         .italic()
                         .padding(.top)
@@ -43,33 +43,33 @@ struct ExerciseListView: View {
                                         .foregroundStyle(.white)
                                         .padding(.vertical, GridPoints.x1)
                                     Spacer()
-                                    Image(systemName: "" /*homeViewAdapter.authDbViewAdapter.systemImages.arrowRightCircle*/)
+                                    Image(systemName: viewModel.arrowIcon)
                                         .foregroundColor(CustomColors.cyan)
                                         .font(.system(size: 30))
                                 }
-                                Text("\(LocalizedStrings.type) \(exercise.type)")
+                                Text("\(viewModel.typeTitle) \(exercise.type)")
                                     .foregroundStyle(.white)
                                     .font(.caption)
-                                Text("\(LocalizedStrings.muscleGroups) \(exercise.muscleGroups.joined(separator: " "))")
+                                Text("\(viewModel.muscleGroupsTitle) \(exercise.muscleGroups.joined(separator: " "))")
                                     .foregroundStyle(.white)
                                     .font(.caption)
                                 
                                 ForEach(exercise.usersTrainingRecords) { records in
                                     VStack(alignment: .leading) {
                                         HStack {
-                                            Text("\(LocalizedStrings.weight) \(records.weight)")
+                                            Text("\(viewModel.weightTitle) \(records.weight)")
                                                 .foregroundStyle(.white).font(.caption)
-                                            Text("\(LocalizedStrings.sets) \(records.sets)")
+                                            Text("\(viewModel.setsTitle) \(records.sets)")
                                                 .foregroundStyle(.white).font(.caption)
-                                            Text("\(LocalizedStrings.reps) \(records.reps)")
+                                            Text("\(viewModel.repsTitle) \(records.reps)")
                                                 .foregroundStyle(.white).font(.caption)
                                                 .font(.caption)
                                         }
                                         HStack {
-                                            Text("\(LocalizedStrings.totalReps) \(records.totalReps)")
+                                            Text("\(viewModel.totalRepsTitle) \(records.totalReps)")
                                                 .foregroundStyle(.white)
                                                 .font(.caption)
-                                            Text("\(LocalizedStrings.totalWeight) \(records.totalWeight)")
+                                            Text("\(viewModel.totalRepsTitle) \(records.totalWeight)")
                                                 .foregroundStyle(.white)
                                                 .font(.caption)
                                         }
@@ -83,13 +83,10 @@ struct ExerciseListView: View {
                         
                         VStack {
                             Button(action: {
-                                homeViewAdapter.authDbViewAdapter.deleteProgram(exercise: exercise)
-                                
-                                
-                                //                                authDBViewAdapter.deleteProgram(exercise: exercise)
+                                viewModel.deleteAction(exercise)
                             }, label: {
                                 HStack(alignment: .center) {
-                                    RoundedBtn(icon: "" /*homeViewAdapter.authDbViewAdapter.systemImages.trash*/)
+                                    RoundedBtn(icon: viewModel.trashIcon)
                                     Spacer()
                                     VStack(alignment: .leading) {
                                         Text(LocalizedStrings.created).font(.caption)
@@ -113,13 +110,17 @@ struct ExerciseListView: View {
             }
         }
     }
-    
     struct ViewModel {
-        let icon: String
+        let noExercisesTitle: String
+        let typeTitle: String
+        let muscleGroupsTitle: String
+        let weightTitle: String
+        let setsTitle: String
+        let repsTitle: String
+        let totalRepsTitle: String
+        let totalWeightTitle: String
+        let arrowIcon: String
+        let trashIcon: String
+        let deleteAction: (UsersExcercise) -> Void
     }
 }
-
-//#Preview {
-//    ExerciseListView(exerciceListViewModel: ExerciseListView.ViewModel(icon: ""))
-//        .environmentObject(HomeViewAdapter(authDbViewAdapter: AuthDbViewAdapter()))
-//}

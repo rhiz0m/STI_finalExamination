@@ -49,7 +49,7 @@ struct UpdateProgramView: View {
                                        sets: $sets
                 )
                             HStack {
-                                Button(viewModel.saveTitle, action: {
+                                Button(viewModel.updateTitle, action: {
                                     
                                     if !exerciseName.isEmpty {
                                         
@@ -69,10 +69,9 @@ struct UpdateProgramView: View {
                                             trainingRecordIds: [trainingRecordsId],
                                             usersTrainingRecords: [usersTrainingRecord]
                                         )
-                //                        print("new exercise \(newExercise)")
-                                        homeViewAdapter.authDbViewAdapter.addProgramToDb(userExercise: newExercise)
+                                        viewModel.updateExerciseAction(newExercise)
                                     }
-                                    //navigateToListView = true
+//                                    navigateToListView = true
                                 })
                             }
                 .onAppear {
@@ -107,10 +106,10 @@ struct UpdateProgramView: View {
         }
     struct ViewModel {
         let updateExercisesTitle: String
-        let saveTitle: String
+        let updateTitle: String
         let categoryTitle: String
         let exerciceFormCell: ExerciseFormCell.ViewModel
         let trainingRecordFormCell: TrainingRecordFormCell.ViewModel
-        let saveExercise: (@escaping (Bool) -> Void) -> Void
+        let updateExerciseAction: (UsersExcercise) -> Void
     }
 }
