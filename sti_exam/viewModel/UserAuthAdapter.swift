@@ -10,6 +10,7 @@ import Foundation
 class UserAuthAdapter: ObservableObject {
     @Published var loginViewModel: LoginView.ViewModel?
     @Published var registerViewModel: RegisterView.ViewModel?
+  
     
     var authDbViewAdapter: AuthDbViewAdapter
     
@@ -44,14 +45,13 @@ class UserAuthAdapter: ObservableObject {
             passwordTitle: LocalizedStrings.password,
             confirmPasswordTitle: LocalizedStrings.confirmPassword,
             emailTitle: LocalizedStrings.email,
-            confirmEmailTitle: LocalizedStrings.confirmEmail, 
-            registerAction: { [weak self] completion in
+            confirmEmailTitle: LocalizedStrings.confirmEmail,
+            
+            registerAction: { [weak self] email, password, completion in
                 guard let self = self else { return }
-                self.authDbViewAdapter.registerUser(
-                    email: self.authDbViewAdapter.emailInput,
-                    password: self.authDbViewAdapter.passwordInput) { success in
-                        completion(success)
-                    }
+                self.authDbViewAdapter.registerUser(email: email, password: password) { success in
+                    completion(success)
+                }
             }
         )
         self.registerViewModel = registerViewModel

@@ -13,6 +13,7 @@ struct RegisterView: View {
     @State var confirmEmail = ""
     @State var password = ""
     @State var confirmPassword = ""
+    @State var newRegistration = false
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
@@ -57,6 +58,14 @@ struct RegisterView: View {
                 Divider()
                     .rotationEffect(Angle(degrees: -GridPoints.x1))
                 
+                NavigationLink(
+                    destination: HomeView()
+                        .environmentObject(userAuthAdapter),
+                    isActive: $newRegistration,
+                    label: { EmptyView() }
+                )
+                .hidden()
+                
                 Text(viewModel.registerTitle)
                     .font(.title2)
                     .bold()
@@ -67,17 +76,15 @@ struct RegisterView: View {
                     .shadow(color: Color.brown.opacity(0.6), radius: 8, x: 0, y: 2)
                     .onTapGesture {
                         if !email.isEmpty && email == confirmEmail && !password.isEmpty && password == confirmPassword {
-                            
-                            _ = userAuthAdapter.authDbViewAdapter.registerUser(email: email, password: password) { success in
+                            viewModel.registerAction(email, password) { success in
                                 if success {
-                                    
+                                    newRegistration = true
                                 } else {
                                     
                                 }
                             }
                         }
                     }
-                
                 
                 Text(viewModel.cancelTitle)
                     .bold()
@@ -125,7 +132,7 @@ struct RegisterView: View {
         let confirmPasswordTitle: String
         let emailTitle: String
         let confirmEmailTitle: String
-        let registerAction: (@escaping (Bool) -> Void) -> Void
+        let registerAction: (String, String, @escaping (Bool) -> Void) -> Void
     }
 }
 
@@ -133,12 +140,3 @@ struct RegisterView: View {
     RegisterView(userAuthAdapter: UserAuthAdapter(authDbViewAdapter: AuthDbViewAdapter()),
                  email: "", confirmEmail: "", password: "", confirmPassword: "")
 }
-
-
-//                            viewModel.registerAction { success in
-//                                if success {
-//                                    print("success")
-//                                } else {
-//                                    print("non sucess")
-//                                }
-//                            }

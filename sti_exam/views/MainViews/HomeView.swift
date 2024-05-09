@@ -16,11 +16,12 @@ struct HomeView: View {
             BottomBarView()
         }
         .navigationBarBackButtonHidden(true)
+        .environmentObject(homeViewAdapter)
     }
 
 }
 
 #Preview {
     HomeView()
-    .environmentObject(HomeViewAdapter(authDbViewAdapter: AuthDbViewAdapter()))
+        .environmentObject(HomeViewAdapter(authDbViewAdapter: AuthDbViewAdapter()))
 }

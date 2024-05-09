@@ -8,11 +8,8 @@
 import SwiftUI
 
 struct LoginView: View {
-    @StateObject var userAuthAdapter: UserAuthAdapter
-    
-    init(loginViewAdapter: UserAuthAdapter) {
-        self._userAuthAdapter = StateObject(wrappedValue: loginViewAdapter)
-    }
+    @ObservedObject var userAuthAdapter: UserAuthAdapter
+    @State private var loggedIn = false
     
     var body: some View {
         if let viewModel = userAuthAdapter.loginViewModel{
@@ -43,15 +40,26 @@ struct LoginView: View {
                 VStack {
                     EmailView(
                         authDbViewAdapter: userAuthAdapter.authDbViewAdapter,
-                        userNameInput: $userAuthAdapter.authDbViewAdapter.emailInput, customLabel: viewModel.emailTitle, textSize: 14)
+                        userNameInput: $userAuthAdapter.authDbViewAdapter.emailInput, 
+                        customLabel: viewModel.emailTitle, textSize: 14)
                     .padding(.vertical)
                     
-                    PasswordView(authDbViewAdapter: userAuthAdapter.authDbViewAdapter, userNameInput: $userAuthAdapter.authDbViewAdapter.passwordInput, customLabel: viewModel.passwordTitle, textSize: 12)
+                    PasswordView(authDbViewAdapter: userAuthAdapter.authDbViewAdapter, 
+                                 userNameInput: $userAuthAdapter.authDbViewAdapter.passwordInput,
+                                 customLabel: viewModel.passwordTitle, textSize: 12)
                         .padding()
                 }
                 .padding(.horizontal, GridPoints.x2)
                 Divider()
                     .rotationEffect(Angle(degrees: -GridPoints.x1))
+                
+                NavigationLink(
+                    destination: HomeView()
+                        .environmentObject(userAuthAdapter),
+                    isActive: $loggedIn,
+                    label: { EmptyView() }
+                )
+                .hidden()
                 
                 Text(viewModel.loginTitle)
                     .font(.title2)
@@ -65,7 +73,7 @@ struct LoginView: View {
                         if !userAuthAdapter.authDbViewAdapter.emailInput.isEmpty && !userAuthAdapter.authDbViewAdapter.passwordInput.isEmpty {
                             viewModel.loginAction { success in
                                 if success {
-                                    
+                                    loggedIn = true
                                 } else {
                                     
                                 }
@@ -124,5 +132,5 @@ struct LoginView: View {
 }
 
 #Preview {
-    LoginView(loginViewAdapter: UserAuthAdapter(authDbViewAdapter: AuthDbViewAdapter()))
+    LoginView(userAuthAdapter: UserAuthAdapter(authDbViewAdapter: AuthDbViewAdapter()))
 }

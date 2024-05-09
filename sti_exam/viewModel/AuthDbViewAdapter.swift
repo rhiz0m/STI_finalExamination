@@ -30,7 +30,7 @@ class AuthDbViewAdapter: ObservableObject {
     @Published var dateString: String = ""
     @Published var description = ""
     @Published var name = ""
-        
+    
     private var db = Firestore.firestore()
     private var auth = Auth.auth()
     private let USER_DATA_COLLECTION = "user_data"
@@ -43,7 +43,7 @@ class AuthDbViewAdapter: ObservableObject {
                 print("A user has been logged in \(user.email ?? "No Email")")
                 self.currentUser = user
                 self.startListeningToDb()
-
+                
             } else {
                 self.dbListener?.remove()
                 self.dbListener = nil
@@ -64,7 +64,7 @@ class AuthDbViewAdapter: ObservableObject {
         print("Document path: \(documentPath)")
         
         dbListener = db.collection(self.USER_DATA_COLLECTION).document(user.uid).addSnapshotListener { snapshot, error in
-
+            
             if let error = error {
                 print("Error occurred: \(error.localizedDescription)")
                 return
@@ -79,39 +79,11 @@ class AuthDbViewAdapter: ObservableObject {
             switch result {
             case .success(let userData):
                 self.currentUserData = userData
-
+                
                 self.usersExercises = userData.usersExercises
             case .failure(let error):
                 print("Error decoding data: \(error.localizedDescription)")
             }
-        }
-    }
-    
-    func saveExercise(completion: @escaping (Bool) -> Void) {
-        
-        if !exerciseName.isEmpty {
-            
-            let weightValue = Double(weight) ?? 0.0
-            
-            let usersTrainingRecord = UsersTrainingRecord(weight: weight, reps: reps, sets: sets, totalReps: reps * sets, totalWeight: reps * sets * Int(weightValue))
-            
-            let trainingRecordsId = usersTrainingRecord.id
-            
-            let newExercise = UsersExcercise(
-                id: UUID(),
-                category: "users_exercise",
-                exerciseName: exerciseName,
-                date: Date(),
-                type: type,
-                muscleGroups: [muscleGroups],
-                trainingRecordIds: [trainingRecordsId],
-                usersTrainingRecords: [usersTrainingRecord]
-            )
-            print("new exercise \(newExercise)")
-            completion(true)
-            
-        } else {
-            completion(false)
         }
     }
     
@@ -166,7 +138,7 @@ class AuthDbViewAdapter: ObservableObject {
             }
         }
     }
-
+    
     func deleteProgram(exercise: UsersExcercise) {
         if let currentUser = currentUser {
             do {
@@ -183,42 +155,71 @@ class AuthDbViewAdapter: ObservableObject {
             }
         }
     }
-
+    
     // Auth
     func registerUser(email: String, password: String, completion: @escaping (Bool) -> Void) {
         
-            auth.createUser(withEmail: email, password: password) { authResult, error in
-    
-                if let error = error {
-                    print(error.localizedDescription)
-                    completion(false)
-                }
-    
-                if authResult != nil {
-                   completion(true)
-                }
+        auth.createUser(withEmail: email, password: password) { authResult, error in
+            
+            if let error = error {
+                print(error.localizedDescription)
+                completion(false)
+            }
+            
+            if authResult != nil {
+                completion(true)
             }
         }
+    }
     
-        func loginUser(email: String, password: String, completion: @escaping (Bool) -> Void) {
-            auth.signIn(withEmail: email, password: password) { authDataResult, error in
-                if let error = error {
-                    print("Error logging in:", error.localizedDescription)
-                    completion(false)
-                } else {
-                    print("You are logged in!")
-                    completion(true)
-                }
+    func loginUser(email: String, password: String, completion: @escaping (Bool) -> Void) {
+        auth.signIn(withEmail: email, password: password) { authDataResult, error in
+            if let error = error {
+                print("Error logging in:", error.localizedDescription)
+                completion(false)
+            } else {
+                print("You are logged in!")
+                completion(true)
             }
         }
+    }
     
-         func logout() {
-             do {
-                 emailInput = ""
-                 passwordInput = ""
-                 try Auth.auth().signOut()
-             } catch let error as NSError {
-                 print("Error logout: \(error.localizedDescription)")
-             }
-         }
+    func logout() {
+        do {
+            emailInput = ""
+            passwordInput = ""
+            try Auth.auth().signOut()
+        } catch let error as NSError {
+            print("Error logout: \(error.localizedDescription)")
+        }
+    }
 }
+
+
+//func saveExercise(completion: @escaping (Bool) -> Void) {
+//
+//        if !exerciseName.isEmpty {
+//
+//            let weightValue = Double(weight) ?? 0.0
+//
+//            let usersTrainingRecord = UsersTrainingRecord(weight: weight, reps: reps, sets: sets, totalReps: reps * sets, totalWeight: reps * sets * Int(weightValue))
+//
+//            let trainingRecordsId = usersTrainingRecord.id
+//
+//            let newExercise = UsersExcercise(
+//                id: UUID(),
+//                category: "users_exercise",
+//                exerciseName: exerciseName,
+//                date: Date(),
+//                type: type,
+//                muscleGroups: [muscleGroups],
+//                trainingRecordIds: [trainingRecordsId],
+//                usersTrainingRecords: [usersTrainingRecord]
+//            )
+//            print("new exercise \(newExercise)")
+//            completion(true)
+//
+//        } else {
+//            completion(false)
+//        }
+//    }

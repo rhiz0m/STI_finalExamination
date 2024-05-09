@@ -42,6 +42,7 @@ struct BottomBarView: View {
             }
             CustomBottomBar(tabSelection: $tabSelection, viewModel: viewModel.customBottomBarViewModel)
         }
+        .environmentObject(homeViewAdapter)
     }
     struct ViewModel {
         let customBottomBarViewModel: CustomBottomBar.ViewModel

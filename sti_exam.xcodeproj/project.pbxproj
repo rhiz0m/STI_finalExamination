@@ -273,7 +273,6 @@
 			isa = PBXGroup;
 			children = (
 				FE8435C42BE91E96004B0B4B /* MainViews */,
-				FE60342A2BD8069500D7FA47 /* Map */,
 				FE93B89B2BBDBC0B00A68DBD /* UtilityViews */,
 				FE93B8972BBDB86100A68DBD /* Subviews */,
 				FE8D9A372BA316B70065EEDD /* CoordinatorView.swift */,
@@ -330,6 +329,7 @@
 			isa = PBXGroup;
 			children = (
 				FE687F512BD6D1C100F8A307 /* Auth */,
+				FE60342A2BD8069500D7FA47 /* Map */,
 				FE8D9A112BA2EF020065EEDD /* HomeView.swift */,
 				FE8D9A292BA313D70065EEDD /* SplashScreen.swift */,
 				FE8D9A2B2BA314310065EEDD /* CreateProgramView.swift */,

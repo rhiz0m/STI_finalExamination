@@ -17,15 +17,20 @@ class AppDelegate: NSObject, UIApplicationDelegate {
   }
 }
 
+let authDbViewAdapter = AuthDbViewAdapter()
+
 @main
 struct sti_examApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
-    @StateObject var authDbViewAdapter = AuthDbViewAdapter()
+    @StateObject var userAuthAdapter = UserAuthAdapter(authDbViewAdapter: authDbViewAdapter)
+    @StateObject var homeViewAdapter = HomeViewAdapter(authDbViewAdapter: authDbViewAdapter)
     
     var body: some Scene {
         WindowGroup {
-            CoordinatorView(authDbViewAdapter: authDbViewAdapter)
+                CoordinatorView()
+                .environmentObject(userAuthAdapter)
+                .environmentObject(homeViewAdapter)
         }
     }
 }
