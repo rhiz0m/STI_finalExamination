@@ -10,7 +10,6 @@ import Foundation
 class UserAuthAdapter: ObservableObject {
     @Published var loginViewModel: LoginView.ViewModel?
     @Published var registerViewModel: RegisterView.ViewModel?
-  
     
     var authDbViewAdapter: AuthDbViewAdapter
     

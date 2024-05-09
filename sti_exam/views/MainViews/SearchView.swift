@@ -129,7 +129,7 @@ struct SearchView: View {
             Button(action: {
                 withAnimation(.bouncy(duration: 0.5)) {
                     selected.toggle()
-                    homeViewAdapter.API(muscle: title)
+                    homeViewAdapter.searchExercisesAPI(muscle: title)
                 }
             }, label: {
                 RoundedBtn(title: "", icon: viewModel.icon)

@@ -24,7 +24,7 @@ class HomeViewAdapter: ObservableObject {
     @Published var apiResponse: [ExerciseAPI] = []
     @Published var topBarViewModel: TopBarView.ViewModel?
     @Published var customBottomBarViewModel: CustomBottomBar.ViewModel?
-
+    
     @Published var updateProgramViewModel: UpdateProgramView.ViewModel?
     @Published var setTitle = ""
     @Published var repsTitle = ""
@@ -101,12 +101,14 @@ class HomeViewAdapter: ObservableObject {
             imageName: "gym_womanBg",
             icon: SelectedSystemImages.shared.magnifyingGlass,
             apiAction: { [weak self] muscle in
-                self?.API(muscle: muscle)
+                self?.searchExercisesAPI(muscle: muscle)
             }
         )
         
         let mapViewModel = MapView.ViewModel(
-            markerTitle: "", icon: "", textFeildLabel: "")
+            markerTitle: LocalizedStrings.markerTitle,
+            icon: SelectedSystemImages.shared.paperPlane,
+            textFeildLabel: LocalizedStrings.searchGym)
         
         self.bottomBarViewModel = BottomBarView.ViewModel(
             customBottomBarViewModel: CustomBottomBar.ViewModel(
@@ -117,9 +119,15 @@ class HomeViewAdapter: ObservableObject {
                 listIcon: SelectedSystemImages.shared.list,
                 addIcon: SelectedSystemImages.shared.add,
                 searchIcon: SelectedSystemImages.shared.search,
-                mapIcon: SelectedSystemImages.shared.map
-            ), 
-            createProgramViewModel: createProgramViewModel, 
+                mapIcon: SelectedSystemImages.shared.map,
+                tabBarItems: [
+                    (SelectedSystemImages.shared.list, LocalizedStrings.list),
+                    (SelectedSystemImages.shared.add, LocalizedStrings.add),
+                    (SelectedSystemImages.shared.search, LocalizedStrings.search),
+                    (SelectedSystemImages.shared.map, LocalizedStrings.map)
+                ]
+            ),
+            createProgramViewModel: createProgramViewModel,
             searchViewModel: searchViewModel,
             exerciseListViewModel: exerciseListViewModel,
             mapViewModel: mapViewModel
@@ -143,7 +151,7 @@ class HomeViewAdapter: ObservableObject {
         self.updateProgramViewModel = updateViewModel
     }
     
-    func API(muscle: String) {
+    func searchExercisesAPI(muscle: String) {
         guard let muscleEncoded = muscle.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
               let url = URL(string: "https://api.api-ninjas.com/v1/exercises?muscle=\(muscleEncoded)") else {
             return

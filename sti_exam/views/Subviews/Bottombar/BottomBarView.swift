@@ -27,8 +27,8 @@ struct BottomBarView: View {
         ZStack(alignment: .bottom) {
             TabView(selection: $tabSelection) {
                 ExerciseListView(viewModel: viewModel.exerciseListViewModel)
-                        .tabItem {
-                        }.tag(1)
+                    .tabItem {
+                    }.tag(1)
                 CreateProgramView(viewModel: viewModel.createProgramViewModel)
                     .tabItem {
                     }.tag(2)

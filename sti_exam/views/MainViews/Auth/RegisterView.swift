@@ -37,22 +37,22 @@ struct RegisterView: View {
                         authDbViewAdapter: userAuthAdapter.authDbViewAdapter,
                         userNameInput: $email,
                         customLabel: viewModel.emailTitle, textSize: 14)
-                        .padding(.vertical)
+                    .padding(.vertical)
                     EmailView(
                         authDbViewAdapter: userAuthAdapter.authDbViewAdapter,
                         userNameInput: $confirmEmail,
                         customLabel: viewModel.confirmEmailTitle, textSize: 12)
-                        .padding(.vertical)
+                    .padding(.vertical)
                     PasswordView(
                         authDbViewAdapter: userAuthAdapter.authDbViewAdapter,
                         userNameInput: $password,
                         customLabel: viewModel.passwordTitle, textSize: 14)
-                        .padding(.bottom, GridPoints.x3)
+                    .padding(.bottom, GridPoints.x3)
                     PasswordView(
                         authDbViewAdapter: userAuthAdapter.authDbViewAdapter,
                         userNameInput: $confirmPassword,
                         customLabel: viewModel.confirmPasswordTitle, textSize: 12)
-                        .padding(.bottom, GridPoints.x3)
+                    .padding(.bottom, GridPoints.x3)
                 }
                 .padding(.horizontal, GridPoints.x2)
                 Divider()

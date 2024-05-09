@@ -47,7 +47,7 @@ struct LoginView: View {
                     PasswordView(authDbViewAdapter: userAuthAdapter.authDbViewAdapter, 
                                  userNameInput: $userAuthAdapter.authDbViewAdapter.passwordInput,
                                  customLabel: viewModel.passwordTitle, textSize: 12)
-                        .padding()
+                    .padding()
                 }
                 .padding(.horizontal, GridPoints.x2)
                 Divider()

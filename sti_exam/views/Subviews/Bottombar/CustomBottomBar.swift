@@ -20,7 +20,7 @@ struct CustomBottomBar: View {
     
     var body: some View {
         HStack() {
-            ForEach(0..<viewModel.tabBarItems.count) { index in
+            ForEach(0..<viewModel.tabBarItems.count, id: \.self) { index in
                 Button(action: {
                     tabSelection = index + 1
                 }, label: {
@@ -30,9 +30,12 @@ struct CustomBottomBar: View {
                             icon: viewModel.tabBarItems[index].image,
                             fontSize: 12)
                         if index + 1 == tabSelection {
-                            Capsule().frame(height: 6)
+                            Capsule()
+                                .frame(height: 6)
                                 .foregroundColor(CustomColors.cyan)
-                                .matchedGeometryEffect(id: LocalizedStrings.selectedTabId, in: animationNamespace)
+                                .matchedGeometryEffect(
+                                    id: LocalizedStrings.selectedTabId,
+                                    in: animationNamespace)
                                 .offset(y: 3)
                         } else {
                             Capsule()
@@ -50,38 +53,14 @@ struct CustomBottomBar: View {
     }
     
     struct ViewModel {
-            let listTitle: String
-            let addTitle: String
-            let searchTitle: String
-            let mapTitle: String
-            let listIcon: String
-            let addIcon: String
-            let searchIcon: String
-            let mapIcon: String
-            let tabBarItems: [(image: String, title: String)]
-
-            init(listTitle: String,
-                 addTitle: String,
-                 searchTitle: String,
-                 mapTitle: String,
-                 listIcon: String,
-                 addIcon: String,
-                 searchIcon: String,
-                 mapIcon: String) {
-                self.listTitle = listTitle
-                self.addTitle = addTitle
-                self.searchTitle = searchTitle
-                self.mapTitle = mapTitle
-                self.listIcon = listIcon
-                self.addIcon = addIcon
-                self.searchIcon = searchIcon
-                self.mapIcon = mapIcon
-                self.tabBarItems = [
-                    (listIcon, listTitle),
-                    (addIcon, addTitle),
-                    (searchIcon, searchTitle),
-                    (mapIcon, mapTitle)
-                ]
-            }
-        }
+        let listTitle: String
+        let addTitle: String
+        let searchTitle: String
+        let mapTitle: String
+        let listIcon: String
+        let addIcon: String
+        let searchIcon: String
+        let mapIcon: String
+        let tabBarItems: [(image: String, title: String)]
+    }
 }
