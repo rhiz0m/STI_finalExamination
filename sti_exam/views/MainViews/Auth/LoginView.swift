@@ -8,12 +8,17 @@
 import SwiftUI
 
 struct LoginView: View {
-    @ObservedObject var userAuthAdapter: UserAuthAdapter
-    @State private var loggedIn = false
+    @EnvironmentObject var userAuthAdapter: UserAuthAdapter
+    @State private var navigateToHome = false
     
     var body: some View {
         if let viewModel = userAuthAdapter.loginViewModel{
             content(viewModel: viewModel)
+            NavigationLink(
+                destination: HomeView()
+                    .environmentObject(userAuthAdapter),
+                isActive: $navigateToHome,
+                label: { EmptyView() })
         } else {
             ProgressView()
                 .onAppear(perform: {
@@ -40,11 +45,11 @@ struct LoginView: View {
                 VStack {
                     EmailView(
                         authDbViewAdapter: userAuthAdapter.authDbViewAdapter,
-                        userNameInput: $userAuthAdapter.authDbViewAdapter.emailInput, 
+                        userNameInput: $userAuthAdapter.authDbViewAdapter.emailInput,
                         customLabel: viewModel.emailTitle, textSize: 14)
                     .padding(.vertical)
                     
-                    PasswordView(authDbViewAdapter: userAuthAdapter.authDbViewAdapter, 
+                    PasswordView(authDbViewAdapter: userAuthAdapter.authDbViewAdapter,
                                  userNameInput: $userAuthAdapter.authDbViewAdapter.passwordInput,
                                  customLabel: viewModel.passwordTitle, textSize: 12)
                     .padding()
@@ -52,14 +57,6 @@ struct LoginView: View {
                 .padding(.horizontal, GridPoints.x2)
                 Divider()
                     .rotationEffect(Angle(degrees: -GridPoints.x1))
-                
-                NavigationLink(
-                    destination: HomeView()
-                        .environmentObject(userAuthAdapter),
-                    isActive: $loggedIn,
-                    label: { EmptyView() }
-                )
-                .hidden()
                 
                 Text(viewModel.loginTitle)
                     .font(.title2)
@@ -73,7 +70,7 @@ struct LoginView: View {
                         if !userAuthAdapter.authDbViewAdapter.emailInput.isEmpty && !userAuthAdapter.authDbViewAdapter.passwordInput.isEmpty {
                             viewModel.loginAction { success in
                                 if success {
-                                    loggedIn = true
+                                    navigateToHome = true
                                 } else {
                                     
                                 }
@@ -132,5 +129,5 @@ struct LoginView: View {
 }
 
 #Preview {
-    LoginView(userAuthAdapter: UserAuthAdapter(authDbViewAdapter: AuthDbViewAdapter()))
+    LoginView()
 }

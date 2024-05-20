@@ -67,8 +67,9 @@ struct CreateProgramView: View {
                             usersTrainingRecords: [usersTrainingRecord]
                         )
                         viewModel.saveExerciseAction(newExercise)
+                        navigateToListView = true
                     }
-                    navigateToListView = true
+                
                 })
             }
             .padding(.vertical, GridPoints.x1)

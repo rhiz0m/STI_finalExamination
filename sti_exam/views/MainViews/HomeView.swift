@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     @EnvironmentObject var homeViewAdapter: HomeViewAdapter
+    @EnvironmentObject var userAuthAdapter: UserAuthAdapter
     
     var body: some View {
         VStack {

@@ -31,7 +31,8 @@ struct ExerciseListView: View {
                 } else {
                     List(userData.usersExercises) { exercise in
                         NavigationLink(
-                            destination: UpdateProgramView(),
+                            destination: UpdateProgramView()
+                                .environmentObject(homeViewAdapter),
                             tag: exercise.id,
                             selection: $homeViewAdapter.authDbViewAdapter.selectedExerciseID
                         ) {

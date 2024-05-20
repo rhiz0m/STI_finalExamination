@@ -8,27 +8,40 @@
 import SwiftUI
 
 struct CoordinatorView: View {
-    @EnvironmentObject var userAuthAdapter: UserAuthAdapter
-    @EnvironmentObject var homeViewAdapter: HomeViewAdapter
+    @EnvironmentObject var authDbViewAdapter: AuthDbViewAdapter
+    @StateObject private var userAuthAdapter: UserAuthAdapter
+    @StateObject private var homeViewAdapter: HomeViewAdapter
+
+    init() {
+        let authDbViewAdapter = AuthDbViewAdapter()
+        _userAuthAdapter = StateObject(wrappedValue: UserAuthAdapter(authDbViewAdapter: authDbViewAdapter))
+        _homeViewAdapter = StateObject(wrappedValue: HomeViewAdapter(authDbViewAdapter: authDbViewAdapter))
+    }
+
 
     var body: some View {
-        if let _ = userAuthAdapter.authDbViewAdapter.currentUser {
+        if userAuthAdapter.authDbViewAdapter.currentUser != nil {
             NavigationStack {
                 HomeView()
                     .environmentObject(homeViewAdapter)
-            }
-            .environmentObject(userAuthAdapter)
-          
-            
+            }        
         } else {
             NavigationStack {
-                LoginView(userAuthAdapter: userAuthAdapter)
+                LoginView()
+                    .environmentObject(userAuthAdapter)
             }
-            .environmentObject(userAuthAdapter)
         }
     }
 }
 
-#Preview {
-    CoordinatorView()
+struct CoordinatorView_Previews: PreviewProvider {
+    static var previews: some View {
+        let authDbViewAdapter = AuthDbViewAdapter()
+        let userAuthAdapter = UserAuthAdapter(authDbViewAdapter: authDbViewAdapter)
+        let homeViewAdapter = HomeViewAdapter(authDbViewAdapter: authDbViewAdapter)
+        
+        CoordinatorView()
+            .environmentObject(userAuthAdapter)
+            .environmentObject(homeViewAdapter)
+    }
 }

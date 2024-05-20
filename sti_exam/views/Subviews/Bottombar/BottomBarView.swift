@@ -13,7 +13,6 @@ struct BottomBarView: View {
     
     var body: some View {
         if let viewModel = homeViewAdapter.bottomBarViewModel {
-            
             content(viewModel: viewModel)
         } else {
             ProgressView()
@@ -27,12 +26,12 @@ struct BottomBarView: View {
         ZStack(alignment: .bottom) {
             TabView(selection: $tabSelection) {
                 ExerciseListView(viewModel: viewModel.exerciseListViewModel)
+                    .environmentObject(homeViewAdapter)
                     .tabItem {
                     }.tag(1)
                 CreateProgramView(viewModel: viewModel.createProgramViewModel)
                     .tabItem {
                     }.tag(2)
-                
                 SearchView(viewModel: viewModel.searchViewModel)
                     .tabItem {
                     }.tag(3)

@@ -23,6 +23,7 @@ struct UpdateProgramView: View {
         
         if let viewModel = homeViewAdapter.updateProgramViewModel {
             content(viewModel: viewModel)
+       
         } else {
             ProgressView()
                 .onAppear(perform: {

@@ -8,11 +8,6 @@
 import Foundation
 
 class HomeViewAdapter: ObservableObject {
-    //    @Published var coordinator: Coordinator
-    //
-    //    init(coordinator: Coordinator) {
-    //        self.coordinator = coordinator
-    //    }
     
     @Published var bottomBarViewModel: BottomBarView.ViewModel?
     
@@ -189,3 +184,9 @@ class HomeViewAdapter: ObservableObject {
         task.resume()
     }
 }
+
+//    @Published var coordinator: Coordinator
+//
+//    init(coordinator: Coordinator) {
+//        self.coordinator = coordinator
+//    }
