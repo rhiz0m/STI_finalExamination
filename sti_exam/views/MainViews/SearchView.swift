@@ -36,7 +36,7 @@ struct SearchView: View {
     @ViewBuilder private func backgroundImageView(imageName: String) -> some View {
         Image(imageName)
             .resizable()
-        //            .scaledToFill()
+            .scaledToFill()
             .edgesIgnoringSafeArea(.bottom)
             .overlay(
                 LinearGradient(
@@ -112,16 +112,13 @@ struct SearchView: View {
             
         }.cornerRadius(GridPoints.x2)
             .listStyle(PlainListStyle())
-        
-            .padding(.horizontal, GridPoints.x8)
-            .shadow(color: CustomColors.cyan.opacity(0.2), radius: 15, x: 0, y: 5)
+            .padding(.horizontal, GridPoints.x2)
+            .shadow(color: CustomColors.cyan.opacity(0.1), radius: 15, x: 0, y: 5)
         
     }
     
     
     @ViewBuilder func searchFeildView(viewModel: ViewModel) -> some View {
-        
-        
         
         HStack {
             CustomTextField(textInput: $title, title: viewModel.title)
@@ -135,8 +132,9 @@ struct SearchView: View {
                 RoundedBtn(title: "", icon: viewModel.icon)
                     .scaleEffect(selected ? 1.1 : 1.0)
             })
-        }.padding(.horizontal, GridPoints.x8)
-            .padding(.top, GridPoints.x4)
+        }
+        .padding(.horizontal, GridPoints.x2)
+        .padding(.top, GridPoints.x4)
         
     }
     
@@ -153,19 +151,3 @@ struct SearchView: View {
         let apiAction: (String) -> Void
     }
 }
-
-//struct SearchView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SearchView(viewModel: SearchView.ViewModel(
-//            nameTitle: <#T##String#>,
-//            typeTitle: <#T##String#>,
-//            muscleTitle: <#T##String#>,
-//            equipmentTitle: <#T##String#>,
-//            difficultyTitle: <#T##String#>,
-//            instructionsTitle: <#T##String#>,
-//            title: <#T##String#>,
-//            imageName: <#T##String#>,
-//            icon: <#T##String#>,
-//            apiAction: <#T##(String) -> Void#>))
-//    }
-//}

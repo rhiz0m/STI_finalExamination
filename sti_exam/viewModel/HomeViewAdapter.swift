@@ -93,7 +93,7 @@ class HomeViewAdapter: ObservableObject {
             difficultyTitle: LocalizedStrings.difficulty,
             instructionsTitle: LocalizedStrings.instructions,
             title: "\(LocalizedStrings.muscleGroups)...",
-            imageName: "gym_womanBg",
+            imageName: "gym_woman",
             icon: SelectedSystemImages.shared.magnifyingGlass,
             apiAction: { [weak self] muscle in
                 self?.searchExercisesAPI(muscle: muscle)

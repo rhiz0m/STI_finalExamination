@@ -19,10 +19,11 @@ class UserAuthAdapter: ObservableObject {
     
     func generateLoginViewModel() {
         let loginViewModel = LoginView.ViewModel(
+            image: "gym_man",
             appTitle: LocalizedStrings.apptitle,
             loginTitle: LocalizedStrings.login,
             registerTitle: LocalizedStrings.register,
-            passwordTitle: LocalizedStrings.apptitle,
+            passwordTitle: LocalizedStrings.password,
             emailTitle: LocalizedStrings.email,
             loginAction: { [weak self] completion in
                 guard let self = self else { return }

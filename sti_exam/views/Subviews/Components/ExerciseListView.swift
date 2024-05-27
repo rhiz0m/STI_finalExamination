@@ -19,6 +19,17 @@ struct ExerciseListView: View {
         content(viewModel: viewModel)
     }
     
+//    var body: some View {
+//        if let viewModel = homeViewAdapter.exerciseListViewModel {
+//            content(viewModel: viewModel)
+//        } else {
+//            ProgressView()
+//                .onAppear {
+//                    homeViewAdapter.generateBottomBarViewModel()
+//                }
+//        }
+//    }
+//    
     @ViewBuilder func content(viewModel: ViewModel) -> some View {
         VStack() {
             if let userData = homeViewAdapter.authDbViewAdapter.currentUserData {

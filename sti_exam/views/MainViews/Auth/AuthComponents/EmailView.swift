@@ -19,11 +19,11 @@ struct EmailView: View {
                     Rectangle()
                         .frame(width: GridPoints.custom(14),height: GridPoints.x4)
                         .rotationEffect(.degrees(-GridPoints.x1))
-                        .modifier(TextFeildStyling(customBgColor: .yellow, customBgStroke: .black))
+                        .modifier(TextFeildStyling(customBgColor: CustomColors.cyan, customBgStroke: .black))
                     Text(customLabel)
                         .font(Font.custom("PermanentMarker-Regular", size: textSize))
                         .rotationEffect(.degrees(-GridPoints.x1))
-                        .foregroundStyle(.yellow)
+                        .foregroundStyle(.white)
                         .padding(.horizontal)
                         .padding(.bottom, GridPoints.half)
             }

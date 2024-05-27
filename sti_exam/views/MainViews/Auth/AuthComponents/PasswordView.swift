@@ -20,7 +20,10 @@ struct PasswordView: View {
                     .frame(width: GridPoints.custom(16),height: GridPoints.x4)
                     .rotationEffect(.degrees(-GridPoints.x2))
                     .clipped()
-                    .modifier(TextFeildStyling(customBgColor: .yellow, customBgStroke: .orange))
+                    .modifier(TextFeildStyling(
+                        customBgColor:
+                            CustomColors.cyan,
+                        customBgStroke: CustomColors.cyan))
                 Text(customLabel)
                     .font(Font.custom("PermanentMarker-Regular", size: textSize))
                     .rotationEffect(.degrees(-GridPoints.x1))
@@ -31,7 +34,7 @@ struct PasswordView: View {
             .padding(.bottom, -GridPoints.x1)
             .rotationEffect(.degrees(GridPoints.x2))
             SecureField("", text: $userNameInput)
-                .modifier(TextFeildStyling(customBgColor: .white, customBgStroke: .yellow))
+                .modifier(TextFeildStyling(customBgColor: .white, customBgStroke: CustomColors.cyan))
         }
     }
 }

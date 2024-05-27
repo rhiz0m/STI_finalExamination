@@ -23,10 +23,10 @@ struct TextFeildStyling: ViewModifier {
         .background(customBgStroke)
         .cornerRadius(GridPoints.custom(6))
       
-        .shadow(color: Color.brown.opacity(0.8), radius: 8, x: 0, y: 1)
+//        .shadow(color: Color.white.opacity(0.8), radius: 1, x: 1, y: 1)
         .overlay(
             RoundedRectangle(cornerRadius: GridPoints.custom(6))
-                .stroke(Color.black, lineWidth: 1)
+                .stroke(Color.mint, lineWidth: 0.5)
         )
     }
 }
