@@ -35,7 +35,6 @@ struct RoundedBtn: View {
     }
 }
 
-
 struct RoundedBtn_Previews: PreviewProvider {
     static var previews: some View {
         PrimaryBtnStyle(title: "title", icon: "plus.circle.fill")

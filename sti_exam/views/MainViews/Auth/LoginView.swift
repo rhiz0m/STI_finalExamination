@@ -36,15 +36,6 @@ struct LoginView: View {
                 .padding(.bottom, GridPoints.x8)
             
                 VStack {
-//                    Text(viewModel.appTitle)
-//                        .padding(.leading, GridPoints.custom(4))
-//                        .rotation3DEffect(
-//                            .degrees(50),
-//                            axis: (x: 20.0, y: -90, z: 0.0)
-//                        )
-//                        .shadow(color: .yellow.opacity(0.5), radius: 1, x: 1, y: 1)
-//                        .font(Font.custom("PermanentMarker-Regular", size: 35))
-
                     EmailView(
                         authDbViewAdapter: userAuthAdapter.authDbViewAdapter,
                         userNameInput: $userAuthAdapter.authDbViewAdapter.emailInput,

@@ -8,18 +8,15 @@
 import Foundation
 
 class HomeViewAdapter: ObservableObject {
-    
+
     @Published var bottomBarViewModel: BottomBarView.ViewModel?
-    
     @Published var exerciseListViewModel: ExerciseListView.ViewModel?
     @Published var createProgramViewModel: CreateProgramView.ViewModel?
     @Published var mapViewModel: MapView.ViewModel?
     @Published var searchViewModel: SearchView.ViewModel?
-    
     @Published var apiResponse: [ExerciseAPI] = []
     @Published var topBarViewModel: TopBarView.ViewModel?
     @Published var customBottomBarViewModel: CustomBottomBar.ViewModel?
-    
     @Published var updateProgramViewModel: UpdateProgramView.ViewModel?
     @Published var setTitle = ""
     @Published var repsTitle = ""
@@ -74,7 +71,6 @@ class HomeViewAdapter: ObservableObject {
                 self.authDbViewAdapter.deleteProgram(exercise: exercise)
             }
         )
-        
         let createProgramViewModel = CreateProgramView.ViewModel(
             saveTitle: LocalizedStrings.save,
             categoryTitle: LocalizedStrings.usersExercise,
@@ -84,7 +80,6 @@ class HomeViewAdapter: ObservableObject {
                 self.authDbViewAdapter.saveProgramToDb(userExercise: exercise)
             }
         )
-        
         let searchViewModel = SearchView.ViewModel(
             nameTitle: LocalizedStrings.name,
             typeTitle: LocalizedStrings.type,
@@ -184,9 +179,3 @@ class HomeViewAdapter: ObservableObject {
         task.resume()
     }
 }
-
-//    @Published var coordinator: Coordinator
-//
-//    init(coordinator: Coordinator) {
-//        self.coordinator = coordinator
-//    }

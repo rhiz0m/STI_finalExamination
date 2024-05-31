@@ -22,8 +22,6 @@ struct TextFeildStyling: ViewModifier {
         .padding(.vertical, GridPoints.custom(0.2))
         .background(customBgStroke)
         .cornerRadius(GridPoints.custom(6))
-      
-//        .shadow(color: Color.white.opacity(0.8), radius: 1, x: 1, y: 1)
         .overlay(
             RoundedRectangle(cornerRadius: GridPoints.custom(6))
                 .stroke(Color.mint, lineWidth: 0.5)

@@ -194,32 +194,3 @@ class AuthDbViewAdapter: ObservableObject {
         }
     }
 }
-
-
-//func saveExercise(completion: @escaping (Bool) -> Void) {
-//
-//        if !exerciseName.isEmpty {
-//
-//            let weightValue = Double(weight) ?? 0.0
-//
-//            let usersTrainingRecord = UsersTrainingRecord(weight: weight, reps: reps, sets: sets, totalReps: reps * sets, totalWeight: reps * sets * Int(weightValue))
-//
-//            let trainingRecordsId = usersTrainingRecord.id
-//
-//            let newExercise = UsersExcercise(
-//                id: UUID(),
-//                category: "users_exercise",
-//                exerciseName: exerciseName,
-//                date: Date(),
-//                type: type,
-//                muscleGroups: [muscleGroups],
-//                trainingRecordIds: [trainingRecordsId],
-//                usersTrainingRecords: [usersTrainingRecord]
-//            )
-//            print("new exercise \(newExercise)")
-//            completion(true)
-//
-//        } else {
-//            completion(false)
-//        }
-//    }

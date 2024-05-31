@@ -78,7 +78,6 @@ struct LocationDetailsView: View {
 }
 
 // Function to get the lookaround view
-
 extension LocationDetailsView {
     func fetchLookAroundPreview() {
         if let mapSelection {

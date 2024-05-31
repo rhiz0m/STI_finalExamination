@@ -72,7 +72,6 @@ struct UpdateProgramView: View {
                                         )
                                         viewModel.updateExerciseAction(newExercise)
                                     }
-//                                    navigateToListView = true
                                 })
                             }
                 .onAppear {

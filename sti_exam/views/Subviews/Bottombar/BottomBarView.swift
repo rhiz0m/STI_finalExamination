@@ -26,7 +26,6 @@ struct BottomBarView: View {
         ZStack(alignment: .bottom) {
             TabView(selection: $tabSelection) {
                 ExerciseListView(viewModel: viewModel.exerciseListViewModel)
-                    .environmentObject(homeViewAdapter)
                     .tabItem {
                     }.tag(1)
                 CreateProgramView(viewModel: viewModel.createProgramViewModel)

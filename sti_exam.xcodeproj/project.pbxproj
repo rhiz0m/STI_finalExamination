@@ -42,7 +42,6 @@
 		FE8D9A1D2BA307CA0065EEDD /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = FE8D9A1C2BA307CA0065EEDD /* FirebaseFirestore */; };
 		FE8D9A1F2BA307CA0065EEDD /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = FE8D9A1E2BA307CA0065EEDD /* FirebaseFirestoreCombine-Community */; };
 		FE8D9A212BA307CA0065EEDD /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FE8D9A202BA307CA0065EEDD /* FirebaseFirestoreSwift */; };
-		FE8D9A242BA30E8A0065EEDD /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE8D9A232BA30E8A0065EEDD /* Coordinator.swift */; };
 		FE8D9A262BA313420065EEDD /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE8D9A252BA313420065EEDD /* LoginView.swift */; };
 		FE8D9A282BA313990065EEDD /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE8D9A272BA313990065EEDD /* RegisterView.swift */; };
 		FE8D9A2A2BA313D70065EEDD /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE8D9A292BA313D70065EEDD /* SplashScreen.swift */; };
@@ -111,7 +110,6 @@
 		FE7EC5BF2BEBA2A6006BF427 /* CustomDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDateFormatter.swift; sourceTree = "<group>"; };
 		FE8D9A112BA2EF020065EEDD /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		FE8D9A182BA305E10065EEDD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		FE8D9A232BA30E8A0065EEDD /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		FE8D9A252BA313420065EEDD /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		FE8D9A272BA313990065EEDD /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		FE8D9A292BA313D70065EEDD /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
@@ -207,7 +205,6 @@
 		FE64B9EE2B4C354700A70F62 /* sti_exam */ = {
 			isa = PBXGroup;
 			children = (
-				FE8D9A222BA30E540065EEDD /* Navigation */,
 				FE64BA1B2B4C39CE00A70F62 /* views */,
 				FE64BA1A2B4C39C300A70F62 /* viewModel */,
 				FE64BA192B4C39BC00A70F62 /* model */,
@@ -337,14 +334,6 @@
 				FE8D9A352BA314F60065EEDD /* SearchView.swift */,
 			);
 			path = MainViews;
-			sourceTree = "<group>";
-		};
-		FE8D9A222BA30E540065EEDD /* Navigation */ = {
-			isa = PBXGroup;
-			children = (
-				FE8D9A232BA30E8A0065EEDD /* Coordinator.swift */,
-			);
-			path = Navigation;
 			sourceTree = "<group>";
 		};
 		FE93B8972BBDB86100A68DBD /* Subviews */ = {
@@ -566,7 +555,6 @@
 				FE7102072BD7A3E600B61516 /* UsersTrainingRecord.swift in Sources */,
 				FE93B89D2BBDBC2200A68DBD /* GridPoints.swift in Sources */,
 				FEA4F5C42BDC20AB005F21AE /* AuthDbViewAdapter.swift in Sources */,
-				FE8D9A242BA30E8A0065EEDD /* Coordinator.swift in Sources */,
 				FE71020B2BD7A4BA00B61516 /* TrainingRecordFormCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
